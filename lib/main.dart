@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'cow1.dart';
+//import 'cow1.dart';
+import 'addcow1.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(AddCow());
 }
