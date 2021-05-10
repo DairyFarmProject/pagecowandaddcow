@@ -77,24 +77,14 @@ class _MyGridScreenState extends State<MyGridScreen> {
             ),
             Row(
               children: [
-                Container(
-                  width: 280,
-                  padding: const EdgeInsets.all(20.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'วันเกิด',
-                      fillColor: Colors.blueGrey,
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blueGrey, width: 2),
-                      ),
-                    ),
-                    onChanged: (String name) {},
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 20, 0, 20),
+                  child: Text(
+                    _dateTime == null ? 'วันเกิด' : _dateTime.toString(),
                   ),
                 ),
-                Text(_dateTime == null ? 'วันเกิด' : _dateTime.toString()),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
                   child: IconButton(
                     icon: Icon(
                       Icons.calendar_today_sharp,
@@ -247,6 +237,7 @@ class _MyGridScreenState extends State<MyGridScreen> {
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // ignore: deprecated_member_use
                     RaisedButton(
                       onPressed: () {},
                       color: Colors.blueGrey[50],
@@ -266,6 +257,7 @@ class _MyGridScreenState extends State<MyGridScreen> {
                 Container(
                     child: Column(
                   children: [
+                    // ignore: deprecated_member_use
                     RaisedButton(
                       onPressed: () {},
                       color: Color(0xff62b490),
