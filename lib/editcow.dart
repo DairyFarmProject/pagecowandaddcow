@@ -1,22 +1,13 @@
+import 'package:finaldairy/successeditcow.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
-class EditCow extends StatelessWidget {
-  // This widget is the root of your application.
+class EditCow extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: EditCowScreen(),
-    );
-  }
+  _EditCowState createState() => _EditCowState();
 }
 
-class EditCowScreen extends StatefulWidget {
-  @override
-  _EditCowScreenState createState() => _EditCowScreenState();
-}
-
-class _EditCowScreenState extends State<EditCowScreen> {
+class _EditCowState extends State<EditCow> {
   DateTime _dateTime;
 
   final String name = 'มูมู้';
@@ -29,7 +20,9 @@ class _EditCowScreenState extends State<EditCowScreen> {
       appBar: AppBar(
         title: Text("แก้ไขข้อมูลวัว"),
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -148,34 +141,47 @@ class _EditCowScreenState extends State<EditCowScreen> {
                   onChanged: (String name) {},
                 ),
               ),
-              Row(
+              Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 20, 0, 20),
-                    child: Text(
-                      _dateTime == null ? '$birthday' : _dateTime.toString(),
-                    ),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    margin: EdgeInsets.all(0),
+                    padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                    child: Text('วันเกิด',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.calendar_today_sharp,
-                        color: Colors.blueGrey,
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 20, 0, 20),
+                        child: Text(
+                          _dateTime == null
+                              ? '$birthday'
+                              : _dateTime.toString(),
+                        ),
                       ),
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1970),
-                          lastDate: DateTime(2022),
-                        ).then((date) {
-                          setState(() {
-                            _dateTime = date;
-                          });
-                        });
-                      },
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.calendar_today_sharp,
+                            color: Colors.blueGrey,
+                          ),
+                          onPressed: () {
+                            showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1970),
+                              lastDate: DateTime(2022),
+                            ).then((date) {
+                              setState(() {
+                                _dateTime = date;
+                              });
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -266,7 +272,9 @@ class _EditCowScreenState extends State<EditCowScreen> {
                         children: [
                           // ignore: deprecated_member_use
                           RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                             color: Colors.blueGrey[50],
                             shape: RoundedRectangleBorder(
                                 borderRadius:
@@ -289,7 +297,12 @@ class _EditCowScreenState extends State<EditCowScreen> {
                           // ignore: deprecated_member_use
 
                           RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return SuccessEditCow();
+                              }));
+                            },
                             color: Color(0xff62b490),
                             shape: RoundedRectangleBorder(
                                 borderRadius:

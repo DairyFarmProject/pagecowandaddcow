@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
 
-class HistoryCow extends StatelessWidget {
+class HistoryCow extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HistoryCowScreen(),
-    );
-  }
+  _HistoryCowState createState() => _HistoryCowState();
 }
 
-class HistoryCowScreen extends StatefulWidget {
+class _HistoryCowState extends State<HistoryCow> {
   @override
-  _HistoryCowScreenState createState() => _HistoryCowScreenState();
-}
-
-class _HistoryCowScreenState extends State<HistoryCowScreen> {
   final String name = 'มูมู้';
   final String birthday = '11 ธันวาคม 2559';
   final String code = 'A121';
@@ -25,7 +17,9 @@ class _HistoryCowScreenState extends State<HistoryCowScreen> {
       appBar: AppBar(
         title: Text("ประวัติวัว"),
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: Icon(
             Icons.arrow_back,
             color: Colors.white,

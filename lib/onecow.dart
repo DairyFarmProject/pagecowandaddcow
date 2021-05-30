@@ -1,24 +1,16 @@
+import 'package:finaldairy/deletecow.dart';
+import 'package:finaldairy/editcow.dart';
+import 'package:finaldairy/historycow.dart';
 import 'package:flutter/material.dart';
 
-class OneCow extends StatelessWidget {
-  // This widget is the root of your application.
+class OneCow extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyGridScreen(),
-    );
-  }
+  _OneCowState createState() => _OneCowState();
 }
 
-class MyGridScreen extends StatefulWidget {
-  MyGridScreen({Key key, this.title}) : super(key: key);
-  final String title;
+class _OneCowState extends State<OneCow> {
   @override
-  _MyGridScreenState createState() => _MyGridScreenState();
-}
-
-class _MyGridScreenState extends State<MyGridScreen> {
-  Widget optionCowButton() {
+  Widget OneCow() {
     return IconButton(
       icon: Icon(Icons.more_vert),
       onPressed: () {
@@ -30,27 +22,40 @@ class _MyGridScreenState extends State<MyGridScreen> {
   final String name = 'มูมู้';
   final String birthday = '11 ธันวาคม 2559';
   final String code = 'A121';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("$name , $code"),
         actions: [
-          PopupMenuButton<String>(
-            offset: Offset(0, 40),
-            onSelected: (select) => print('hi'),
-            itemBuilder: (BuildContext context) {
-              return {'แก้ไขข้อมูลวัว', 'ลบวัว'}.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
+          PopupMenuButton(
+            itemBuilder: (content) => [
+              PopupMenuItem(
+                value: 1,
+                child: Text('แก้ไขข้อมูลวัว'),
+              ),
+              PopupMenuItem(
+                value: 2,
+                child: Text('ลบวัว'),
+              ),
+            ],
+            onSelected: (int menu) {
+              print(menu);
+              if (menu == 1) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => EditCow()));
+              } else if (menu == 2) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DeleteCow()));
+              }
             },
           )
         ],
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -343,7 +348,12 @@ class _MyGridScreenState extends State<MyGridScreen> {
                   children: [
                     // ignore: deprecated_member_use
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return HistoryCow();
+                        }));
+                      },
                       color: Color(0xff6d78e1),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(39))),

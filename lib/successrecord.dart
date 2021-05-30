@@ -1,18 +1,20 @@
+import 'package:finaldairy/addactivity.dart';
+import 'package:finaldairy/navigator.dart';
 import 'package:flutter/material.dart';
 import 'cow1.dart';
 import 'package:finaldairy/addcow1.dart';
 
-class SuccessAddCow extends StatefulWidget {
+class SuccessRecord extends StatefulWidget {
   @override
-  _SuccessAddCowState createState() => _SuccessAddCowState();
+  _SuccessRecordState createState() => _SuccessRecordState();
 }
 
-class _SuccessAddCowState extends State<SuccessAddCow> {
+class _SuccessRecordState extends State<SuccessRecord> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("เพิ่มวัว"),
+          title: Text(""),
           leading: GestureDetector(
             onTap: () {},
           ),
@@ -34,7 +36,7 @@ class _SuccessAddCowState extends State<SuccessAddCow> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: Text(
-                  'เพิ่มข้อมูลวัวสำเร็จ',
+                  'บันทึกข้อมูลสำเร็จ',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
@@ -53,14 +55,14 @@ class _SuccessAddCowState extends State<SuccessAddCow> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return AddCow();
+                        return Nav();
                       }));
                     },
                     color: Colors.blueGrey[50],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(39))),
                     child: Text(
-                      'เพิ่มวัวเพิ่ม',
+                      'กลับหน้าแรก',
                       style: TextStyle(
                           color: Color(0xff59aca9),
                           fontWeight: FontWeight.w600,
@@ -78,14 +80,14 @@ class _SuccessAddCowState extends State<SuccessAddCow> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Cow();
+                        return AddActivity();
                       }));
                     },
                     color: Color(0xff59aca9),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(39))),
                     child: Text(
-                      'ดูวัวทั้งหมด',
+                      'เพิ่มกิจกรรม',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,

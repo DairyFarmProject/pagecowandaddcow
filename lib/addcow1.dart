@@ -1,24 +1,14 @@
+import 'package:finaldairy/cow1.dart';
+import 'package:finaldairy/successaddcow.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
-class AddCow extends StatelessWidget {
-  // This widget is the root of your application.
+class AddCow extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyGridScreen(),
-    );
-  }
+  _AddCowState createState() => _AddCowState();
 }
 
-class MyGridScreen extends StatefulWidget {
-  MyGridScreen({Key key}) : super(key: key);
-
-  @override
-  _MyGridScreenState createState() => _MyGridScreenState();
-}
-
-class _MyGridScreenState extends State<MyGridScreen> {
+class _AddCowState extends State<AddCow> {
   DateTime _dateTime;
 
   @override
@@ -27,7 +17,9 @@ class _MyGridScreenState extends State<MyGridScreen> {
       appBar: AppBar(
         title: Text("เพิ่มวัว"),
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -75,34 +67,45 @@ class _MyGridScreenState extends State<MyGridScreen> {
                 onChanged: (String name) {},
               ),
             ),
-            Row(
+            Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 20, 0, 20),
-                  child: Text(
-                    _dateTime == null ? 'วันเกิด' : _dateTime.toString(),
-                  ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  margin: EdgeInsets.all(0),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                  child: Text('วันเกิด',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.calendar_today_sharp,
-                      color: Colors.blueGrey,
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 20, 0, 20),
+                      child: Text(
+                        _dateTime == null ? 'yyyy/mm/dd' : _dateTime.toString(),
+                      ),
                     ),
-                    onPressed: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1970),
-                        lastDate: DateTime(2022),
-                      ).then((date) {
-                        setState(() {
-                          _dateTime = date;
-                        });
-                      });
-                    },
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.calendar_today_sharp,
+                          color: Colors.blueGrey,
+                        ),
+                        onPressed: () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1970),
+                            lastDate: DateTime(2022),
+                          ).then((date) {
+                            setState(() {
+                              _dateTime = date;
+                            });
+                          });
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -234,46 +237,60 @@ class _MyGridScreenState extends State<MyGridScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
                     child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // ignore: deprecated_member_use
-                    RaisedButton(
-                      onPressed: () {},
-                      color: Colors.blueGrey[50],
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(39))),
-                      child: Text(
-                        'ยกเลิก',
-                        style: TextStyle(
-                            color: Color(0xffd6786e),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14),
-                      ),
-                      padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                    )
-                  ],
-                )),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // ignore: deprecated_member_use
+                        RaisedButton(
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return Cow();
+                            }));
+                          },
+                          color: Colors.blueGrey[50],
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(39))),
+                          child: Text(
+                            'ยกเลิก',
+                            style: TextStyle(
+                                color: Color(0xffd6786e),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14),
+                          ),
+                          padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                        )
+                      ],
+                    )),
                 Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
                     child: Column(
-                  children: [
-                    // ignore: deprecated_member_use
-                    RaisedButton(
-                      onPressed: () {},
-                      color: Color(0xff62b490),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(39))),
-                      child: Text(
-                        'บันทึกข้อมูล',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14),
-                      ),
-                      padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
-                    )
-                  ],
-                )),
+                      children: [
+                        // ignore: deprecated_member_use
+                        RaisedButton(
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return SuccessAddCow();
+                            }));
+                          },
+                          color: Color(0xff62b490),
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(39))),
+                          child: Text(
+                            'บันทึกข้อมูล',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14),
+                          ),
+                          padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+                        )
+                      ],
+                    )),
               ],
             ),
           ],

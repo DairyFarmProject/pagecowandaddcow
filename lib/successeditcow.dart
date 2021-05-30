@@ -1,20 +1,13 @@
+import 'package:finaldairy/cow1.dart';
+import 'package:finaldairy/navigator.dart';
 import 'package:flutter/material.dart';
 
-class SuccessEditCow extends StatelessWidget {
+class SuccessEditCow extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SuccessEditCowScreen(),
-    );
-  }
+  _SuccessEditCowState createState() => _SuccessEditCowState();
 }
 
-class SuccessEditCowScreen extends StatefulWidget {
-  @override
-  _SuccessEditCowScreenState createState() => _SuccessEditCowScreenState();
-}
-
-class _SuccessEditCowScreenState extends State<SuccessEditCowScreen> {
+class _SuccessEditCowState extends State<SuccessEditCow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +15,6 @@ class _SuccessEditCowScreenState extends State<SuccessEditCowScreen> {
           title: Text("แก้ไขข้อมูลวัว"),
           leading: GestureDetector(
             onTap: () {},
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
           ),
           backgroundColor: Color(0xff62b490),
         ),
@@ -61,7 +50,12 @@ class _SuccessEditCowScreenState extends State<SuccessEditCowScreen> {
                 children: [
                   // ignore: deprecated_member_use
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Nav();
+                      }));
+                    },
                     color: Colors.blueGrey[50],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(39))),
@@ -81,7 +75,12 @@ class _SuccessEditCowScreenState extends State<SuccessEditCowScreen> {
                 children: [
                   // ignore: deprecated_member_use
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Cow();
+                      }));
+                    },
                     color: Color(0xff59aca9),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(39))),

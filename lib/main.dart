@@ -1,6 +1,10 @@
 import 'package:finaldairy/addcow1.dart';
 import 'package:finaldairy/cow1.dart';
+import 'package:finaldairy/navigator.dart';
 import 'package:finaldairy/onecow.dart';
+import 'package:finaldairy/recordbreeding.dart';
+import 'package:finaldairy/recordcalve.dart';
+import 'package:finaldairy/recordvaccine.dart';
 import 'package:flutter/material.dart';
 import 'cow1.dart';
 import 'addcow1.dart';
@@ -9,9 +13,12 @@ import 'deletecow.dart';
 import 'successdeletecow.dart';
 import 'editcow.dart';
 import 'historycow.dart';
+import 'addactivity.dart';
+import 'recordmilk.dart';
+import 'allrecordbreeding.dart';
 
 void main() {
-  runApp(OneCow());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: AddCow(),
+      home: Nav(),
     );
   }
 }

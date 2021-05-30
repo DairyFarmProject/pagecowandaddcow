@@ -1,24 +1,13 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:finaldairy/successdeletecow.dart';
 import 'package:flutter/material.dart';
 
-class DeleteCow extends StatelessWidget {
-  // This widget is the root of your application.
+class DeleteCow extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyGridScreen(),
-    );
-  }
+  _DeleteCowState createState() => _DeleteCowState();
 }
 
-class MyGridScreen extends StatefulWidget {
-  MyGridScreen({Key key, this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyGridScreenState createState() => _MyGridScreenState();
-}
-
-class _MyGridScreenState extends State<MyGridScreen> {
+class _DeleteCowState extends State<DeleteCow> {
   Widget optionCowButton() {
     return IconButton(
       icon: Icon(Icons.more_vert),
@@ -31,13 +20,16 @@ class _MyGridScreenState extends State<MyGridScreen> {
   final String name = 'มูมู้';
   final String birthday = '11 ธันวาคม 2559';
   final String code = 'A121';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("ลบวัว"),
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -265,7 +257,9 @@ Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
                   borderRadius: BorderRadius.all(Radius.circular(39)),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop(ConfirmAction.Accept);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SuccessDeleteCow();
+                  }));
                 },
               ),
             ),
