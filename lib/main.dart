@@ -24,12 +24,10 @@ void main() {
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-  final String name = 'มูมู้';
-  final String birthday = '11 ธันวาคม 2559';
-  final String code = 'A121';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Mitr'),
       home: Nav(),
     );
   }
