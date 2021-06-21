@@ -1,37 +1,29 @@
+import 'dart:convert';
+import 'dart:convert';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'successrecord.dart';
-
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+import 'successrecord.dart';
+import 'models/Vaccines.dart';
 
 class RecordVacine extends StatefulWidget {
   @override
   _RecordVacineState createState() => _RecordVacineState();
 }
-
-class Vaccines {
-  int vaccine_id;
-  String vac_nameen, vac_nameth, detail;
-  Vaccines(this.vaccine_id, this.vac_nameen, this.vac_nameth, this.detail);
-}
-
 class _RecordVacineState extends State<RecordVacine> {
-  getVaccines() async {
-    var response = await http.get(Uri.http('10.0.2.2:3000', 'vaccines'));
-    var data = json.decode(response.body);
-    List<Vaccines> vaccines = [];
-    for (var u in data) {
-      Vaccines vaccine = Vaccines(
-          u['vaccine_id'], u['vac_nameen'], u['vac_nameth'], u['detail']);
-      vaccines.add(vaccine);
-    }
-    print(vaccines.length);
+  Future<List<Vaccines>> getVaccines() async {
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'vaccines'));
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    final List list = data['data'];
+    
+    List<Vaccines> vaccines = list.map((e) => Vaccines.fromMap(e)).toList();
+
     return vaccines;
   }
-
-
 
   @override
   void initState() {
@@ -65,7 +57,7 @@ class _RecordVacineState extends State<RecordVacine> {
           backgroundColor: Color(0xff59aca9),
         ),
         body: Container(
-            child: FutureBuilder(
+            child: FutureBuilder<List<Vaccines>>(
           future: getVaccines(),
           builder: (context, snapshot) {
             if (snapshot.data == null) {
@@ -79,55 +71,22 @@ class _RecordVacineState extends State<RecordVacine> {
                 child: Column(
                   children: [
                     Container(
-                        // child: DropdownButton<String>(
-                        //     hint: Text('${snapshot.data[0].vac_nameth}'),
-                        //     value: '${snapshot.data[0].vac_nameth}',
-                        //     onChanged: (newValue) {
-                        //       setState(() {
-                        //         snapshot.data[0].vac_nameth = newValue;
-                        //       });
-                        //     },
-                        //     items: snapshot.data.map((vaccine) =>
-                        //       DropdownMenuItem<String>(
-                        //           child: Text(vaccine.vac_nameth),
-                        //           value: vaccine.vac_nameth)
-                        //     ).toList()
-                        //     )
-                        // child: ListView.builder(
-                        //     itemCount: snapshot.data.length,
-                        //     itemBuilder: (context, i) {
-                        //       return
-                        //       DropdownSearch <String> (
-                        //         mode: Mode.MENU,
-                        //         showSelectedItem: true,
-                        //         items: ['ไข้ขา'],
-                        //         label: "ชื่อวัคซีน",
-                        //         hint: "country in menu mode",
-                        //         popupItemDisabled: (String s) =>
-                        //         s.startsWith('I'),
-                        //         onChanged: print,
-                        //         selectedItem: 'ไข้ขา'
-                        //         );
-                            
-                              
-                             child: Container(
-                                  margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                                  child: DropdownSearch<String>(
-                                      mode: Mode.MENU,
-                                      showSelectedItem: true,
-                                      items: [snapshot.data[0].vac_nameth],
-                                      label: "ชื่อวัคซีน",
-                                      hint: "country in menu mode",
-                                      popupItemDisabled: (String s) =>
-                                          s.startsWith('I'),
-                                      onChanged: print,
-                                      selectedItem:
-                                          '${snapshot.data[0].vac_nameth}'),
-                                  padding: const EdgeInsets.all(20.0)
-                                  )
+                        child: Container(
+                            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                            child: DropdownSearch<String>(
+                                mode: Mode.MENU,
+                                showSelectedItem: true,
+                                items: snapshot.data.map((data) => data.vac_nameth).toList(),
+                                label: "ชื่อวัคซีน",
+                                hint: "country in menu mode",
+                                popupItemDisabled: (String s) =>
+                                    s.startsWith('I'),
+                                onChanged: print,
+                                selectedItem: '${snapshot.data[0].vac_nameth}'),
+                            padding: const EdgeInsets.all(20.0))
                         //     }
                         // )
-                         ),
+                        ),
                     Container(
                       alignment: Alignment.topLeft,
                       margin: EdgeInsets.all(0),

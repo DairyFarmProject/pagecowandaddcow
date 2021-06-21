@@ -1,64 +1,28 @@
-import 'package:finaldairy/addcow1.dart';
-import 'package:finaldairy/onecow.dart';
-import 'package:flutter/material.dart';
-
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import 'addcow1.dart';
+import 'models/Cows.dart';
+import 'onecow.dart';
 
 class Cow extends StatefulWidget {
   @override
   _CowState createState() => _CowState();
 }
 
-class Cows {
-  int cow_id, typecow_id, species_id, farm_id, statuscow_id;
-  String cow_no,
-      cow_name,
-      cow_birthday,
-      cow_sex,
-      cow_image1,
-      cow_image2,
-      cow_image3,
-      note;
-  Cows(
-      this.cow_id,
-      this.cow_no,
-      this.cow_name,
-      this.cow_birthday,
-      this.cow_sex,
-      this.cow_image1,
-      this.cow_image2,
-      this.cow_image3,
-      this.note,
-      this.typecow_id,
-      this.species_id,
-      this.farm_id,
-      this.statuscow_id);
-}
+
 
 class _CowState extends State<Cow> {
-  getCows() async {
-    var response = await http.get(Uri.http('10.0.2.2:4000', 'cow'));
-    var data = json.decode(response.body);
-    List<Cows> cows = [];
-    for (var u in data) {
-      Cows cow = Cows(
-          u['cow_id'],
-          u['cow_no'],
-          u['cow_name'],
-          u['cow_birthday'],
-          u['cow_sex'],
-          u['cow_image1'],
-          u['cow_image2'],
-          u['cow_image3'],
-          u['note'],
-          u['typecow_id'],
-          u['species_id'],
-          u['farm_id'],
-          u['statuscow_id']);
-      cows.add(cow);
-    }
-    print(cows.length);
+  Future<List<Cows>> getCows() async {
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'cows'));
+    
+    Map<String, dynamic> data = jsonDecode(response.body);
+    final List list = data['data'];
+    
+    List<Cows> cows = list.map((e) => Cows.fromMap(e)).toList();
+
     return cows;
   }
 
