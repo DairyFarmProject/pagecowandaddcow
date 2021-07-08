@@ -12,15 +12,13 @@ class Cow extends StatefulWidget {
   _CowState createState() => _CowState();
 }
 
-
-
 class _CowState extends State<Cow> {
   Future<List<Cows>> getCows() async {
     final response = await http.get(Uri.http('10.0.2.2:3000', 'cows'));
-    
+
     Map<String, dynamic> data = jsonDecode(response.body);
     final List list = data['data'];
-    
+
     List<Cows> cows = list.map((e) => Cows.fromMap(e)).toList();
 
     return cows;
@@ -45,7 +43,7 @@ class _CowState extends State<Cow> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          titleTextStyle: TextStyle(fontWeight: FontWeight.w900),
+          titleTextStyle: TextStyle(fontWeight: FontWeight.w700),
           title: Text("วัวในฟาร์ม"),
           actions: [
             PopupMenuButton<String>(
@@ -85,54 +83,52 @@ class _CowState extends State<Cow> {
                           itemBuilder: (context, i) {
                             return Padding(
                                 padding: const EdgeInsets.all(0),
-                                child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return OneCow();
-                                      }));
-                                    },
-                                    child: Center(
+                                child: Center(
+                                    child: Column(
+                                  children: [
+                                    Center(
+                                        child: Card(
+                                      elevation: 1,
+                                      margin: EdgeInsets.only(top: 3),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(15)),
+                                      child: InkWell(
+                                        onTap: () {
+                                          
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => OneCow(cow: snapshot.data[i])
+                                          ));
+                                        },
                                         child: Column(
-                                      children: [
-                                        Center(
-                                          child: Card(
-                                            elevation: 1,
-                                            margin: EdgeInsets.only(top: 3),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    new BorderRadius.circular(
-                                                        15)),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Image.network(
-                                                  snapshot.data[i].cow_image1 ??
-                                                      "",
-                                                  width: 180,
-                                                  height: 150,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                SizedBox.fromSize(
-                                                    size: Size(100, 8)),
-                                                Padding(
-                                                    padding: const EdgeInsets
-                                                        .fromLTRB(10, 0, 0, 12),
-                                                    child: Text('${
-                                                      snapshot.data[i]
-                                                              .cow_name ?? ""}, ${snapshot.data[i].cow_no}',
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          ),
-                                                    )
-                                                    ),
-                                              ],
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Image.network(
+                                              snapshot.data[i].cow_image1 ?? "",
+                                              width: 180,
+                                              height: 150,
+                                              fit: BoxFit.cover,
                                             ),
-                                          ),
-                                        )
-                                      ],
-                                    ))));
+                                            SizedBox.fromSize(
+                                                size: Size(100, 8)),
+                                            Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        10, 0, 0, 12),
+                                                child: Text(
+                                                  '${snapshot.data[i].cow_name ?? ""}, ${snapshot.data[i].cow_no}',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                )),
+                                          ],
+                                        ),
+                                      ),
+                                    ))
+                                  ],
+                                )));
                           });
                   }),
             )),
