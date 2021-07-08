@@ -1,37 +1,105 @@
 import 'package:finaldairy/successeditcow.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:intl/intl.dart';
+import 'package:flutter/cupertino.dart';
+import 'models/Cows.dart';
+import 'models/TypeCows.dart';
+import 'models/StatusCows.dart';
+import 'models/Species.dart';
 
 class EditCow extends StatefulWidget {
+  final Cows cow;
+  EditCow({this.cow});
   @override
   _EditCowState createState() => _EditCowState();
 }
 
 class _EditCowState extends State<EditCow> {
+  Future<List<TypeCows>> getTypeCows() async {
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'typecows'));
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    final List list = data['data'];
+
+    List<TypeCows> typecows = list.map((e) => TypeCows.fromMap(e)).toList();
+
+    return typecows;
+  }
+
+  Future<List<StatusCows>> getStatusCows() async {
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'statuscows'));
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    final List list = data['data'];
+
+    List<StatusCows> statuscows =
+        list.map((e) => StatusCows.fromMap(e)).toList();
+
+    return statuscows;
+  }
+
+  Future<List<Species>> getSpecies() async {
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'species'));
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    final List list = data['data'];
+
+    List<Species> species = list.map((e) => Species.fromMap(e)).toList();
+
+    return species;
+  }
+
+  final myController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getTypeCows();
+    getStatusCows();
+    getSpecies();
+  }
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
+
+  int _selectIndex = 0;
+
+  void _onItemTap(int index) {
+    setState(() {
+      _selectIndex = index;
+    });
+  }
+
   DateTime _dateTime;
 
-  final String name = 'มูมู้';
-  final String birthday = '11 ธันวาคม 2559';
-  final String code = 'A121';
-  final String note = 'ไม่กินหญ้า';
+  TextEditingController dateCtl = TextEditingController();
+  DateTime date;
+  var formatter = new DateFormat('dd-MM-yyyy');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("แก้ไขข้อมูลวัว"),
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+        appBar: AppBar(
+          title: Text("แก้ไขข้อมูลวัว"),
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
           ),
+          backgroundColor: Color(0xff62b490),
         ),
-        backgroundColor: Color(0xff62b490),
-      ),
-      body: Container(
-        child: SingleChildScrollView(
+        body: Container(
+            child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Container(
@@ -41,7 +109,7 @@ class _EditCowState extends State<EditCow> {
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.blueGrey[100],
-                  border: Border.all(color: Colors.blueGrey[800], width: 2),
+                  border: Border.all(color: Colors.blueGrey[300], width: 2),
                   borderRadius: BorderRadius.circular(3),
                 ),
                 child: Container(
@@ -62,9 +130,9 @@ class _EditCowState extends State<EditCow> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 0, 5),
                                   child: Text(
-                                    'ชื่อวัว : $name',
+                                    'ชื่อวัว : ${widget.cow.cow_name}',
                                     style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                        TextStyle(fontWeight: FontWeight.w500),
                                   ),
                                 ),
                               ),
@@ -76,9 +144,9 @@ class _EditCowState extends State<EditCow> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 0, 5),
                                   child: Text(
-                                    'วันเกิด : $birthday',
+                                    'วันเกิด : ${DateFormat('dd-MM-yyyy').format(DateTime.parse(widget.cow.cow_birthday))}',
                                     style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                        TextStyle(fontWeight: FontWeight.w500),
                                   ),
                                 ),
                               ),
@@ -90,8 +158,8 @@ class _EditCowState extends State<EditCow> {
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 10, 0, 15),
                           child: Text(
-                            'รหัสประจำตัว : $code',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            'รหัสประจำตัว : ${widget.cow.cow_no}',
+                            style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -102,113 +170,172 @@ class _EditCowState extends State<EditCow> {
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Text(
-                          'สถานะปัจจุบัน : โคท้อง',
+                          'สถานะปัจจุบัน : ${widget.cow.statuscow_id} - ???',
                           style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'ชื่อวัว',
-                      hintText: '$name',
-                      fillColor: Colors.blueGrey,
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blueGrey, width: 2),
-                      )),
-                  onChanged: (String name) {},
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'รหัสประจำตัว',
-                      hintText: '$code',
-                      fillColor: Colors.blueGrey,
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blueGrey, width: 2),
-                      )),
-                  onChanged: (String name) {},
-                ),
-              ),
-              Column(
-                children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    margin: EdgeInsets.all(0),
-                    padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-                    child: Text('วันเกิด',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 20, 0, 20),
-                        child: Text(
-                          _dateTime == null
-                              ? '$birthday'
-                              : _dateTime.toString(),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.calendar_today_sharp,
-                            color: Colors.blueGrey,
-                          ),
-                          onPressed: () {
-                            showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(1970),
-                              lastDate: DateTime(2022),
-                            ).then((date) {
-                              setState(() {
-                                _dateTime = date;
-                              });
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
               ),
               Container(
-                child: DropdownSearch<String>(
-                    mode: Mode.MENU,
-                    showSelectedItem: true,
-                    items: ["ป่วย", "สุขภาพดี", "ตาย"],
-                    label: "สถานะวัว",
-                    hint: "country in menu mode",
-                    popupItemDisabled: (String s) => s.startsWith('I'),
-                    onChanged: print,
-                    selectedItem: "ป่วย"),
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                              child: Container(
+                                  alignment: Alignment.topLeft,
+                                  margin: EdgeInsets.all(0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                                  child: Text('ชื่อวัว',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500)))),
+                          Expanded(
+                              flex: 2,
+                              child: Container(
+                                  child: Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                      child: SizedBox(
+                                        height: 30,
+                                        width: 100,
+                                        child: TextField(
+                                          controller: myController,
+                                          decoration: InputDecoration(
+                                            hintText: '${widget.cow.cow_name}',
+                                            fillColor: Colors.blueGrey,
+                                          ),
+                                          onChanged: (String name) {},
+                                        ),
+                                      ))))
+                        ]),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                              child: Container(
+                                  alignment: Alignment.topLeft,
+                                  margin: EdgeInsets.all(0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 20, 0, 15),
+                                  child: Text('รหัสประจำตัว',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500)))),
+                          Expanded(
+                              flex: 2,
+                              child: Container(
+                                  child: Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                      child: SizedBox(
+                                        height: 30,
+                                        width: 100,
+                                        child: TextField(
+                                          controller: myController,
+                                          decoration: InputDecoration(
+                                            hintText: '${widget.cow.cow_no}',
+                                            fillColor: Colors.blueGrey,
+                                          ),
+                                          onChanged: (String name) {},
+                                        ),
+                                      ))))
+                        ]),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            margin: EdgeInsets.all(0),
+                            padding: const EdgeInsets.fromLTRB(0, 20, 0, 15),
+                            child: Text('วันเกิด',
+                                style: TextStyle(fontWeight: FontWeight.w500)),
+                          ),
+                        ),
+                        Expanded(
+                            flex: 2,
+                            child: Container(
+                                child: Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              child: SizedBox(
+                                  height: 30,
+                                  width: 250,
+                                  child: TextFormField(
+                                      readOnly: true,
+                                      controller: dateCtl,
+                                      decoration: InputDecoration(
+                                        hintText:
+                                            '${DateFormat('dd-MM-yyyy').format(DateTime.parse(widget.cow.cow_birthday))}',
+                                        fillColor: Colors.blueGrey,
+                                      ),
+                                      onTap: () async {
+                                        date = await showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime.now()
+                                                .subtract(Duration(days: 2)),
+                                            lastDate: DateTime.now()
+                                                .add(Duration(days: 2)));
+                                        if (date == null) {
+                                          date = DateTime.now();
+                                        } else {
+                                          dateCtl.text = formatter.format(date);
+                                        }
+                                      })),
+                            )))
+                      ],
+                    )
+                  ],
+                ),
               ),
+              Container(
+                  child: FutureBuilder<List<StatusCows>>(
+                      future: getStatusCows(),
+                      builder: (context, snapshot) {
+                        if (snapshot.data == null) {
+                          return Container(
+                            child: Center(
+                              child: Text('Loading...'),
+                            ),
+                          );
+                        } else
+                          return Container(
+                              child: DropdownSearch<String>(
+                                  mode: Mode.MENU,
+                                  showSelectedItem: true,
+                                  items: snapshot.data
+                                      .map((data) => data.status_name)
+                                      .toList(),
+                                  label: "สถานะวัว",
+                                  hint: "country in menu mode",
+                                  popupItemDisabled: (String s) =>
+                                      s.startsWith('I'),
+                                  onChanged: print,
+                                  selectedItem:
+                                      '${snapshot.data[0].status_name}'),
+                              padding:
+                                  const EdgeInsets.fromLTRB(20, 20, 20, 0));
+                      })),
               Column(
                 children: [
                   Container(
                     alignment: Alignment.topLeft,
                     margin: EdgeInsets.all(0),
-                    padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-                    child: Text('รูปภาพวัว'),
+                    padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
+                    child: Text('รูปภาพวัว',
+                        style: TextStyle(fontWeight: FontWeight.w500)),
                   ),
                   Container(
                       alignment: Alignment.topLeft,
                       margin: EdgeInsets.all(0),
-                      padding: const EdgeInsets.fromLTRB(30, 10, 0, 10),
+                      padding: const EdgeInsets.fromLTRB(30, 5, 0, 30),
                       child: Icon(
                         Icons.add_a_photo_outlined,
                         size: 30,
@@ -216,51 +343,81 @@ class _EditCowState extends State<EditCow> {
                       )),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'รายละเอียดอื่นๆ',
-                      hintText: '$note',
-                      fillColor: Colors.blueGrey,
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blueGrey, width: 2),
-                      )),
-                  onChanged: (String name) {},
+              Column(children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  margin: EdgeInsets.all(0),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Text('รายละเอียดอื่นๆ',
+                      style: TextStyle(fontWeight: FontWeight.w500)),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+                  child: TextField(
+                    controller: myController,
+                    decoration: InputDecoration(
+                      hintText: '${widget.cow.note}',
+                      fillColor: Colors.blueGrey,
+                    ),
+                    onChanged: (String name) {},
+                  ),
+                )
+              ]),
               Container(
-                child: DropdownSearch<String>(
-                    mode: Mode.MENU,
-                    showSelectedItem: true,
-                    items: [
-                      "ลูกวัว",
-                      "โคสาว",
-                      "โคท้อง",
-                      "โคแห้งนม",
-                      "โคผสมพันธ์",
-                      "โคแก่"
-                    ],
-                    label: "ประเภทวัว",
-                    hint: "country in menu mode",
-                    popupItemDisabled: (String s) => s.startsWith('I'),
-                    onChanged: print,
-                    selectedItem: "ลูกวัว"),
-                padding: const EdgeInsets.all(20.0),
-              ),
+                  child: FutureBuilder<List<TypeCows>>(
+                      future: getTypeCows(),
+                      builder: (context, snapshot) {
+                        if (snapshot.data == null) {
+                          return Container(
+                            child: Center(
+                              child: Text('Loading...'),
+                            ),
+                          );
+                        } else
+                          return Container(
+                            child: DropdownSearch<String>(
+                                mode: Mode.MENU,
+                                showSelectedItem: true,
+                                items: snapshot.data
+                                    .map((data) => data.type_name)
+                                    .toList(),
+                                label: "ประเภทวัว",
+                                hint: "country in menu mode",
+                                popupItemDisabled: (String s) =>
+                                    s.startsWith('I'),
+                                onChanged: print,
+                                selectedItem: '${snapshot.data[0].type_name}'),
+                            padding: const EdgeInsets.all(20.0),
+                          );
+                      })),
               Container(
-                child: DropdownSearch<String>(
-                    mode: Mode.MENU,
-                    showSelectedItem: true,
-                    items: ["Thai Friesian", "Sahiwal", "Red Dane"],
-                    label: "สายพันธ์วัว",
-                    hint: "country in menu mode",
-                    popupItemDisabled: (String s) => s.startsWith('I'),
-                    onChanged: print,
-                    selectedItem: "Sahiwal"),
-                padding: const EdgeInsets.all(20.0),
-              ),
+                  child: FutureBuilder<List<Species>>(
+                      future: getSpecies(),
+                      builder: (context, snapshot) {
+                        if (snapshot.data == null) {
+                          return Container(
+                            child: Center(
+                              child: Text('Loading...'),
+                            ),
+                          );
+                        } else
+                          return Container(
+                              child: DropdownSearch<String>(
+                                  mode: Mode.MENU,
+                                  showSelectedItem: true,
+                                  items: snapshot.data
+                                      .map((data) => data.specie_name_th)
+                                      .toList(),
+                                  label: "สายพันธ์วัว",
+                                  hint: "country in menu mode",
+                                  popupItemDisabled: (String s) =>
+                                      s.startsWith('I'),
+                                  onChanged: print,
+                                  selectedItem:
+                                      '${snapshot.data[0].specie_name_th}'),
+                              padding:
+                                  const EdgeInsets.fromLTRB(20, 20, 20, 60));
+                      })),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -322,8 +479,6 @@ class _EditCowState extends State<EditCow> {
               ),
             ],
           ),
-        ),
-      ),
-    );
+        )));
   }
 }
