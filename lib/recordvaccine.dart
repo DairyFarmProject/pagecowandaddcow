@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:convert';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/foundation.dart';
@@ -76,13 +75,13 @@ class _RecordVacineState extends State<RecordVacine> {
                             child: DropdownSearch<String>(
                                 mode: Mode.MENU,
                                 showSelectedItem: true,
-                                items: snapshot.data.map((data) => data.vac_nameth).toList(),
+                                items: snapshot.data.map((data) => data.vac_name_th).toList(),
                                 label: "ชื่อวัคซีน",
                                 hint: "country in menu mode",
                                 popupItemDisabled: (String s) =>
                                     s.startsWith('I'),
                                 onChanged: print,
-                                selectedItem: '${snapshot.data[0].vac_nameth}'),
+                                selectedItem: '${snapshot.data[0].vac_name_th}'),
                             padding: const EdgeInsets.all(20.0))
                         //     }
                         // )

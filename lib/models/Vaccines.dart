@@ -2,26 +2,27 @@ import 'dart:convert';
 
 class Vaccines {
   final int vaccine_id;
-  final String vac_nameen;
-  final String vac_nameth;
+  final String vac_name_en;
+  final String vac_name_th;
   final String detail;
   Vaccines({
     this.vaccine_id,
-    this.vac_nameen,
-    this.vac_nameth,
+    this.vac_name_en,
+    this.vac_name_th,
     this.detail,
   });
+  
 
   Vaccines copyWith({
     int vaccine_id,
-    String vac_nameen,
-    String vac_nameth,
+    String vac_name_en,
+    String vac_name_th,
     String detail,
   }) {
     return Vaccines(
       vaccine_id: vaccine_id ?? this.vaccine_id,
-      vac_nameen: vac_nameen ?? this.vac_nameen,
-      vac_nameth: vac_nameth ?? this.vac_nameth,
+      vac_name_en: vac_name_en ?? this.vac_name_en,
+      vac_name_th: vac_name_th ?? this.vac_name_th,
       detail: detail ?? this.detail,
     );
   }
@@ -29,19 +30,17 @@ class Vaccines {
   Map<String, dynamic> toMap() {
     return {
       'vaccine_id': vaccine_id,
-      'vac_nameen': vac_nameen,
-      'vac_nameth': vac_nameth,
+      'vac_name_en': vac_name_en,
+      'vac_name_th': vac_name_th,
       'detail': detail,
     };
   }
 
   factory Vaccines.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
     return Vaccines(
       vaccine_id: map['vaccine_id'],
-      vac_nameen: map['vac_nameen'],
-      vac_nameth: map['vac_nameth'],
+      vac_name_en: map['vac_name_en'],
+      vac_name_th: map['vac_name_th'],
       detail: map['detail'],
     );
   }
@@ -52,25 +51,25 @@ class Vaccines {
 
   @override
   String toString() {
-    return 'Vaccines(vaccine_id: $vaccine_id, vac_nameen: $vac_nameen, vac_nameth: $vac_nameth, detail: $detail)';
+    return 'Vaccines(vaccine_id: $vaccine_id, vac_name_en: $vac_name_en, vac_name_th: $vac_name_th, detail: $detail)';
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Vaccines &&
-      o.vaccine_id == vaccine_id &&
-      o.vac_nameen == vac_nameen &&
-      o.vac_nameth == vac_nameth &&
-      o.detail == detail;
+    return other is Vaccines &&
+      other.vaccine_id == vaccine_id &&
+      other.vac_name_en == vac_name_en &&
+      other.vac_name_th == vac_name_th &&
+      other.detail == detail;
   }
 
   @override
   int get hashCode {
     return vaccine_id.hashCode ^
-      vac_nameen.hashCode ^
-      vac_nameth.hashCode ^
+      vac_name_en.hashCode ^
+      vac_name_th.hashCode ^
       detail.hashCode;
   }
 }
