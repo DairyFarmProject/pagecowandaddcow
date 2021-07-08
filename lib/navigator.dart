@@ -4,8 +4,8 @@ import 'package:finaldairy/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'addactivity.dart';
-import 'cow1.dart';
-import 'onecow.dart';
+import 'Screens/Cow/cow1.dart';
+import 'Screens/Cow/onecow.dart';
 
 class Nav extends StatefulWidget {
   @override

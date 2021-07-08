@@ -1,5 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:finaldairy/successdeletecow.dart';
+import 'package:finaldairy/Screens/Cow/successdeletecow.dart';
 import 'package:flutter/material.dart';
 
 class DeleteCow extends StatefulWidget {

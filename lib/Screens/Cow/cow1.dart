@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'addcow1.dart';
-import 'models/Cows.dart';
+import 'package:finaldairy/models/Cows.dart';
 import 'onecow.dart';
 
 class Cow extends StatefulWidget {

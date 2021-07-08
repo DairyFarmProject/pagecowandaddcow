@@ -1,9 +1,9 @@
-import 'package:finaldairy/deletecow.dart';
-import 'package:finaldairy/editcow.dart';
-import 'package:finaldairy/historycow.dart';
+import 'package:finaldairy/Screens/Cow/deletecow.dart';
+import 'package:finaldairy/Screens/Cow/editcow.dart';
+import 'package:finaldairy/Screens/Cow/historycow.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'models/Cows.dart';
+import '../../models/Cows.dart';
 
 class OneCow extends StatefulWidget {
   final Cows cow;

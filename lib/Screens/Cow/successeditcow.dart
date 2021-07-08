@@ -1,4 +1,4 @@
-import 'package:finaldairy/cow1.dart';
+import 'package:finaldairy/Screens/Cow/cow1.dart';
 import 'package:finaldairy/navigator.dart';
 import 'package:flutter/material.dart';
 

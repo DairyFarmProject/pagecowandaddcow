@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'cow1.dart';
-import 'package:finaldairy/addcow1.dart';
+import 'package:finaldairy/Screens/Cow/addcow1.dart';
 
 class SuccessAddCow extends StatefulWidget {
   @override

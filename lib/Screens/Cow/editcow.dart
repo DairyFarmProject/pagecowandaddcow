@@ -1,14 +1,14 @@
-import 'package:finaldairy/successeditcow.dart';
+import 'package:finaldairy/Screens/Cow/successeditcow.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
-import 'models/Cows.dart';
-import 'models/TypeCows.dart';
-import 'models/StatusCows.dart';
-import 'models/Species.dart';
+import '../../models/Cows.dart';
+import '../../models/TypeCows.dart';
+import '../../models/StatusCows.dart';
+import '../../models/Species.dart';
 
 class EditCow extends StatefulWidget {
   final Cows cow;

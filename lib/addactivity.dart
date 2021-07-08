@@ -1,6 +1,6 @@
 import 'package:finaldairy/allrecordbreeding.dart';
-import 'package:finaldairy/cow1.dart';
-import 'package:finaldairy/onecow.dart';
+import 'package:finaldairy/Screens/Cow/cow1.dart';
+import 'package:finaldairy/Screens/Cow/onecow.dart';
 import 'package:finaldairy/recordcalve.dart';
 import 'package:finaldairy/recordmilk.dart';
 import 'package:finaldairy/recordvaccine.dart';

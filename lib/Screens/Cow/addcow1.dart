@@ -1,5 +1,5 @@
-import 'package:finaldairy/cow1.dart';
-import 'package:finaldairy/successaddcow.dart';
+import 'package:finaldairy/Screens/Cow/cow1.dart';
+import 'package:finaldairy/Screens/Cow/successaddcow.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
