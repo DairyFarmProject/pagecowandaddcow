@@ -12,7 +12,7 @@ class RecordCalve extends StatefulWidget {
 }
 
 class _RecordCalveState extends State<RecordCalve> {
-  DateTime _dateTime;
+  DateTime? _dateTime;
   Future<List<Abdominals>> getAbdominals() async {
     final response = await http.get(Uri.http('10.0.2.2:3000', 'abdominal'));
 
@@ -78,11 +78,11 @@ class _RecordCalveState extends State<RecordCalve> {
                     child: DropdownSearch<String>(
                         mode: Mode.MENU,
                         showSelectedItem: true,
-                        items: snapshot.data.map((data) => data.semen_name).toList() ,
+                        items: snapshot.data?.map((data) => data.semen_name).toList() ,
                         label: "ชื่อการผสมพันธ์",
                         popupItemDisabled: (String s) => s.startsWith('I'),
                         onChanged: print,
-                        selectedItem: '${snapshot.data[0].semen_name}'),
+                        selectedItem: '${snapshot.data?[0].semen_name}'),
                     padding: const EdgeInsets.all(20.0),
                   ),
                   Container(

@@ -195,12 +195,13 @@ class _RecordMilkState extends State<RecordMilk> {
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.all(10)),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.grey[400]),
+                              (Colors.grey[400])!),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                           ))),
+                          onPressed: () { },
                     );
                   },
                 ),

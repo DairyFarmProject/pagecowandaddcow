@@ -38,7 +38,7 @@ class _RecordVacineState extends State<RecordVacine> {
     });
   }
 
-  DateTime _dateTime;
+  DateTime? _dateTime;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,13 +75,13 @@ class _RecordVacineState extends State<RecordVacine> {
                             child: DropdownSearch<String>(
                                 mode: Mode.MENU,
                                 showSelectedItem: true,
-                                items: snapshot.data.map((data) => data.vac_name_th).toList(),
+                                items: snapshot.data?.map((data) => data.vac_name_th).toList(),
                                 label: "ชื่อวัคซีน",
                                 hint: "country in menu mode",
                                 popupItemDisabled: (String s) =>
                                     s.startsWith('I'),
                                 onChanged: print,
-                                selectedItem: '${snapshot.data[0].vac_name_th}'),
+                                selectedItem: '${snapshot.data?[0].vac_name_th}'),
                             padding: const EdgeInsets.all(20.0))
                         //     }
                         // )

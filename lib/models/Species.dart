@@ -5,15 +5,15 @@ class Species {
   String specie_name_en;
   String specie_name_th;
   Species({
-    this.species_id,
-    this.specie_name_en,
-    this.specie_name_th,
+    required this.species_id,
+    required this.specie_name_en,
+    required this.specie_name_th,
   });
 
   Species copyWith({
-    int species_id,
-    String specie_name_en,
-    String specie_name_th,
+    int? species_id,
+    String? specie_name_en,
+    String? specie_name_th,
   }) {
     return Species(
       species_id: species_id ?? this.species_id,

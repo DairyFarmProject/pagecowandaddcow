@@ -12,7 +12,7 @@ import '../../models/Species.dart';
 
 class EditCow extends StatefulWidget {
   final Cows cow;
-  EditCow({this.cow});
+  EditCow({required this.cow});
   @override
   _EditCowState createState() => _EditCowState();
 }
@@ -76,10 +76,10 @@ class _EditCowState extends State<EditCow> {
     });
   }
 
-  DateTime _dateTime;
+  DateTime? _dateTime;
 
   TextEditingController dateCtl = TextEditingController();
-  DateTime date;
+  DateTime? date;
   var formatter = new DateFormat('dd-MM-yyyy');
 
   @override
@@ -109,7 +109,7 @@ class _EditCowState extends State<EditCow> {
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.blueGrey[100],
-                  border: Border.all(color: Colors.blueGrey[300], width: 2),
+                  border: Border.all(color: (Colors.blueGrey[300])!, width: 2),
                   borderRadius: BorderRadius.circular(3),
                 ),
                 child: Container(
@@ -286,7 +286,7 @@ class _EditCowState extends State<EditCow> {
                                         if (date == null) {
                                           date = DateTime.now();
                                         } else {
-                                          dateCtl.text = formatter.format(date);
+                                          dateCtl.text = formatter.format((date)!);
                                         }
                                       })),
                             )))
@@ -310,7 +310,7 @@ class _EditCowState extends State<EditCow> {
                               child: DropdownSearch<String>(
                                   mode: Mode.MENU,
                                   showSelectedItem: true,
-                                  items: snapshot.data
+                                  items: snapshot.data!
                                       .map((data) => data.status_name)
                                       .toList(),
                                   label: "สถานะวัว",
@@ -319,7 +319,7 @@ class _EditCowState extends State<EditCow> {
                                       s.startsWith('I'),
                                   onChanged: print,
                                   selectedItem:
-                                      '${snapshot.data[0].status_name}'),
+                                      '${snapshot.data?[0].status_name}'),
                               padding:
                                   const EdgeInsets.fromLTRB(20, 20, 20, 0));
                       })),
@@ -379,14 +379,14 @@ class _EditCowState extends State<EditCow> {
                                 mode: Mode.MENU,
                                 showSelectedItem: true,
                                 items: snapshot.data
-                                    .map((data) => data.type_name)
+                                    !.map((data) => data.type_name)
                                     .toList(),
                                 label: "ประเภทวัว",
                                 hint: "country in menu mode",
                                 popupItemDisabled: (String s) =>
                                     s.startsWith('I'),
                                 onChanged: print,
-                                selectedItem: '${snapshot.data[0].type_name}'),
+                                selectedItem: '${snapshot.data?[0].type_name}'),
                             padding: const EdgeInsets.all(20.0),
                           );
                       })),
@@ -405,7 +405,7 @@ class _EditCowState extends State<EditCow> {
                               child: DropdownSearch<String>(
                                   mode: Mode.MENU,
                                   showSelectedItem: true,
-                                  items: snapshot.data
+                                  items: snapshot.data!
                                       .map((data) => data.specie_name_th)
                                       .toList(),
                                   label: "สายพันธ์วัว",
@@ -414,7 +414,7 @@ class _EditCowState extends State<EditCow> {
                                       s.startsWith('I'),
                                   onChanged: print,
                                   selectedItem:
-                                      '${snapshot.data[0].specie_name_th}'),
+                                      '${snapshot.data?[0].specie_name_th}'),
                               padding:
                                   const EdgeInsets.fromLTRB(20, 20, 20, 60));
                       })),

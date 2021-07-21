@@ -29,6 +29,12 @@ class SignUpScreen extends StatelessWidget {
                 RoundedInputField(
                   hintText: "อีเมล",
                   onChanged: (value) {},
+                  validator: (value) {
+                    if (value == null || !value.contains('@')) {
+                      return 'Invalid email';
+                    }
+                    return null;
+                  },
                 ),
                 RoundedPasswordField(
                   onChanged: (value) {},

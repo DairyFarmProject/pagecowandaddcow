@@ -15,35 +15,36 @@ class Cows {
   final String cow_image3;
   final String note;
   Cows({
-    this.cow_id,
-    this.typecow_id,
-    this.species_id,
-    this.farm_id,
-    this.statuscow_id,
-    this.cow_no,
-    this.cow_name,
-    this.cow_birthday,
-    this.cow_sex,
-    this.cow_image1,
-    this.cow_image2,
-    this.cow_image3,
-    this.note,
+    required this.cow_id,
+    required this.typecow_id,
+    required this.species_id,
+    required this.farm_id,
+    required this.statuscow_id,
+    required this.cow_no,
+    required this.cow_name,
+    required this.cow_birthday,
+    required this.cow_sex,
+    required this.cow_image1,
+    required this.cow_image2,
+    required this.cow_image3,
+    required this.note,
   });
+  
 
   Cows copyWith({
-    int cow_id,
-    int typecow_id,
-    int species_id,
-    int farm_id,
-    int statuscow_id,
-    String cow_no,
-    String cow_name,
-    String cow_birthday,
-    String cow_sex,
-    String cow_image1,
-    String cow_image2,
-    String cow_image3,
-    String note,
+    int? cow_id,
+    int? typecow_id,
+    int? species_id,
+    int? farm_id,
+    int? statuscow_id,
+    String? cow_no,
+    String? cow_name,
+    String? cow_birthday,
+    String? cow_sex,
+    String? cow_image1,
+    String? cow_image2,
+    String? cow_image3,
+    String? note,
   }) {
     return Cows(
       cow_id: cow_id ?? this.cow_id,
@@ -81,8 +82,6 @@ class Cows {
   }
 
   factory Cows.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Cows(
       cow_id: map['cow_id'],
       typecow_id: map['typecow_id'],
@@ -110,39 +109,39 @@ class Cows {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is Cows &&
-        o.cow_id == cow_id &&
-        o.typecow_id == typecow_id &&
-        o.species_id == species_id &&
-        o.farm_id == farm_id &&
-        o.statuscow_id == statuscow_id &&
-        o.cow_no == cow_no &&
-        o.cow_name == cow_name &&
-        o.cow_birthday == cow_birthday &&
-        o.cow_sex == cow_sex &&
-        o.cow_image1 == cow_image1 &&
-        o.cow_image2 == cow_image2 &&
-        o.cow_image3 == cow_image3 &&
-        o.note == note;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+  
+    return other is Cows &&
+      other.cow_id == cow_id &&
+      other.typecow_id == typecow_id &&
+      other.species_id == species_id &&
+      other.farm_id == farm_id &&
+      other.statuscow_id == statuscow_id &&
+      other.cow_no == cow_no &&
+      other.cow_name == cow_name &&
+      other.cow_birthday == cow_birthday &&
+      other.cow_sex == cow_sex &&
+      other.cow_image1 == cow_image1 &&
+      other.cow_image2 == cow_image2 &&
+      other.cow_image3 == cow_image3 &&
+      other.note == note;
   }
 
   @override
   int get hashCode {
     return cow_id.hashCode ^
-        typecow_id.hashCode ^
-        species_id.hashCode ^
-        farm_id.hashCode ^
-        statuscow_id.hashCode ^
-        cow_no.hashCode ^
-        cow_name.hashCode ^
-        cow_birthday.hashCode ^
-        cow_sex.hashCode ^
-        cow_image1.hashCode ^
-        cow_image2.hashCode ^
-        cow_image3.hashCode ^
-        note.hashCode;
+      typecow_id.hashCode ^
+      species_id.hashCode ^
+      farm_id.hashCode ^
+      statuscow_id.hashCode ^
+      cow_no.hashCode ^
+      cow_name.hashCode ^
+      cow_birthday.hashCode ^
+      cow_sex.hashCode ^
+      cow_image1.hashCode ^
+      cow_image2.hashCode ^
+      cow_image3.hashCode ^
+      note.hashCode;
   }
 }

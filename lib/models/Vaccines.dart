@@ -6,18 +6,18 @@ class Vaccines {
   final String vac_name_th;
   final String detail;
   Vaccines({
-    this.vaccine_id,
-    this.vac_name_en,
-    this.vac_name_th,
-    this.detail,
+    required this.vaccine_id,
+    required this.vac_name_en,
+    required this.vac_name_th,
+    required this.detail,
   });
   
 
   Vaccines copyWith({
-    int vaccine_id,
-    String vac_name_en,
-    String vac_name_th,
-    String detail,
+    int? vaccine_id,
+    String? vac_name_en,
+    String? vac_name_th,
+    String? detail,
   }) {
     return Vaccines(
       vaccine_id: vaccine_id ?? this.vaccine_id,

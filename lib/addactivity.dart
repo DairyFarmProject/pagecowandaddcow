@@ -15,7 +15,7 @@ class _AddActivityState extends State<AddActivity> {
   int _selectPage = 0;
 
   final _pageOptions = [
-    OneCow(),
+    OneCow,
     Cow(),
     AddActivity(),
     Navigator(),

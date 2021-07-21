@@ -1,23 +1,31 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:finaldairy/Screens/Welcome/constants.dart';
 import 'package:finaldairy/Screens/Welcome/text_field_container.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
+  final String? Function(String?)? validator;
   const RoundedInputField({
-    Key key,
-    this.hintText,
+    Key? key,
+    required this.hintText,
     this.icon = Icons.person,
-    this.onChanged,
+    required this.onChanged,
+    required this.validator,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
         onChanged: onChanged,
+        validator: validator,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           icon: Icon(

@@ -4,13 +4,13 @@ class StatusCows {
   int statuscow_id;
   String status_name;
   StatusCows({
-    this.statuscow_id,
-    this.status_name,
+    required this.statuscow_id,
+    required this.status_name,
   });
 
   StatusCows copyWith({
-    int statuscow_id,
-    String status_name,
+    int? statuscow_id,
+    String? status_name,
   }) {
     return StatusCows(
       statuscow_id: statuscow_id ?? this.statuscow_id,

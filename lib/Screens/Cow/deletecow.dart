@@ -48,7 +48,7 @@ class _DeleteCowState extends State<DeleteCow> {
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.blueGrey[100],
-                  border: Border.all(color: Colors.blueGrey[800], width: 2),
+                  border: Border.all(color: (Colors.blueGrey[800])!, width: 2),
                   borderRadius: BorderRadius.circular(3),
                 ),
                 child: Container(
@@ -184,7 +184,7 @@ class _DeleteCowState extends State<DeleteCow> {
                         //ignore: deprecated_member_use
                         RaisedButton(
                           onPressed: () async {
-                            final ConfirmAction action =
+                            final ConfirmAction? action =
                                 await _asyncConfirmDialog(context);
                             print("Confirm Action $action");
                           },
@@ -216,7 +216,7 @@ class _DeleteCowState extends State<DeleteCow> {
 }
 
 enum ConfirmAction { Cancle, Accept }
-Future<ConfirmAction> _asyncConfirmDialog(BuildContext context) async {
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
   return showDialog<ConfirmAction>(
       context: context,
       barrierDismissible: false,

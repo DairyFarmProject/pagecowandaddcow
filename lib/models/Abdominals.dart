@@ -13,32 +13,32 @@ class Abdominals {
   int cow_id;
   int semen_specie;
   Abdominals({
-    this.abdominal_id,
-    this.round,
-    this.ab_date,
-    this.ab_status,
-    this.ab_caretaker,
-    this.dry_period,
-    this.semen_id,
-    this.semen_name,
-    this.note,
-    this.cow_id,
-    this.semen_specie,
+    required this.abdominal_id,
+    required this.round,
+    required this.ab_date,
+    required this.ab_status,
+    required this.ab_caretaker,
+    required this.dry_period,
+    required this.semen_id,
+    required this.semen_name,
+    required this.note,
+    required this.cow_id,
+    required this.semen_specie,
   });
   
 
   Abdominals copyWith({
-    int abdominal_id,
-    int round,
-    String ab_date,
-    String ab_status,
-    String ab_caretaker,
-    int dry_period,
-    String semen_id,
-    String semen_name,
-    String note,
-    int cow_id,
-    int semen_specie,
+    int? abdominal_id,
+    int? round,
+    String? ab_date,
+    String? ab_status,
+    String? ab_caretaker,
+    int? dry_period,
+    String? semen_id,
+    String? semen_name,
+    String? note,
+    int? cow_id,
+    int? semen_specie,
   }) {
     return Abdominals(
       abdominal_id: abdominal_id ?? this.abdominal_id,
@@ -72,8 +72,6 @@ class Abdominals {
   }
 
   factory Abdominals.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
     return Abdominals(
       abdominal_id: map['abdominal_id'],
       round: map['round'],
@@ -99,21 +97,21 @@ class Abdominals {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Abdominals &&
-      o.abdominal_id == abdominal_id &&
-      o.round == round &&
-      o.ab_date == ab_date &&
-      o.ab_status == ab_status &&
-      o.ab_caretaker == ab_caretaker &&
-      o.dry_period == dry_period &&
-      o.semen_id == semen_id &&
-      o.semen_name == semen_name &&
-      o.note == note &&
-      o.cow_id == cow_id &&
-      o.semen_specie == semen_specie;
+    return other is Abdominals &&
+      other.abdominal_id == abdominal_id &&
+      other.round == round &&
+      other.ab_date == ab_date &&
+      other.ab_status == ab_status &&
+      other.ab_caretaker == ab_caretaker &&
+      other.dry_period == dry_period &&
+      other.semen_id == semen_id &&
+      other.semen_name == semen_name &&
+      other.note == note &&
+      other.cow_id == cow_id &&
+      other.semen_specie == semen_specie;
   }
 
   @override

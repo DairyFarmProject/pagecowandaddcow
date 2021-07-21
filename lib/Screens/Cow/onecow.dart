@@ -7,7 +7,7 @@ import '../../models/Cows.dart';
 
 class OneCow extends StatefulWidget {
   final Cows cow;
-  OneCow({this.cow});
+  OneCow({required this.cow});
   @override
   _OneCowState createState() => _OneCowState();
 }

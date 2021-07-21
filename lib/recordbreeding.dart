@@ -8,7 +8,7 @@ class RecordBreeding extends StatefulWidget {
 }
 
 class _RecordBreedingState extends State<RecordBreeding> {
-  DateTime _dateTime;
+  DateTime? _dateTime;
 
   String n1 = 'มูมู้';
   String c1 = 'A121';

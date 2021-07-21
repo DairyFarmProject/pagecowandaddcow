@@ -4,13 +4,13 @@ class TypeCows {
   int typecow_id;
   String type_name;
   TypeCows({
-    this.typecow_id,
-    this.type_name,
+    required this.typecow_id,
+    required this.type_name,
   });
 
   TypeCows copyWith({
-    int typecow_id,
-    String type_name,
+    int? typecow_id,
+    String? type_name,
   }) {
     return TypeCows(
       typecow_id: typecow_id ?? this.typecow_id,

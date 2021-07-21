@@ -65,7 +65,7 @@ class _CowState extends State<Cow> {
         body: Padding(
             padding: const EdgeInsets.all(0),
             child: Container(
-              child: FutureBuilder(
+              child: FutureBuilder<List<Cows>>(
                   future: getCows(),
                   builder: (context, snapshot) {
                     if (snapshot.data == null) {
@@ -79,7 +79,7 @@ class _CowState extends State<Cow> {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2),
-                          itemCount: snapshot.data.length,
+                          itemCount: snapshot.data!.length,
                           itemBuilder: (context, i) {
                             return Padding(
                                 padding: const EdgeInsets.all(0),
@@ -98,7 +98,7 @@ class _CowState extends State<Cow> {
                                           
                                           Navigator.push(context,
                                               MaterialPageRoute(
-                                                  builder: (context) => OneCow(cow: snapshot.data[i])
+                                                  builder: (context) => OneCow(cow: snapshot.data![i])
                                           ));
                                         },
                                         child: Column(
@@ -106,7 +106,7 @@ class _CowState extends State<Cow> {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Image.network(
-                                              snapshot.data[i].cow_image1 ?? "",
+                                              snapshot.data?[i].cow_image1 ?? "",
                                               width: 180,
                                               height: 150,
                                               fit: BoxFit.cover,
@@ -118,7 +118,7 @@ class _CowState extends State<Cow> {
                                                     const EdgeInsets.fromLTRB(
                                                         10, 0, 0, 12),
                                                 child: Text(
-                                                  '${snapshot.data[i].cow_name ?? ""}, ${snapshot.data[i].cow_no}',
+                                                  '${snapshot.data?[i].cow_name ?? ""}, ${snapshot.data?[i].cow_no}',
                                                   style: TextStyle(
                                                     fontSize: 14,
                                                   ),

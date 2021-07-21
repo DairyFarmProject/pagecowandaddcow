@@ -9,24 +9,24 @@ class Parturitions {
   String per_caretaker;
   int cow_id;
   Parturitions({
-    this.parturition_id,
-    this.par_date,
-    this.calf_name,
-    this.calf_sex,
-    this.note,
-    this.per_caretaker,
-    this.cow_id,
+    required this.parturition_id,
+    required this.par_date,
+    required this.calf_name,
+    required this.calf_sex,
+    required this.note,
+    required this.per_caretaker,
+    required this.cow_id,
   });
   
 
   Parturitions copyWith({
-    int parturition_id,
-    String par_date,
-    String calf_name,
-    String calf_sex,
-    String note,
-    String per_caretaker,
-    int cow_id,
+    int? parturition_id,
+    String? par_date,
+    String? calf_name,
+    String? calf_sex,
+    String? note,
+    String? per_caretaker,
+    int? cow_id,
   }) {
     return Parturitions(
       parturition_id: parturition_id ?? this.parturition_id,
@@ -52,8 +52,6 @@ class Parturitions {
   }
 
   factory Parturitions.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
     return Parturitions(
       parturition_id: map['parturition_id'],
       par_date: map['par_date'],
@@ -75,17 +73,17 @@ class Parturitions {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Parturitions &&
-      o.parturition_id == parturition_id &&
-      o.par_date == par_date &&
-      o.calf_name == calf_name &&
-      o.calf_sex == calf_sex &&
-      o.note == note &&
-      o.per_caretaker == per_caretaker &&
-      o.cow_id == cow_id;
+    return other is Parturitions &&
+      other.parturition_id == parturition_id &&
+      other.par_date == par_date &&
+      other.calf_name == calf_name &&
+      other.calf_sex == calf_sex &&
+      other.note == note &&
+      other.per_caretaker == per_caretaker &&
+      other.cow_id == cow_id;
   }
 
   @override

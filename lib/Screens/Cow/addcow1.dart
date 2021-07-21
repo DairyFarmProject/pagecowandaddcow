@@ -9,7 +9,7 @@ class AddCow extends StatefulWidget {
 }
 
 class _AddCowState extends State<AddCow> {
-  DateTime _dateTime;
+  DateTime? _dateTime;
 
   @override
   Widget build(BuildContext context) {

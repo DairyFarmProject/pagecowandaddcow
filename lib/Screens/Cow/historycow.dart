@@ -38,7 +38,7 @@ class _HistoryCowState extends State<HistoryCow> {
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.blueGrey[100],
-                  border: Border.all(color: Colors.blueGrey[800], width: 2),
+                  border: Border.all(color: (Colors.blueGrey[800])!, width: 2),
                   borderRadius: BorderRadius.circular(3),
                 ),
                 child: Container(
