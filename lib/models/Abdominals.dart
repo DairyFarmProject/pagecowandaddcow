@@ -1,17 +1,17 @@
 import 'dart:convert';
 
 class Abdominals {
-  int abdominal_id;
-  int round;
-  String ab_date;
-  String ab_status;
-  String ab_caretaker;
-  int dry_period;
-  String semen_id;
-  String semen_name;
-  String note;
-  int cow_id;
-  int semen_specie;
+  final int abdominal_id;
+  final int round;
+  final String ab_date;
+  final String ab_status;
+  final String ab_caretaker;
+  final int dry_period;
+  final String semen_id;
+  final String semen_name;
+  final String note;
+  final int cow_id;
+  final int semen_specie;
   Abdominals({
     required this.abdominal_id,
     required this.round,

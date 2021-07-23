@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class Species {
-  int species_id;
-  String specie_name_en;
-  String specie_name_th;
+  final int species_id;
+  final String specie_name_en;
+  final String specie_name_th;
   Species({
     required this.species_id,
     required this.specie_name_en,

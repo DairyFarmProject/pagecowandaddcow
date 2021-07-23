@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 class UserDairys {
-  int user_id;
-  String firstname;
-  String lastname;
-  String birthday;
-  String mobile;
-  String user_image;
-  String email;
-  String password; 
+  final int user_id;
+  final String firstname;
+  final String lastname;
+  final String birthday;
+  final String mobile;
+  final String user_image;
+  final String email;
+  final String password; 
   UserDairys({
     required this.user_id,
     required this.firstname,

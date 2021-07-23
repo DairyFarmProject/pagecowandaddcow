@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 class Parturitions {
-  int parturition_id;
-  String par_date;
-  String calf_name;
-  String calf_sex;
-  String note;
-  String per_caretaker;
-  int cow_id;
+  final int parturition_id;
+  final String par_date;
+  final String calf_name;
+  final String calf_sex;
+  final String note;
+  final String per_caretaker;
+  final int cow_id;
   Parturitions({
     required this.parturition_id,
     required this.par_date,

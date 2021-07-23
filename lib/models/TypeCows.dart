@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class TypeCows {
-  int typecow_id;
-  String type_name;
+  final int typecow_id;
+  final String type_name;
   TypeCows({
     required this.typecow_id,
     required this.type_name,

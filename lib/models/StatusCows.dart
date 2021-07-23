@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class StatusCows {
-  int statuscow_id;
-  String status_name;
+  final int statuscow_id;
+  final String status_name;
   StatusCows({
     required this.statuscow_id,
     required this.status_name,

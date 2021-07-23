@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-class RoundedInputField extends StatelessWidget {
-  final ValueChanged<String> onChanged;
-  final TextEditingController? controller;
-  final String? Function(String?)? validator;
+
+class RoundedShowField extends StatelessWidget {
   final String hintText;
-  const RoundedInputField({
+  const RoundedShowField({
     Key? key,
     required this.hintText,
-    required this.onChanged,
-    required this.validator,
-    required this.controller,
   }) : super(key: key);
 
   @override
@@ -19,14 +14,11 @@ class RoundedInputField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       width: size.width * 0.9,
       decoration: BoxDecoration(
-        color: Colors.green[50],
+        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
-          validator: validator,
-          controller: controller,
-          onChanged: onChanged,
-          cursorColor: Colors.green[900],
+          readOnly: true,
           decoration: InputDecoration(
             hintText: hintText,
             border: InputBorder.none,

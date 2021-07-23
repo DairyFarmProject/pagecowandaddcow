@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'confirm_create_farm.dart';
 import 'home.dart';
+import 'ScreenArguments.dart';
 import 'text_field_container.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class CreateFarm extends StatefulWidget {
-  const CreateFarm({Key? key}) : super(key: key);
+  CreateFarm({Key? key}) : super(key: key);
 
   @override
   _CreateFarmState createState() => _CreateFarmState();
@@ -13,6 +14,17 @@ class CreateFarm extends StatefulWidget {
 
 class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
+  final nameFarmController = TextEditingController();
+  final numberFarmController = TextEditingController();
+  final addressFarmController = TextEditingController();
+  final mooFarmController = TextEditingController();
+  final soiFarmController = TextEditingController();
+  final roadFarmController = TextEditingController();
+  final sub_districtFarmController = TextEditingController();
+  final districtFarmController = TextEditingController();
+  final provinceFarmController = TextEditingController();
+  final postcodeFarmController = TextEditingController();
+  final value_validator = RequiredValidator(errorText: "X Invalid");
 
   @override
   Widget build(BuildContext context) {
@@ -64,18 +76,18 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                             fontWeight: FontWeight.w500, fontSize: 25)),
                   ),
                   TextFieldContainer(
+                      controller: nameFarmController,
                       onChanged: (value) {},
-                      validator: (String? value) {
-                        return (value!.isEmpty) ? 'X Invalid' : null;
-                      },
+                      validator: value_validator,
                       child: Text(
                         'ชื่อฟาร์ม',
                         style: TextStyle(fontSize: 15),
                       ),
                       hintText: "ชื่อฟาร์ม"),
                   TextFieldContainer(
+                      controller: numberFarmController,
                       onChanged: (value) {},
-                      validator: RequiredValidator(errorText: "X"),
+                      validator: value_validator,
                       child: Text(
                         'เลขทะเบียนฟาร์ม',
                         style: TextStyle(fontSize: 15),
@@ -104,68 +116,72 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                     ],
                   ),
                   TextFieldContainer(
+                      controller: addressFarmController,
                       onChanged: (value) {},
-                      validator: RequiredValidator(errorText: "X"),
+                      validator: value_validator,
                       child: Text(
                         'บ้านเลขที่',
                         style: TextStyle(fontSize: 15),
                       ),
                       hintText: "บ้านเลขที่"),
                   TextFieldContainer(
+                      controller: mooFarmController,
                       onChanged: (value) {},
-                      validator: RequiredValidator(errorText: "X"),
+                      validator: value_validator,
                       child: Text(
                         'หมู่',
                         style: TextStyle(fontSize: 15),
                       ),
                       hintText: "หมู่"),
                   TextFieldContainer(
+                      controller: soiFarmController,
                       onChanged: (value) {},
-                      validator: RequiredValidator(errorText: "X"),
+                      validator: value_validator,
                       child: Text(
                         'ซอย',
                         style: TextStyle(fontSize: 15),
                       ),
                       hintText: "ซอย"),
                   TextFieldContainer(
+                      controller: roadFarmController,
                       onChanged: (value) {},
-                      validator: RequiredValidator(errorText: "X"),
+                      validator: value_validator,
                       child: Text(
                         'ถนน',
                         style: TextStyle(fontSize: 15),
                       ),
                       hintText: "ถนน"),
                   TextFieldContainer(
+                      controller: sub_districtFarmController,
                       onChanged: (value) {},
-                      validator: RequiredValidator(errorText: "X"),
+                      validator: value_validator,
                       child: Text(
                         'ตำบล',
                         style: TextStyle(fontSize: 15),
                       ),
                       hintText: "ตำบล"),
                   TextFieldContainer(
+                      controller: districtFarmController,
                       onChanged: (value) {},
-                      validator: RequiredValidator(errorText: "X"),
+                      validator: value_validator,
                       child: Text(
                         'อำเภอ',
                         style: TextStyle(fontSize: 15),
                       ),
                       hintText: "อำเภอ"),
                   TextFieldContainer(
+                      controller: provinceFarmController,
                       onChanged: (value) {},
-                      validator: (String? value) {
-                        return (value!.isEmpty) ? 'X' : null;
-                      },
+                      validator: value_validator,
                       child: Text(
                         'จังหวัด',
                         style: TextStyle(fontSize: 15),
                       ),
                       hintText: "จังหวัด"),
                   TextFieldContainer(
+                      controller: postcodeFarmController,
                       onChanged: (value) {},
-                      validator: (String? value) {
-                        return (value!.isEmpty) ? 'X' : null;
-                      },
+                      validator: value_validator,
                       child: Text(
                         'รหัสไปรษณีย์',
                         style: TextStyle(fontSize: 15),
@@ -212,13 +228,23 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                               RaisedButton(
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    Navigator.push(
-                                      context,
-                                      new MaterialPageRoute(
-                                        builder: (context) =>
-                                            new ConfirmCreateFarm(),
-                                      ),
-                                    );
+                                    Navigator.pushNamed(
+                                      context, "/confirmCreateFarm",
+                                      arguments: ScreenArguments(
+                                        farm_name: nameFarmController.text,
+                                        farm_no: numberFarmController.text,
+                                        address: addressFarmController.text,
+                                        moo: mooFarmController.text,
+                                        soi: soiFarmController.text,
+                                        road: roadFarmController.text,
+                                        sub_district: sub_districtFarmController.text,
+                                        district: districtFarmController.text,
+                                        province: provinceFarmController.text,
+                                        postcode: postcodeFarmController.text,
+                                        )
+                                      );
+                                      
+                                    
                                   }
                                 },
                                 color: Color(0xff62b490),

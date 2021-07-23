@@ -13,8 +13,11 @@ import 'Screens/Cow/deletecow.dart';
 import 'Screens/Cow/successdeletecow.dart';
 import 'Screens/Cow/editcow.dart';
 import 'Screens/Cow/historycow.dart';
+import 'Screens/Farm/home.dart';
+import 'Screens/Farm/create_farm.dart';
 import 'addactivity.dart';
 import 'recordmilk.dart';
+import 'Screens/Farm/confirm_create_farm.dart';
 import 'allrecordbreeding.dart';
 import 'package:finaldairy/Screens/Welcome/Welcome.dart';
 
@@ -29,7 +32,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Mitr'),
-      home: Welcome(),
+      routes: {
+          ConfirmCreateFarm.routeName: (context) => ConfirmCreateFarm(),
+        },
+      home: 
+      Home(),
+      //Nav()
     );
   }
 }

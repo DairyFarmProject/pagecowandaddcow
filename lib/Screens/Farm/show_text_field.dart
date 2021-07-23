@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-import 'rounded_input_field.dart';
+import 'rounded_show_field.dart';
 
-class TextFieldContainer extends StatelessWidget {
+class ShowTextField extends StatelessWidget {
   final Widget child;
-  final ValueChanged<String> onChanged;
-   final TextEditingController? controller;
-  final String? Function(String?)? validator;
   final String hintText;
-  const TextFieldContainer({
+  const ShowTextField({
     Key? key,
     required this.child,
     required this.hintText,
-    required this.onChanged,
-    required this.validator,
-    required this.controller,
   }) : super(key: key);
 
   @override
@@ -26,11 +20,8 @@ class TextFieldContainer extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(23, 20, 0, 0), child: child)),
         Padding(
             padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-            child: RoundedInputField(
+            child: RoundedShowField(
               hintText: hintText,
-              onChanged: onChanged,
-              validator: validator,
-              controller: controller,
             )),
       ],
     );
