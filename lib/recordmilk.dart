@@ -46,7 +46,7 @@ class _RecordMilkState extends State<RecordMilk> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.amber[600],
+        backgroundColor: Colors.amber[500],
       ),
       body: Container(
         child: Column(
@@ -125,15 +125,7 @@ class _RecordMilkState extends State<RecordMilk> {
                           RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                       ))),
-                  onPressed: () => setState(
-                    () {
-                      if (color == Colors.grey) {
-                        color = Color(0xff62b490);
-                      } else {
-                        color == Colors.grey;
-                      }
-                    },
-                  ),
+                  onPressed: doAddition,
                 )
               ],
             ),
@@ -201,7 +193,7 @@ class _RecordMilkState extends State<RecordMilk> {
                                   RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                           ))),
-                          onPressed: () { },
+                      onPressed: () {},
                     );
                   },
                 ),
