@@ -46,21 +46,22 @@ class _RecordMilkState extends State<RecordMilk> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.amber[500],
+        backgroundColor: Colors.amber[600],
       ),
       body: Container(
         child: Column(
           children: <Widget>[
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(70, 20, 10, 0),
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
                       icon: const Icon(Icons.navigate_before, size: 24),
                       onPressed: () {}),
                   Text(
-                    '12 กันยายน 2564',
+                    '21 มิถุนายน 2564',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -77,8 +78,8 @@ class _RecordMilkState extends State<RecordMilk> {
               ),
             ),
             Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
+              alignment: Alignment.center,
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Text(
                 'ช่วงเช้า',
                 style: TextStyle(
@@ -88,9 +89,10 @@ class _RecordMilkState extends State<RecordMilk> {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.fromLTRB(40, 20, 0, 20),
+                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: Text('จำนวนน้ำนมวัว'),
                 ),
                 SizedBox(
@@ -130,8 +132,8 @@ class _RecordMilkState extends State<RecordMilk> {
               ],
             ),
             Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
+              alignment: Alignment.center,
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Text(
                 'ช่วงเย็น',
                 style: TextStyle(
@@ -141,9 +143,10 @@ class _RecordMilkState extends State<RecordMilk> {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.fromLTRB(40, 20, 0, 20),
+                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: Text('จำนวนน้ำนมวัว'),
                 ),
                 SizedBox(
