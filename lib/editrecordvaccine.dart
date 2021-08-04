@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:dropdown_search/dropdown_search.dart';
@@ -8,12 +9,12 @@ import 'package:http/http.dart' as http;
 import 'Screens/Cow/successrecord.dart';
 import 'models/Vaccines.dart';
 
-class RecordVacine extends StatefulWidget {
+class EditRecordVaccine extends StatefulWidget {
   @override
-  _RecordVacineState createState() => _RecordVacineState();
+  _EditRecordVaccineState createState() => _EditRecordVaccineState();
 }
 
-class _RecordVacineState extends State<RecordVacine> {
+class _EditRecordVaccineState extends State<EditRecordVaccine> {
   Future<List<Vaccines>> getVaccines() async {
     final response = await http.get(Uri.http('10.0.2.2:3000', 'vaccines'));
 
@@ -44,7 +45,7 @@ class _RecordVacineState extends State<RecordVacine> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('บันทึกการฉีดวัคซีน'),
+          title: Text('แก้ไขบันทึกการฉีดวัคซีน'),
           leading: GestureDetector(
             onTap: () {
               Navigator.pop(context);
