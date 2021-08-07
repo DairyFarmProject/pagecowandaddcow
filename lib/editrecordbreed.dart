@@ -1,16 +1,18 @@
-import 'dart:html';
+import 'package:flutter/material.dart';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:finaldairy/Screens/Cow/successrecord.dart';
 import 'package:finaldairy/main.dart';
 import 'package:flutter/material.dart';
 
-class RecordBreeding extends StatefulWidget {
+class EditRecordBreed extends StatefulWidget {
+  const EditRecordBreed({Key? key}) : super(key: key);
+
   @override
-  _RecordBreedingState createState() => _RecordBreedingState();
+  _EditRecordBreedState createState() => _EditRecordBreedState();
 }
 
-class _RecordBreedingState extends State<RecordBreeding> {
+class _EditRecordBreedState extends State<EditRecordBreed> {
   DateTime? _dateTime;
 
   String n1 = 'มูมู้';
@@ -45,7 +47,7 @@ class _RecordBreedingState extends State<RecordBreeding> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('บันทึกการผสมพันธ์'),
+        title: Text('แก้ไขบันทึกการผสมพันธ์'),
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);
