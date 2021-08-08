@@ -1,11 +1,12 @@
 import 'dart:html';
 
-import 'package:finaldairy/recordmilk.dart';
-import 'package:finaldairy/recordmilkMonth.dart';
-import 'package:finaldairy/recordmilkYear.dart';
+import 'package:finaldairy/Screens/Activity/Milk/recordmilk.dart';
+import 'package:finaldairy/Screens/Activity/Milk/recordmilkMonth.dart';
+import 'package:finaldairy/Screens/Activity/Milk/recordmilkYear.dart';
+
 import 'package:flutter/material.dart';
 
-import 'editrecordmilk.dart';
+import 'package:finaldairy/Screens/Activity/Milk/editrecordmilk.dart';
 
 class RecordMilkDay extends StatefulWidget {
   const RecordMilkDay({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Screens/Cow/successrecord.dart';
+import '../../Cow/successrecord.dart';
 
 class EditRecordMilk extends StatefulWidget {
   const EditRecordMilk({Key? key}) : super(key: key);

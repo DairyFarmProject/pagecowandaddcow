@@ -1,4 +1,4 @@
-import 'package:finaldairy/editrecordmilk.dart';
+import 'package:finaldairy/Screens/Activity/Milk/editrecordmilk.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,14 +6,12 @@ import 'recordmilk.dart';
 import 'recordmilkDay.dart';
 import 'recordmilkYear.dart';
 
-class RecordMilkYear extends StatefulWidget {
-  const RecordMilkYear({Key? key}) : super(key: key);
-
+class RecordMilkMonth extends StatefulWidget {
   @override
-  _RecordMilkYearState createState() => _RecordMilkYearState();
+  _RecordMilkMonthState createState() => _RecordMilkMonthState();
 }
 
-class _RecordMilkYearState extends State<RecordMilkYear> {
+class _RecordMilkMonthState extends State<RecordMilkMonth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +20,15 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Text("จำนวนน้ำนมรวมภายในปีนี้"),
-              Text('1,800'),
+              Text("จำนวนน้ำนมรวมภายในเดือนนี้"),
+              Text('900'),
               Container(
                   margin: EdgeInsets.only(bottom: 20), child: Text('กิโลกรัม')),
               ExpansionTile(
                 collapsedBackgroundColor: Color(0xff59aca9),
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
-                  'มิถุนายน 2564',
+                  'วันที่ 21 มิถุนายน 2564',
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
@@ -54,12 +52,12 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                     ],
                     rows: <DataRow>[
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเช้า')),
+                        DataCell(Text('น้ำนมวัวรอบเช้า')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเย็น')),
+                        DataCell(Text('น้ำนมวัวรอบเย็น')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
@@ -98,7 +96,7 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                 collapsedBackgroundColor: Colors.teal[200],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
-                  'พฤษภาคม 2564',
+                  'วันที่ 20 มิถุนายน 2564',
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
@@ -122,12 +120,12 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                     ],
                     rows: <DataRow>[
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเช้า')),
+                        DataCell(Text('น้ำนมวัวรอบเช้า')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเย็น')),
+                        DataCell(Text('น้ำนมวัวรอบเย็น')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
@@ -166,7 +164,7 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                 collapsedBackgroundColor: Color(0xff59aca9),
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
-                  'เมษายน 2564',
+                  'วันที่ 19 มิถุนายน 2564',
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
@@ -190,19 +188,19 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                     ],
                     rows: <DataRow>[
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเช้า')),
-                        DataCell(Text('200')),
+                        DataCell(Text('น้ำนมวัวรอบเช้า')),
+                        DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเย็น')),
-                        DataCell(Text('200')),
+                        DataCell(Text('น้ำนมวัวรอบเย็น')),
+                        DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
                       DataRow(cells: <DataCell>[
                         DataCell(Text('รวม',
                             style: TextStyle(fontWeight: FontWeight.bold))),
-                        DataCell(Text('400',
+                        DataCell(Text('40',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.red[700]))),
@@ -234,7 +232,7 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                 collapsedBackgroundColor: Colors.teal[200],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
-                  'มีนาคม 2564',
+                  'วันที่ 18 มิถุนายน 2564',
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
@@ -258,12 +256,12 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                     ],
                     rows: <DataRow>[
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเช้า')),
+                        DataCell(Text('น้ำนมวัวรอบเช้า')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเย็น')),
+                        DataCell(Text('น้ำนมวัวรอบเย็น')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),

@@ -1,97 +1,13 @@
-import 'package:finaldairy/editrecordbreed.dart';
-import 'package:finaldairy/recordbreeding.dart';
+import 'package:finaldairy/Screens/Activity/Breeding/editrecordbreed.dart';
+import 'package:finaldairy/Screens/Activity/Breeding/recordbreeding.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class UpdateBreeding extends StatefulWidget {
-  const UpdateBreeding({Key? key}) : super(key: key);
-
+class AllRecordBreeding extends StatefulWidget {
   @override
-  _UpdateBreedingState createState() => _UpdateBreedingState();
+  _AllRecordBreedingState createState() => _AllRecordBreedingState();
 }
 
-class _UpdateBreedingState extends State<UpdateBreeding> {
-  createAlertDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Center(child: Text('ผลการตรวจสอบการตั้งท้อง')),
-            actions: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                      margin: EdgeInsets.fromLTRB(20, 20, 100, 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          // ignore: deprecated_member_use
-                          RaisedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            color: Color(0xffd6786e),
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(39))),
-                            child: Row(
-                              children: [
-                                Icon(Icons.close),
-                                Text(
-                                  'ไม่ตั้งท้อง',
-                                  style: TextStyle(
-                                      color: Colors.blueGrey[50],
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14),
-                                ),
-                              ],
-                            ),
-                            padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                          )
-                        ],
-                      )),
-                  Container(
-                      margin: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                      child: Column(
-                        children: [
-                          // ignore: deprecated_member_use
-
-                          RaisedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            color: Color(0xff62b490),
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(39))),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                ),
-                                Text(
-                                  'ตั้งท้อง',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14),
-                                ),
-                              ],
-                            ),
-                            padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
-                          )
-                        ],
-                      )),
-                ],
-              )
-            ],
-          );
-        });
-  }
-
+class _AllRecordBreedingState extends State<AllRecordBreeding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,12 +67,12 @@ class _UpdateBreedingState extends State<UpdateBreeding> {
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                               decoration: BoxDecoration(
-                                  color: Colors.grey[600],
+                                  color: Colors.red[800],
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(2),
                                   )),
                               child: Text(
-                                'เสร็จสิ้น',
+                                'อีก 2 วัน',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
@@ -172,12 +88,12 @@ class _UpdateBreedingState extends State<UpdateBreeding> {
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                               decoration: BoxDecoration(
-                                  color: Colors.grey[600],
+                                  color: Colors.red[800],
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(2),
                                   )),
                               child: Text(
-                                'เสร็จสิ้น',
+                                'อีก 5 วัน',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
@@ -193,12 +109,12 @@ class _UpdateBreedingState extends State<UpdateBreeding> {
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                               decoration: BoxDecoration(
-                                  color: Colors.grey[600],
+                                  color: Colors.red[800],
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(2),
                                   )),
                               child: Text(
-                                'เสร็จสิ้น',
+                                'อีก 10 วัน',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
@@ -214,14 +130,14 @@ class _UpdateBreedingState extends State<UpdateBreeding> {
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                               decoration: BoxDecoration(
-                                  color: Colors.amber[400],
+                                  color: Colors.red[800],
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(2),
                                   )),
                               child: Text(
-                                'ถึงกำหนดแล้ว',
+                                'อีก 11 วัน',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -276,15 +192,15 @@ class _UpdateBreedingState extends State<UpdateBreeding> {
                       margin: EdgeInsets.fromLTRB(100, 10, 100, 20),
                       child: RaisedButton(
                         onPressed: () {
-                          createAlertDialog(context);
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return EditRecordBreed();
+                          }));
                         },
                         child: Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.update),
-                              Text('อัพเดตตรวจสอบการตั้งท้อง')
-                            ],
+                            children: [Icon(Icons.edit), Text('แก้ไข')],
                           ),
                         ),
                       ),

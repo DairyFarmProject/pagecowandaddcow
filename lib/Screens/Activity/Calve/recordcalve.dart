@@ -3,7 +3,7 @@ import 'package:finaldairy/Screens/Cow/successrecord.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:convert';
-import 'models/Abdominals.dart';
+import '../../../models/Abdominals.dart';
 import 'package:http/http.dart' as http;
 
 class RecordCalve extends StatefulWidget {
@@ -21,7 +21,7 @@ class _RecordCalveState extends State<RecordCalve> {
 
     List<Abdominals> abdominals =
         list.map((e) => Abdominals.fromMap(e)).toList();
-        
+
     return abdominals;
   }
 
@@ -78,7 +78,9 @@ class _RecordCalveState extends State<RecordCalve> {
                     child: DropdownSearch<String>(
                         mode: Mode.MENU,
                         showSelectedItem: true,
-                        items: snapshot.data?.map((data) => data.semen_name).toList() ,
+                        items: snapshot.data
+                            ?.map((data) => data.semen_name)
+                            .toList(),
                         label: "ชื่อการผสมพันธ์",
                         popupItemDisabled: (String s) => s.startsWith('I'),
                         onChanged: print,
@@ -138,6 +140,32 @@ class _RecordCalveState extends State<RecordCalve> {
                             ),
                           ),
                         ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              labelText: 'ชื่อลูกวัว',
+                              fillColor: Colors.blueGrey,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.blueGrey, width: 2),
+                              )),
+                          onChanged: (String name) {},
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              labelText: 'Tagวัว',
+                              fillColor: Colors.blueGrey,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.blueGrey, width: 2),
+                              )),
+                          onChanged: (String name) {},
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),

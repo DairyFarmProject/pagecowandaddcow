@@ -3,7 +3,7 @@ import 'package:finaldairy/notification.dart';
 import 'package:finaldairy/profile.dart';
 import 'package:flutter/material.dart';
 
-import 'addactivity.dart';
+import 'Screens/Activity/addactivity.dart';
 import 'Screens/Cow/cow1.dart';
 import 'Screens/Cow/onecow.dart';
 

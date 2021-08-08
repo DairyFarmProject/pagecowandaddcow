@@ -1,20 +1,18 @@
-import 'package:finaldairy/Screens/Activity/addactivity.dart';
-import 'package:finaldairy/navigator.dart';
 import 'package:flutter/material.dart';
 import 'cow1.dart';
-import 'package:finaldairy/Screens/Cow/addcow1.dart';
+import 'package:finaldairy/addcow1.dart';
 
-class SuccessRecord extends StatefulWidget {
+class SuccessAddCow extends StatefulWidget {
   @override
-  _SuccessRecordState createState() => _SuccessRecordState();
+  _SuccessAddCowState createState() => _SuccessAddCowState();
 }
 
-class _SuccessRecordState extends State<SuccessRecord> {
+class _SuccessAddCowState extends State<SuccessAddCow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(""),
+          title: Text("เพิ่มวัว"),
           leading: GestureDetector(
             onTap: () {},
           ),
@@ -36,7 +34,7 @@ class _SuccessRecordState extends State<SuccessRecord> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: Text(
-                  'บันทึกข้อมูลสำเร็จ',
+                  'เพิ่มข้อมูลวัวสำเร็จ',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
@@ -55,14 +53,14 @@ class _SuccessRecordState extends State<SuccessRecord> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Nav();
+                        return AddCow();
                       }));
                     },
                     color: Colors.blueGrey[50],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(39))),
                     child: Text(
-                      'กลับหน้าแรก',
+                      'เพิ่มวัวเพิ่ม',
                       style: TextStyle(
                           color: Color(0xff59aca9),
                           fontWeight: FontWeight.w600,
@@ -80,14 +78,14 @@ class _SuccessRecordState extends State<SuccessRecord> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return AddActivity();
+                        return Cow();
                       }));
                     },
                     color: Color(0xff59aca9),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(39))),
                     child: Text(
-                      'เพิ่มกิจกรรม',
+                      'ดูวัวทั้งหมด',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,

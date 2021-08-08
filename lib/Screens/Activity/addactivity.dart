@@ -1,9 +1,12 @@
-import 'package:finaldairy/allrecordbreeding.dart';
+import 'package:finaldairy/Screens/Activity/Breeding/allrecordbreeding.dart';
+import 'package:finaldairy/Screens/Activity/Milk/recordmilkDay.dart';
 import 'package:finaldairy/Screens/Cow/cow1.dart';
 import 'package:finaldairy/Screens/Cow/onecow.dart';
-import 'package:finaldairy/recordcalve.dart';
-import 'package:finaldairy/recordmilk.dart';
+import 'package:finaldairy/Screens/Activity/Calve/allrecordcalve.dart';
+
 import 'package:finaldairy/recordvaccine.dart';
+import 'package:finaldairy/recordvaccinemain.dart';
+import 'package:finaldairy/recordvaccinemainall.dart';
 import 'package:flutter/material.dart';
 
 class AddActivity extends StatefulWidget {
@@ -14,13 +17,7 @@ class AddActivity extends StatefulWidget {
 class _AddActivityState extends State<AddActivity> {
   int _selectPage = 0;
 
-  final _pageOptions = [
-    OneCow,
-    Cow(),
-    AddActivity(),
-    Navigator(),
-    Navigator()
-  ];
+  final _pageOptions = [OneCow, Cow(), AddActivity(), Navigator(), Navigator()];
 
   void _onItemTap(int index) {
     setState(() {
@@ -51,14 +48,14 @@ class _AddActivityState extends State<AddActivity> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return RecordMilk();
+                      return RecordMilkDay();
                     }));
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
                     elevation: 2,
-                    color: Colors.amber[600],
+                    color: Colors.amber[500],
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -83,7 +80,7 @@ class _AddActivityState extends State<AddActivity> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return RecordVacine();
+                      return RecordVaccineMain();
                     }));
                   },
                   child: Card(
@@ -133,7 +130,7 @@ class _AddActivityState extends State<AddActivity> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return RecordCalve();
+                      return AllRecordCalve();
                     }));
                   },
                   child: Card(

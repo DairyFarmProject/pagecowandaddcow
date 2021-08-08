@@ -1,6 +1,8 @@
 import 'package:finaldairy/editrecordvaccine.dart';
 import 'package:flutter/material.dart';
 
+import 'recordvaccine.dart';
+
 class RecordVaccineMainAll extends StatefulWidget {
   const RecordVaccineMainAll({Key? key}) : super(key: key);
 

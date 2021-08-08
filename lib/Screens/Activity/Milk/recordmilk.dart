@@ -1,4 +1,5 @@
-import 'Screens/Cow/successrecord.dart';
+import 'package:finaldairy/successrecord.dart';
+
 import 'package:flutter/material.dart';
 
 class RecordMilk extends StatefulWidget {
