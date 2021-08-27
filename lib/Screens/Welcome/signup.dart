@@ -6,7 +6,11 @@ import 'package:finaldairy/Screens/Welcome/rounded_password_field.dart';
 import 'package:finaldairy/Screens/Welcome/aleady_have_an_account_acheck.dart';
 import 'package:finaldairy/Screens/Welcome/login.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   final formKey = new GlobalKey<FormState>();

@@ -24,8 +24,6 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-String? _email, _password;
-Map<String, String> _authData = {'email': '', 'password': ''};
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 void showInSnackBar(String value) {
