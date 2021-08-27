@@ -41,7 +41,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Icon(
-                          Icons.arrow_back_ios_new_rounded,
+                          Icons.arrow_back_ios_outlined,
                           color: Colors.white,
                         ))),
               ),
@@ -229,22 +229,20 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     Navigator.pushNamed(
-                                      context, "/confirmCreateFarm",
-                                      arguments: ScreenArguments(
-                                        farm_name: nameFarmController.text,
-                                        farm_no: numberFarmController.text,
-                                        address: addressFarmController.text,
-                                        moo: mooFarmController.text,
-                                        soi: soiFarmController.text,
-                                        road: roadFarmController.text,
-                                        sub_district: sub_districtFarmController.text,
-                                        district: districtFarmController.text,
-                                        province: provinceFarmController.text,
-                                        postcode: postcodeFarmController.text,
-                                        )
-                                      );
-                                      
-                                    
+                                        context, "/confirmCreateFarm",
+                                        arguments: ScreenArguments(
+                                          farm_name: nameFarmController.text,
+                                          farm_no: numberFarmController.text,
+                                          address: addressFarmController.text,
+                                          moo: mooFarmController.text,
+                                          soi: soiFarmController.text,
+                                          road: roadFarmController.text,
+                                          sub_district:
+                                              sub_districtFarmController.text,
+                                          district: districtFarmController.text,
+                                          province: provinceFarmController.text,
+                                          postcode: postcodeFarmController.text,
+                                        ));
                                   }
                                 },
                                 color: Color(0xff62b490),
