@@ -1,8 +1,9 @@
+import 'package:finaldairy/Screens/Cow/cow1.dart';
 import 'package:finaldairy/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class SuccessCreateFarm extends StatefulWidget {
-@override
+  @override
   _SuccessCreateFarmState createState() => _SuccessCreateFarmState();
 }
 
@@ -52,7 +53,7 @@ class _SuccessCreateFarmState extends State<SuccessCreateFarm> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Dashboard();
+                        return Cow();
                       }));
                     },
                     color: Colors.blueGrey[50],
@@ -69,7 +70,6 @@ class _SuccessCreateFarmState extends State<SuccessCreateFarm> {
                   )
                 ],
               )),
-              
             ],
           ),
         ]));

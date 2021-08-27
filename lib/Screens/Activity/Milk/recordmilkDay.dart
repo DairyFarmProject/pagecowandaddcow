@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:finaldairy/Screens/Activity/Milk/recordmilk.dart';
 import 'package:finaldairy/Screens/Activity/Milk/recordmilkMonth.dart';
 import 'package:finaldairy/Screens/Activity/Milk/recordmilkYear.dart';
