@@ -23,8 +23,9 @@ dependencies:
   provider: ^5.0.0
   meta: ^1.0.2
   flushbar: ^1.10.4
-  dependencies:
+  commons: ^0.7.8+3
   dio: ^4.0.0
+  pin_code_fields: ^7.3.0
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,4 @@
-import 'package:finaldairy/successrecord.dart';
+import '../../Cow/successrecord.dart';
 
 import 'package:flutter/material.dart';
 

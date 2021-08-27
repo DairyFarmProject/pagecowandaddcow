@@ -9,7 +9,7 @@ class Vaccines {
     required this.vaccine_id,
     required this.vac_name_en,
     required this.vac_name_th,
-    required this.detail,
+    required this.detail, 
   });
   
 

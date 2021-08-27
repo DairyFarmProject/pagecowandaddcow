@@ -7,6 +7,12 @@ import 'package:finaldairy/Screens/Welcome/aleady_have_an_account_acheck.dart';
 import 'package:finaldairy/Screens/Welcome/login.dart';
 
 class SignUpScreen extends StatelessWidget {
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  final formKey = new GlobalKey<FormState>();
+
+  String? _email, _password;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,6 +34,8 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 RoundedInputField(
                   hintText: "อีเมล",
+                  controller: emailController,
+                  onSaved: (value) => _email = value,
                   onChanged: (value) {},
                   validator: (value) {
                     if (value == null || !value.contains('@')) {
@@ -37,6 +45,8 @@ class SignUpScreen extends StatelessWidget {
                   },
                 ),
                 RoundedPasswordField(
+                  onSaved: (value) => _password = value,
+                  controller: passwordController,
                   onChanged: (value) {},
                 ),
                 RoundedButton(
@@ -57,7 +67,6 @@ class SignUpScreen extends StatelessWidget {
                     );
                   },
                 ),
-            
               ],
             ),
           ),
