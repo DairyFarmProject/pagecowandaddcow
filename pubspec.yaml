@@ -15,14 +15,16 @@ dependencies:
   intl: ^0.17.0
   flutter_svg: 0.19.3
   form_field_validator: ^1.1.0
-  shared_preferences: 2.0.5
-  animations: ^2.0.1
+  shared_preferences: ^0.4.3
+  animations: ^2.0.0
   cupertino_icons: ^1.0.2
   dropdown_search:  ^0.5.0
+  mobx: ^2.0.1
   provider: ^5.0.0
-  otp_text_field: ^1.1.1
-  pin_code_fields: ^7.3.0
-  commons: ^0.2.3
+  meta: ^1.0.2
+  flushbar: ^1.10.4
+  dependencies:
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:
