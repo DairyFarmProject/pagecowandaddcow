@@ -1,6 +1,8 @@
-import 'package:finaldairy/models/UserDairys.dart';
+import 'package:finaldairy/models/CheckEmail.dart';
+import '../models/UserDairys.dart';
 import 'package:finaldairy/models/Token.dart';
 import '../models/User.dart';
+import '../models/CheckEmail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
@@ -60,6 +62,29 @@ class UserPreferences {
     prefs.setInt("postcode", postcode);
 
     print(password);
+
+    return prefs.commit();
+  }
+
+  Future<bool> saveRegister(
+      String user_id,
+      String firstname,
+      String lastname,
+      String birthday,
+      String mobile,
+      String user_image,
+      String email,
+      String password) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setString("user_id", user_id);
+    prefs.setString("lastname", lastname);
+    prefs.setString("birthday", birthday);
+    prefs.setString("mobile", mobile);
+    prefs.setString("firstname", firstname);
+    prefs.setString("user_image", user_image);
+    prefs.setString("email", email);
+    prefs.setString("password", password);
 
     return prefs.commit();
   }
@@ -137,6 +162,15 @@ class UserPreferences {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token");
     return token;
+  }
+
+  Future<CheckEmail> getCheckEmail(
+      String user_id, String email, String password) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String user_id = prefs.getString("user_id");
+    String email = prefs.getString("email");
+    String password = prefs.getString("password");
+    return CheckEmail(user_id: user_id, email: email, password: password);
   }
 
   Future<bool> setToken(Token token) async {

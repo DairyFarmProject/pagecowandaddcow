@@ -205,9 +205,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response["user"] != null) {
         User user = response["user"];
         Provider.of<UserProvider>(context, listen: false).setUser(user);
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Cow();
-        }));
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return Cow();
+        // }));
       } else {
         Flushbar(
           title: "Failed Login",

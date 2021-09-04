@@ -5,6 +5,11 @@ import 'package:finaldairy/Screens/Welcome/rounded_button.dart';
 import 'package:finaldairy/Screens/Welcome/login.dart';
 import 'package:finaldairy/Screens/Welcome/signup.dart';
 import 'package:finaldairy/Screens/Welcome/constants.dart';
+import '../../util/register_store.dart';
+import 'package:provider/provider.dart';
+import 'register.dart';
+import 'login.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class Welcome extends StatefulWidget {
   @override
@@ -12,6 +17,28 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  bool _initialized = false;
+  bool _error = false;
+
+  void initializeFlutterFire() async {
+    try {
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch (e) {
+      setState(() {
+        _error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    initializeFlutterFire();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

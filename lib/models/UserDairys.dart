@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class UserDairys {
-  final int user_id;
+  final String user_id;
   final String firstname;
   final String lastname;
   final String birthday;
@@ -19,10 +19,9 @@ class UserDairys {
     required this.email,
     required this.password,
   });
-  
 
   UserDairys copyWith({
-    int? user_id,
+    String? user_id,
     String? firstname,
     String? lastname,
     String? birthday,

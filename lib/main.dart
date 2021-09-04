@@ -1,29 +1,37 @@
+import 'package:finaldairy/Screens/Welcome/login.dart';
+import 'package:finaldairy/Screens/Welcome/otp.dart';
+import 'package:finaldairy/Screens/Welcome/register.dart';
+import 'package:finaldairy/Screens/Welcome/signup.dart';
+import 'package:finaldairy/Screens/Welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'providers/auth.dart';
 import 'providers/user_provider.dart';
-import 'models/User.dart';
+import 'models/User.dart' as DairyUser;
 import 'util/shared_preference.dart';
+import 'util/register_store.dart';
 import 'Screens/Farm/confirm_create_farm.dart';
 
 //home
-import 'Screens/Welcome/welcome.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
-    Future<User> getUserData() => UserPreferences().getUser();
+    Future<DairyUser.User> getUserData() => UserPreferences().getUser();
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           ChangeNotifierProvider(create: (_) => UserProvider()),
+          Provider<RegisterStore>(create: (_) => RegisterStore()),
           Provider<AuthProvider>(create: (_) => AuthProvider()),
           // Provider<UserProvider>(create: (_) => UserProvider()),
           ChangeNotifierProxyProvider<UserProvider, AuthProvider>(
@@ -37,8 +45,9 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(fontFamily: 'Mitr'),
             routes: {
               ConfirmCreateFarm.routeName: (context) => ConfirmCreateFarm(),
+              RegisterScreen.routeName: (context) => RegisterScreen(),
+              OTP.routeName: (context) => OTP(),
             },
             home: Welcome()));
   }
 }
-

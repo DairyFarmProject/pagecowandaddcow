@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ScreenArguments.dart';
+import '../../models/ScreenArguments.dart';
 import 'show_text_field.dart';
 import 'success_create_farm.dart';
 
