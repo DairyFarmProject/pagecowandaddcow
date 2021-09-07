@@ -1,4 +1,6 @@
 import 'package:finaldairy/Screens/Cow/cow1.dart';
+import 'package:finaldairy/Screens/Farm/home.dart';
+import 'package:finaldairy/Screens/Farm/splash.dart';
 import 'package:finaldairy/util/shared_preference.dart';
 
 import '../../models/User.dart';
@@ -15,7 +17,6 @@ import 'package:finaldairy/Screens/Welcome/rounded_input_field.dart';
 import 'package:finaldairy/Screens/Welcome/rounded_password_field.dart';
 import 'package:finaldairy/Screens/Welcome/aleady_have_an_account_acheck.dart';
 import 'package:finaldairy/Screens/Welcome/signup.dart';
-import '../Cow/cow1.dart';
 import 'package:finaldairy/providers/auth.dart';
 import '../../providers/user_provider.dart';
 
@@ -205,9 +206,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response["user"] != null) {
         User user = response["user"];
         Provider.of<UserProvider>(context, listen: false).setUser(user);
-        // Navigator.push(context, MaterialPageRoute(builder: (context) {
-        //   return Cow();
-        // }));
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return SplashPage();
+        }));
       } else {
         Flushbar(
           title: "Failed Login",

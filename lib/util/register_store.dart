@@ -1,3 +1,4 @@
+import 'package:finaldairy/Screens/Welcome/success_otp.dart';
 import 'package:finaldairy/Screens/Welcome/welcome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -143,7 +144,7 @@ abstract class RegisterStoreBase with Store {
     firebaseUser = result.user;
 
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => Welcome()),
+        MaterialPageRoute(builder: (_) => SuccessOTP()),
         (Route<dynamic> route) => false);
 
     isLoginLoading = false;

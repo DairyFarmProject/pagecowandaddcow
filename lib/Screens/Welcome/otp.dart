@@ -92,7 +92,7 @@ class _OTPState extends State<OTP> with TickerProviderStateMixin {
                                   ))),
                         ),
                         Center(
-                          child: Text('DairyCattle' + user_id),
+                          child: Text('DairyCattle'),
                         ),
                         Expanded(
                             child: Align(

@@ -11,4 +11,13 @@ class UserProvider with ChangeNotifier {
     _user = user;
     notifyListeners();
   }
+
+  Future<bool> isAlreadyAuthenticated() async {
+    if (user.farm_id.toString() == 'null') {
+      print(user.farm_id);
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
