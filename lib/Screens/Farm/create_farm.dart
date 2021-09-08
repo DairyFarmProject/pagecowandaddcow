@@ -76,6 +76,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                   ),
                   TextFieldContainer(
                       controller: nameFarmController,
+                      keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(
@@ -85,13 +86,14 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                       hintText: "ชื่อฟาร์ม"),
                   TextFieldContainer(
                       controller: numberFarmController,
+                      keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(
                         'เลขทะเบียนฟาร์ม',
                         style: TextStyle(fontSize: 15),
                       ),
-                      hintText: "เลขทะเบียนฟาร์ม"),
+                      hintText: "รูปภาพ"),
                   Column(
                     children: [
                       Container(
@@ -116,6 +118,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                   ),
                   TextFieldContainer(
                       controller: addressFarmController,
+                      keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(
@@ -125,6 +128,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                       hintText: "บ้านเลขที่"),
                   TextFieldContainer(
                       controller: mooFarmController,
+                      keyboardType: TextInputType.number,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(
@@ -134,6 +138,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                       hintText: "หมู่"),
                   TextFieldContainer(
                       controller: soiFarmController,
+                      keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(
@@ -143,6 +148,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                       hintText: "ซอย"),
                   TextFieldContainer(
                       controller: roadFarmController,
+                      keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(
@@ -152,6 +158,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                       hintText: "ถนน"),
                   TextFieldContainer(
                       controller: sub_districtFarmController,
+                      keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(
@@ -161,6 +168,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                       hintText: "ตำบล"),
                   TextFieldContainer(
                       controller: districtFarmController,
+                      keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(
@@ -170,6 +178,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                       hintText: "อำเภอ"),
                   TextFieldContainer(
                       controller: provinceFarmController,
+                      keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(
@@ -179,6 +188,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                       hintText: "จังหวัด"),
                   TextFieldContainer(
                       controller: postcodeFarmController,
+                      keyboardType: TextInputType.number,
                       onChanged: (value) {},
                       validator: value_validator,
                       child: Text(

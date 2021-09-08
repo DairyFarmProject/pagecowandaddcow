@@ -120,6 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                         ),
                         TextFieldContainer(
                             controller: firstnameController,
+                            keyboardType: TextInputType.text,
                             onChanged: (value) {},
                             validator: value_validator,
                             child: Text(
@@ -129,6 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                             hintText: "ชื่อ"),
                         TextFieldContainer(
                             controller: lastnameController,
+                            keyboardType: TextInputType.text,
                             onChanged: (value) {},
                             validator: value_validator,
                             child: Text(
@@ -210,6 +212,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                         ),
                         TextFieldContainer(
                             controller: mobileController,
+                            keyboardType: TextInputType.number,
                             onChanged: (value) {},
                             validator: value_validator,
                             child: Text(
@@ -219,6 +222,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                             hintText: "เบอร์มือถือ"),
                         TextFieldContainer(
                             controller: user_imageController,
+                            keyboardType: TextInputType.text,
                             onChanged: (value) {},
                             validator: value_validator,
                             child: Text(

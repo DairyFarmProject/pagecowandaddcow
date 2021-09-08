@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../../models/ScreenArguments.dart';
 import 'show_text_field.dart';
 import 'success_create_farm.dart';
+import '../../models/User.dart';
+import '../../providers/user_provider.dart';
 
 class ConfirmCreateFarm extends StatefulWidget {
   static const routeName = '/confirmCreateFarm';
@@ -13,6 +18,7 @@ class ConfirmCreateFarm extends StatefulWidget {
 class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
     with TickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   late ScreenArguments args;
   late String farm_no = '';
   late String farm_name = '';
@@ -46,6 +52,7 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
 
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<UserProvider>(context).user;
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -212,13 +219,18 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
                               RaisedButton(
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    Navigator.push(
-                                      context,
-                                      new MaterialPageRoute(
-                                        builder: (context) =>
-                                            new SuccessCreateFarm(),
-                                      ),
-                                    );
+                                    userCreateFarm(
+                                        user.user_id,
+                                        args.farm_name,
+                                        args.farm_no,
+                                        args.address,
+                                        args.moo,
+                                        args.soi,
+                                        args.road,
+                                        args.sub_district,
+                                        args.district,
+                                        args.province,
+                                        args.postcode);
                                   }
                                 },
                                 color: Color(0xff62b490),
@@ -244,5 +256,49 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
             ),
           ),
         ));
+  }
+
+  userCreateFarm(user_id, farm_name, farm_no, address, moo, soi, road,
+      sub_district, district, province, postcode) async {
+
+      print(user_id);
+    String user = user_id.toString();
+
+    Map data = {
+      'user_id': user,
+      'farm_name': farm_name,
+      'farm_no': farm_no,
+      'address': address,
+      'moo': moo,
+      'soi': soi,
+      'road': road,
+      'sub_district': sub_district,
+      'district': district,
+      'province': province,
+      'postcode': postcode
+    };
+
+    final response = await http.post(Uri.http('10.0.2.2:3000', 'createFarm'),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data,
+        encoding: Encoding.getByName("utf-8"));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> resposne = jsonDecode(response.body);
+      Map<String, dynamic> user = resposne['data'];
+      print(user['message']);
+      Navigator.push(
+        context,
+        new MaterialPageRoute(
+          builder: (context) => new SuccessCreateFarm(),
+        ),
+      );
+    } else {
+      _scaffoldKey.currentState
+          ?.showSnackBar(SnackBar(content: Text("Please Try again")));
+    }
   }
 }

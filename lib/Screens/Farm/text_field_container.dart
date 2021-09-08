@@ -7,6 +7,7 @@ class TextFieldContainer extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String hintText;
+  final TextInputType? keyboardType;
   const TextFieldContainer({
     Key? key,
     required this.child,
@@ -14,6 +15,7 @@ class TextFieldContainer extends StatelessWidget {
     required this.onChanged,
     required this.validator,
     required this.controller,
+    required this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class TextFieldContainer extends StatelessWidget {
         Padding(
             padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
             child: RoundedInputField(
+              keyboardType: keyboardType,
               hintText: hintText,
               onChanged: onChanged,
               validator: validator,
