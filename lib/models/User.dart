@@ -1,31 +1,31 @@
 import 'dart:convert';
 
 class User {
-  int user_id;
-  String firstname;
-  String lastname;
-  String birthday;
-  String mobile;
-  String user_image;
-  String email;
-  String password;
-  int worker_id;
-  int role_id;
-  int farm_id;
-  String date_startwork;
-  String date_endwork;
-  String role_name;
-  String farm_no;
-  String farm_name;
-  String farm_image;
-  String address;
-  int moo;
-  String soi;
-  String road;
-  String sub_district;
-  String district;
-  String province;
-  int postcode;
+  int? user_id;
+  String? firstname;
+  String? lastname;
+  String? birthday;
+  String? mobile;
+  String? user_image;
+  String? email;
+  String? password;
+  int? worker_id;
+  int? role_id;
+  int? farm_id;
+  String? date_startwork;
+  String? date_endwork;
+  String? role_name;
+  String? farm_no;
+  String? farm_name;
+  String? farm_image;
+  String? address;
+  int? moo;
+  String? soi;
+  String? road;
+  String? sub_district;
+  String? district;
+  String? province;
+  int? postcode;
   User({
     required this.user_id,
     required this.firstname,

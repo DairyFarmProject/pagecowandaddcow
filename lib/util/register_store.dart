@@ -33,7 +33,7 @@ abstract class RegisterStoreBase with Store {
 
   @action
   Future<bool> isAlreadyAuthenticated() async {
-    firebaseUser = _auth.currentUser;
+    firebaseUser = _auth.currentUser!;
     if (firebaseUser != null) {
       print(firebaseUser.uid);
       return true;

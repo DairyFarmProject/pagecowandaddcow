@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:finaldairy/Screens/Welcome/constants.dart';
 import 'package:finaldairy/Screens/Welcome/text_field_container.dart';
@@ -21,7 +20,6 @@ class RoundedInputField extends StatelessWidget {
     required this.onSaved,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
@@ -29,7 +27,7 @@ class RoundedInputField extends StatelessWidget {
         keyboardType: TextInputType.emailAddress,
         onChanged: onChanged,
         controller: controller,
-        validator: validator,
+        //validator: validator,
         onSaved: onSaved,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(

@@ -1,13 +1,17 @@
 import 'package:finaldairy/dashboard.dart';
 import 'package:finaldairy/notification.dart';
 import 'package:finaldairy/profile.dart';
+import 'package:finaldairy/util/shared_preference.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/Activity/addactivity.dart';
 import 'Screens/Cow/cow1.dart';
 import 'Screens/Cow/onecow.dart';
+import 'models/User.dart';
 
 class Nav extends StatefulWidget {
+  // final User user;
+  // Nav({Key? key, required this.user}) : super(key: key);
   @override
   _NavState createState() => _NavState();
 }

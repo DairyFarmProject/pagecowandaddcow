@@ -1,8 +1,10 @@
+import 'package:finaldairy/Screens/Cow/cow1.dart';
 import 'package:finaldairy/Screens/Welcome/login.dart';
 import 'package:finaldairy/Screens/Welcome/otp.dart';
 import 'package:finaldairy/Screens/Welcome/register.dart';
 import 'package:finaldairy/Screens/Welcome/signup.dart';
 import 'package:finaldairy/Screens/Welcome/welcome.dart';
+import 'package:finaldairy/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:finaldairy/models/User.dart';
+import 'package:finaldairy/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
-import 'addcow1.dart';
 import 'package:finaldairy/models/Cows.dart';
+import 'addcow1.dart';
 import 'onecow.dart';
 
 class Cow extends StatefulWidget {
@@ -40,11 +43,12 @@ class _CowState extends State<Cow> {
 
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<UserProvider>(context).user;
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           titleTextStyle: TextStyle(fontWeight: FontWeight.w700),
-          title: Text("วัวในฟาร์ม"),
+          title: Text('dairy farm'),
           actions: [
             PopupMenuButton<String>(
               offset: Offset(100, 38),
@@ -95,18 +99,19 @@ class _CowState extends State<Cow> {
                                               new BorderRadius.circular(15)),
                                       child: InkWell(
                                         onTap: () {
-                                          
-                                          Navigator.push(context,
+                                          Navigator.push(
+                                              context,
                                               MaterialPageRoute(
-                                                  builder: (context) => OneCow(cow: snapshot.data![i])
-                                          ));
+                                                  builder: (context) => OneCow(
+                                                      cow: snapshot.data![i])));
                                         },
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Image.network(
-                                              snapshot.data?[i].cow_image1 ?? "",
+                                              snapshot.data?[i].cow_image1 ??
+                                                  "",
                                               width: 180,
                                               height: 150,
                                               fit: BoxFit.cover,

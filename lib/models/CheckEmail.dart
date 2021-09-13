@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class CheckEmail {
-  String user_id;
-  String email;
-  String password;
+  String? user_id;
+  String? email;
+  String? password;
   CheckEmail({
     required this.user_id,
     required this.email,
@@ -40,19 +40,21 @@ class CheckEmail {
 
   String toJson() => json.encode(toMap());
 
-  factory CheckEmail.fromJson(String source) => CheckEmail.fromMap(json.decode(source));
+  factory CheckEmail.fromJson(String source) =>
+      CheckEmail.fromMap(json.decode(source));
 
   @override
-  String toString() => 'CheckEmail(user_id: $user_id, email: $email, password: $password)';
+  String toString() =>
+      'CheckEmail(user_id: $user_id, email: $email, password: $password)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is CheckEmail &&
-      other.user_id == user_id &&
-      other.email == email &&
-      other.password == password;
+        other.user_id == user_id &&
+        other.email == email &&
+        other.password == password;
   }
 
   @override

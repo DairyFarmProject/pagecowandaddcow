@@ -18,7 +18,7 @@ class RoundedPasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
-        validator: RequiredValidator(errorText: "กรุณาป้อนรหัสผ่าน"),
+        // validator: RequiredValidator(errorText: "กรุณาป้อนรหัสผ่าน"),
         obscureText: true,
         onChanged: onChanged,
         controller: controller,

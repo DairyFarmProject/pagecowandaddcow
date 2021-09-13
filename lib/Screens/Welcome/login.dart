@@ -146,6 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+                
                 SizedBox(height: size.height * 0.03),
                 AlreadyHaveAnAccountCheck(
                   press: () {
@@ -159,6 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   },
                 ),
+
               ],
             ),
           ),

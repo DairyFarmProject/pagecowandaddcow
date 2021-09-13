@@ -67,24 +67,24 @@ class UserPreferences {
   }
 
   Future<bool> saveRegister(
-      String user_id,
+      String? user_id,
       String firstname,
       String lastname,
       String birthday,
       String mobile,
       String user_image,
-      String email,
-      String password) async {
+      String? email,
+      String? password) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setString("user_id", user_id);
+    prefs.setString("user_id", user_id!);
     prefs.setString("lastname", lastname);
     prefs.setString("birthday", birthday);
     prefs.setString("mobile", mobile);
     prefs.setString("firstname", firstname);
     prefs.setString("user_image", user_image);
-    prefs.setString("email", email);
-    prefs.setString("password", password);
+    prefs.setString("email", email!);
+    prefs.setString("password", password!);
 
     return prefs.commit();
   }
@@ -92,31 +92,31 @@ class UserPreferences {
   Future<User> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    int user_id = prefs.getInt("user_id");
-    String firstname = prefs.getString("firstname");
-    String lastname = prefs.getString("lastname");
-    String birthday = prefs.getString("birthday");
-    String mobile = prefs.getString("mobile");
-    String user_image = prefs.getString("user_image");
-    String email = prefs.getString("email");
-    String password = prefs.getString("password");
-    int worker_id = prefs.getInt("worker_id");
-    int role_id = prefs.getInt("role_id");
-    int farm_id = prefs.getInt("farm_id");
-    String date_startwork = prefs.getString("date_startwork");
-    String date_endwork = prefs.getString("date_endwork");
-    String role_name = prefs.getString("role_name");
-    String farm_no = prefs.getString("farm_no");
-    String farm_name = prefs.getString("farm_name");
-    String farm_image = prefs.getString("farm_image");
-    String address = prefs.getString("address");
-    int moo = prefs.getInt("moo");
-    String soi = prefs.getString("soi");
-    String road = prefs.getString("road");
-    String sub_district = prefs.getString("sub_district");
-    String district = prefs.getString("district");
-    String province = prefs.getString("province");
-    int postcode = prefs.getInt("postcode");
+    int? user_id = prefs.getInt("user_id");
+    String? firstname = prefs.getString("firstname");
+    String? lastname = prefs.getString("lastname");
+    String? birthday = prefs.getString("birthday");
+    String? mobile = prefs.getString("mobile");
+    String? user_image = prefs.getString("user_image");
+    String? email = prefs.getString("email");
+    String? password = prefs.getString("password");
+    int? worker_id = prefs.getInt("worker_id");
+    int? role_id = prefs.getInt("role_id");
+    int? farm_id = prefs.getInt("farm_id");
+    String? date_startwork = prefs.getString("date_startwork");
+    String? date_endwork = prefs.getString("date_endwork");
+    String? role_name = prefs.getString("role_name");
+    String? farm_no = prefs.getString("farm_no");
+    String? farm_name = prefs.getString("farm_name");
+    String? farm_image = prefs.getString("farm_image");
+    String? address = prefs.getString("address");
+    int? moo = prefs.getInt("moo");
+    String? soi = prefs.getString("soi");
+    String? road = prefs.getString("road");
+    String? sub_district = prefs.getString("sub_district");
+    String? district = prefs.getString("district");
+    String? province = prefs.getString("province");
+    int? postcode = prefs.getInt("postcode");
 
     return User(
         user_id: user_id,
@@ -158,18 +158,18 @@ class UserPreferences {
     prefs.remove("password");
   }
 
-  Future<String> getToken(args) async {
+  Future<String?> getToken(args) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString("token");
+    String? token = prefs.getString("token");
     return token;
   }
 
   Future<CheckEmail> getCheckEmail(
       String user_id, String email, String password) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String user_id = prefs.getString("user_id");
-    String email = prefs.getString("email");
-    String password = prefs.getString("password");
+    String? user_id = prefs.getString("user_id");
+    String? email = prefs.getString("email");
+    String? password = prefs.getString("password");
     return CheckEmail(user_id: user_id, email: email, password: password);
   }
 
