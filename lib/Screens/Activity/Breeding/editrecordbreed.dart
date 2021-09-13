@@ -70,9 +70,9 @@ class _EditRecordBreedState extends State<EditRecordBreed> {
                   items: [n1 + c1, n2 + c2, n3 + c3, n4 + c4, A],
                   label: "ชื่อวัว",
                   popupItemDisabled: (String s) => s.startsWith('I'),
-                  onChanged: (String selectedCow) {
+                  onChanged: (String? selectedCow) async {
                     if (selectedCow == A) {
-                      setState(() {
+                      setState(() async {
                         isShowOtherField = true;
                       });
                     }
@@ -144,7 +144,7 @@ class _EditRecordBreedState extends State<EditRecordBreed> {
                   popupItemDisabled: (String s) {
                     return s.startsWith('I');
                   },
-                  onChanged: (String selectedCow) {
+                  onChanged: (String? selectedCow) {
                     if (selectedCow == A) {
                       setState(() {
                         isShowOtherField = true;

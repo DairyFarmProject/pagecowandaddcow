@@ -66,7 +66,7 @@ class _RecordBreedingState extends State<RecordBreeding> {
                   items: [n1 + c1, n2 + c2, n3 + c3, n4 + c4, A],
                   label: "ชื่อวัว",
                   popupItemDisabled: (String s) => s.startsWith('I'),
-                  onChanged: (String selectedCow) {
+                  onChanged: (String? selectedCow) {
                     if (selectedCow == A) {
                       setState(() {
                         isShowOtherField = true;
@@ -140,7 +140,7 @@ class _RecordBreedingState extends State<RecordBreeding> {
                   popupItemDisabled: (String s) {
                     return s.startsWith('I');
                   },
-                  onChanged: (String selectedCow) {
+                  onChanged: (String? selectedCow) {
                     if (selectedCow == A) {
                       setState(() {
                         isShowOtherField = true;

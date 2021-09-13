@@ -4,7 +4,6 @@ import 'package:finaldairy/Screens/Welcome/otp.dart';
 import 'package:finaldairy/Screens/Welcome/register.dart';
 import 'package:finaldairy/Screens/Welcome/signup.dart';
 import 'package:finaldairy/Screens/Welcome/welcome.dart';
-import 'package:finaldairy/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +17,7 @@ import 'util/register_store.dart';
 import 'Screens/Farm/confirm_create_farm.dart';
 
 //home
+import 'Screens/Activity/addactivity.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +50,6 @@ class MyApp extends StatelessWidget {
               RegisterScreen.routeName: (context) => RegisterScreen(),
               OTP.routeName: (context) => OTP(),
             },
-            home: Welcome()));
+            home: LoginScreen()));
   }
 }

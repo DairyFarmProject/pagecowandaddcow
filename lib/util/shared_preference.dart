@@ -89,6 +89,39 @@ class UserPreferences {
     return prefs.commit();
   }
 
+  Future<bool> saveCow(
+    int cow_id,
+    int typecow_id,
+    int species_id,
+    int farm_id,
+    int statuscow_id,
+    String cow_no,
+    String cow_name,
+    String cow_birthday,
+    String cow_sex,
+    String cow_image1,
+    String cow_image2,
+    String cow_image3,
+    String note
+  ) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt("cow_id", cow_id);
+    prefs.setInt("typecow_id", typecow_id);
+    prefs.setInt("species_id", species_id);
+    prefs.setInt("farm_id", farm_id);
+    prefs.setInt("statuscow_id", statuscow_id);
+    prefs.setString("cow_no", cow_no);
+    prefs.setString("cow_name", cow_name);
+    prefs.setString("cow_birthday", cow_birthday);
+    prefs.setString("cow_sex", cow_sex);
+    prefs.setString("cow_image1", cow_image1);
+    prefs.setString("cow_image2", cow_image2);
+    prefs.setString("cow_image3", cow_image3);
+
+    return prefs.commit();
+  }
+
   Future<User> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 

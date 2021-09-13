@@ -1,13 +1,14 @@
 import 'dart:convert';
 
-import 'package:finaldairy/models/User.dart';
-import 'package:finaldairy/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import 'package:finaldairy/models/Cows.dart';
 import 'addcow1.dart';
+import 'package:finaldairy/models/Cows.dart';
+import 'package:finaldairy/models/User.dart';
+import 'package:finaldairy/providers/user_provider.dart';
+import '../../util/shared_preference.dart';
 import 'onecow.dart';
 
 class Cow extends StatefulWidget {
@@ -16,22 +17,15 @@ class Cow extends StatefulWidget {
 }
 
 class _CowState extends State<Cow> {
-  Future<List<Cows>> getCows() async {
-    final response = await http.get(Uri.http('10.0.2.2:3000', 'cows'));
-
-    Map<String, dynamic> data = jsonDecode(response.body);
-    final List list = data['data'];
-
-    List<Cows> cows = list.map((e) => Cows.fromMap(e)).toList();
-
-    return cows;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getCows();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Provider.of<UserProvider>(context, listen: false)
+  //       .getCows()
+  //       .whenComplete(() {
+  //     setState(() {});
+  //   });
+  // }
 
   int _selectIndex = 0;
 
@@ -43,12 +37,11 @@ class _CowState extends State<Cow> {
 
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<UserProvider>(context).user;
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           titleTextStyle: TextStyle(fontWeight: FontWeight.w700),
-          title: Text('dairy farm'),
+          title: Text("วัวในฟาร์ม"),
           actions: [
             PopupMenuButton<String>(
               offset: Offset(100, 38),
@@ -70,7 +63,7 @@ class _CowState extends State<Cow> {
             padding: const EdgeInsets.all(0),
             child: Container(
               child: FutureBuilder<List<Cows>>(
-                  future: getCows(),
+                  // future: UserProvider().getCows(),
                   builder: (context, snapshot) {
                     if (snapshot.data == null) {
                       return Container(

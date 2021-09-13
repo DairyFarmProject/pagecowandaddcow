@@ -146,7 +146,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Map<String, dynamic> user = resposne['data'];
         print(" User id ${user['user_id']}");
         savePref(user['user_id'], email, password);
-        UserPreferences().getCheckEmail(user['user_id'], email, password);
+        // UserPreferences().getCheckEmail(user['user_id'], email, password);
         Navigator.pushReplacementNamed(context, "/register",
             arguments: CheckEmail(
                 email: email, user_id: user['user_id'], password: password));

@@ -3,7 +3,7 @@ import 'package:finaldairy/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class SuccessCreateFarm extends StatefulWidget {
-  @override
+@override
   _SuccessCreateFarmState createState() => _SuccessCreateFarmState();
 }
 
@@ -70,6 +70,7 @@ class _SuccessCreateFarmState extends State<SuccessCreateFarm> {
                   )
                 ],
               )),
+              
             ],
           ),
         ]));

@@ -4,7 +4,6 @@ import 'package:finaldairy/Screens/Farm/splash.dart';
 import 'package:finaldairy/util/shared_preference.dart';
 
 import '../../models/User.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -124,6 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                       color: kPrimaryColor,
                       onPressed: () {
+                        
                         if (isLoading) {
                           return;
                         }
@@ -146,7 +146,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                
                 SizedBox(height: size.height * 0.03),
                 AlreadyHaveAnAccountCheck(
                   press: () {
@@ -160,7 +159,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   },
                 ),
-
               ],
             ),
           ),
@@ -186,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Map<String, dynamic> resposne = jsonDecode(response.body);
       Map<String, dynamic> user = resposne['data'];
       savePref(user['token']);
-      UserPreferences().getToken(user['token']);
+      //UserPreferences().getToken(user['token']);
       doLogin(user['token']);
     } else {
       _scaffoldKey.currentState
@@ -212,11 +210,11 @@ class _LoginScreenState extends State<LoginScreen> {
           return SplashPage();
         }));
       } else {
-        Flushbar(
-          title: "Failed Login",
-          message: response['message']['message'].toString(),
-          duration: Duration(seconds: 3),
-        ).show(context);
+        // Flushbar(
+        //   title: "Failed Login",
+        //   message: response['message']['message'].toString(),
+        //   duration: Duration(seconds: 3),
+        // ).show(context);
       }
     });
   }

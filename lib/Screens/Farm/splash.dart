@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flushbar/flushbar.dart';
 
 import 'package:finaldairy/models/User.dart';
 import 'package:finaldairy/providers/user_provider.dart';
@@ -17,15 +16,6 @@ class SplashPage extends StatefulWidget {
   _SplashPageState createState() => _SplashPageState();
 }
 
-//     if (result) {
-//       Navigator.push(context, MaterialPageRoute(builder: (context) {
-//       return Home();
-//     }));
-//   } else {
-//     Navigator.push(context, MaterialPageRoute(builder: (context) {
-//       return Cow();
-//     }));
-// }
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
@@ -36,11 +26,11 @@ class _SplashPageState extends State<SplashPage> {
           print(result);
       if (result) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Home();
+          return Cow();
         }));
       } else {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Cow();
+          return Home();
         }));
       }
     });
