@@ -1,7 +1,6 @@
-
 import UIKit
+import Flutter
 import Firebase
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
