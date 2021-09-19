@@ -4,17 +4,18 @@ import 'package:finaldairy/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/Activity/addactivity.dart';
+import 'Screens/Cow/addcow1.dart';
 import 'Screens/Cow/cow1.dart';
 import 'Screens/Cow/onecow.dart';
 
-class Nav extends StatefulWidget {
+class Homepage extends StatefulWidget {
   @override
-  _NavState createState() => _NavState();
+  _HomepageState createState() => _HomepageState();
 }
 
 int _selectIndex = 0;
 
-class _NavState extends State<Nav> {
+class _HomepageState extends State<Homepage> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     Text('ภาพรวม'),
@@ -30,6 +31,46 @@ class _NavState extends State<Nav> {
     });
   }
 
+  List<AppBar> _appBarList = [
+    AppBar(
+      title: Text('dashboard'),
+      backgroundColor: Color(0xff62b490),
+    ),
+    AppBar(
+      centerTitle: true,
+      titleTextStyle: TextStyle(fontWeight: FontWeight.w700),
+      title: Text("วัวในฟาร์ม"),
+      actions: [
+        PopupMenuButton<String>(
+          offset: Offset(100, 38),
+          icon: Icon(Icons.sort),
+          itemBuilder: (BuildContext context) {
+            return {'อายุ : มาก - น้อย', 'อายุ : น้อย - มาก', 'ประเภทวัว'}
+                .map((String choice) {
+              return PopupMenuItem<String>(
+                value: choice,
+                child: Text(choice),
+              );
+            }).toList();
+          },
+        )
+      ],
+      backgroundColor: Color(0xff62b490),
+    ),
+    AppBar(
+      title: Text('เพิ่มกิจกรรม'),
+      backgroundColor: Color(0xff62b490),
+    ),
+    AppBar(
+      title: Text('การแจ้งเตือน'),
+      backgroundColor: Color(0xff62b490),
+    ),
+    AppBar(
+      title: Text('บัญชีผู้ใช้'),
+      backgroundColor: Color(0xff62b490),
+    ),
+  ];
+
   int _selectPage = 0;
 
   final _pageOptions = [
@@ -43,38 +84,57 @@ class _NavState extends State<Nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _pageOptions[_selectPage],
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (int index) {
-            setState(() {
-              _selectPage = index;
-            });
+      appBar: _appBarList[_selectPage],
+      body: _pageOptions[_selectPage],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (int index) {
+          setState(() {
+            print('page:$index');
+            _selectPage = index;
+          });
+        },
+        selectedItemColor: Colors.amberAccent,
+        unselectedItemColor: Colors.blueGrey,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.analytics),
+            label: 'ภาพรวม',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'วัวของฉัน',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.note_add),
+            label: 'เพิ่มกิจกรรม',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'แจ้งเตือน',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people_alt),
+            label: 'ฉัน',
+          ),
+        ],
+        currentIndex: _selectPage,
+      ),
+      floatingActionButton: Visibility(
+        visible: _selectPage == 1,
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return AddCow();
+            }));
           },
-          selectedItemColor: Colors.amberAccent,
-          unselectedItemColor: Colors.blueGrey,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.analytics),
-              label: 'ภาพรวม',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'วัวของฉัน',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.note_add),
-              label: 'เพิ่มกิจกรรม',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
-              label: 'แจ้งเตือน',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people_alt),
-              label: 'ฉัน',
-            ),
-          ],
-          currentIndex: _selectPage,
-        ));
+          child: const Icon(
+            Icons.add_circle_outline_rounded,
+            color: Colors.white,
+            size: 40,
+          ),
+          backgroundColor: Color(0xff62b490),
+        ),
+      ),
+    );
   }
 }

@@ -28,10 +28,6 @@ class _AddActivityState extends State<AddActivity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('เพิ่มกิจกรรม'),
-        backgroundColor: Color(0xff62b490),
-      ),
       body: Container(
         child: Column(
           children: <Widget>[

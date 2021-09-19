@@ -1,6 +1,7 @@
 import 'package:finaldairy/Screens/Cow/cow1.dart';
 import 'package:finaldairy/Screens/Farm/home.dart';
 import 'package:finaldairy/models/CheckEmail.dart';
+import 'package:finaldairy/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -23,10 +24,10 @@ class _SplashPageState extends State<SplashPage> {
     Provider.of<UserProvider>(context, listen: false)
         .isAlreadyAuthenticated()
         .then((result) {
-          print(result);
+      print(result);
       if (result) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Cow();
+          return Homepage();
         }));
       } else {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
