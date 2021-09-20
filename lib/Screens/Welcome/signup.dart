@@ -43,12 +43,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "SIGNUP",
+                  "ลงทะเบียน",
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
                 ),
                 SizedBox(height: size.height * 0.03),
                 Image.asset(
-                  "assets/images/flower3.png",
+                  "assets/images/DairyCattle1.png",
                   height: size.height * 0.25,
                 ),
                 Form(

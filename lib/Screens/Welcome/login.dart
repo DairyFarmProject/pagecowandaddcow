@@ -83,12 +83,12 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "LOGIN",
+                  "เข้าสู่ระบบ",
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
                 ),
                 SizedBox(height: size.height * 0.03),
                 Image.asset(
-                  "assets/images/flower2.png",
+                  "assets/images/DairyCattle1.png",
                   height: size.height * 0.2,
                 ),
                 SizedBox(height: size.height * 0.03),
@@ -123,7 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                       color: kPrimaryColor,
                       onPressed: () {
-                        
                         if (isLoading) {
                           return;
                         }

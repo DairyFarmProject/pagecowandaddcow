@@ -33,12 +33,14 @@ class _HomepageState extends State<Homepage> {
 
   List<AppBar> _appBarList = [
     AppBar(
-      title: Text('dashboard'),
+      automaticallyImplyLeading: false,
+      title: Text('ภาพรวมฟาร์ม'),
       backgroundColor: Color(0xff62b490),
     ),
     AppBar(
+      automaticallyImplyLeading: false,
       centerTitle: true,
-      titleTextStyle: TextStyle(fontWeight: FontWeight.w700),
+      //titleTextStyle: TextStyle(fontWeight: FontWeight.w700),
       title: Text("วัวในฟาร์ม"),
       actions: [
         PopupMenuButton<String>(
@@ -58,14 +60,17 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Color(0xff62b490),
     ),
     AppBar(
+      automaticallyImplyLeading: false,
       title: Text('เพิ่มกิจกรรม'),
       backgroundColor: Color(0xff62b490),
     ),
     AppBar(
+      automaticallyImplyLeading: false,
       title: Text('การแจ้งเตือน'),
       backgroundColor: Color(0xff62b490),
     ),
     AppBar(
+      automaticallyImplyLeading: false,
       title: Text('บัญชีผู้ใช้'),
       backgroundColor: Color(0xff62b490),
     ),
