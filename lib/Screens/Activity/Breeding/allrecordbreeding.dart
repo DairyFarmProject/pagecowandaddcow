@@ -30,21 +30,25 @@ class _AllRecordBreedingState extends State<AllRecordBreeding> {
             child: Column(
               children: <Widget>[
                 ExpansionTile(
-                  collapsedBackgroundColor: Color(0xff59aca9),
+                  collapsedBackgroundColor: Colors.blueGrey[200],
                   tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   title: Text(
                     'บุญมี - A122 กับ บุญรี - A123',
                     style: TextStyle(
                         color: Colors.black,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         fontSize: 16),
                   ),
                   children: <Widget>[
                     Text(
                       'วันที่เริ่มผสม 11/12/63',
-                      style: TextStyle(color: Colors.black, fontSize: 18),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
                     ),
                     DataTable(
+                      columnSpacing: 10,
                       columns: <DataColumn>[
                         DataColumn(
                             label: Text(
@@ -62,7 +66,7 @@ class _AllRecordBreedingState extends State<AllRecordBreeding> {
                       rows: <DataRow>[
                         DataRow(cells: <DataCell>[
                           DataCell(Text('กลับสัด 1')),
-                          DataCell(Text('4/1/2564')),
+                          DataCell(Text('4/1/64')),
                           DataCell(
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -83,7 +87,7 @@ class _AllRecordBreedingState extends State<AllRecordBreeding> {
                         ]),
                         DataRow(cells: <DataCell>[
                           DataCell(Text('กลับสัด 2')),
-                          DataCell(Text('7/1/2564')),
+                          DataCell(Text('7/1/64')),
                           DataCell(
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -104,7 +108,7 @@ class _AllRecordBreedingState extends State<AllRecordBreeding> {
                         ]),
                         DataRow(cells: <DataCell>[
                           DataCell(Text('กลับสัด 3')),
-                          DataCell(Text('12/1/2564')),
+                          DataCell(Text('12/1/64')),
                           DataCell(
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -125,7 +129,7 @@ class _AllRecordBreedingState extends State<AllRecordBreeding> {
                         ]),
                         DataRow(cells: <DataCell>[
                           DataCell(Text('ตรวจสอบการตั้งท้อง')),
-                          DataCell(Text('13/1/2564')),
+                          DataCell(Text('13/1/64')),
                           DataCell(
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -146,7 +150,7 @@ class _AllRecordBreedingState extends State<AllRecordBreeding> {
                         ]),
                         DataRow(cells: <DataCell>[
                           DataCell(Text('พักท้อง')),
-                          DataCell(Text('14/1/2564')),
+                          DataCell(Text('14/1/64')),
                           DataCell(
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -167,7 +171,7 @@ class _AllRecordBreedingState extends State<AllRecordBreeding> {
                         ]),
                         DataRow(cells: <DataCell>[
                           DataCell(Text('กำหนดคลอด')),
-                          DataCell(Text('17/1/2564')),
+                          DataCell(Text('17/1/64')),
                           DataCell(
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),

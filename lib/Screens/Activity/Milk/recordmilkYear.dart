@@ -22,22 +22,31 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Text("จำนวนน้ำนมรวมภายในปีนี้"),
-              Text('1,800'),
+              Text(
+                "จำนวนน้ำนมรวมภายในปีนี้",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+              ),
+              Text('1,800',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
               Container(
-                  margin: EdgeInsets.only(bottom: 20), child: Text('กิโลกรัม')),
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: Text(
+                    'กิโลกรัม',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                  )),
               ExpansionTile(
-                collapsedBackgroundColor: Color(0xff59aca9),
+                collapsedBackgroundColor: Colors.blueGrey[200],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
                   'มิถุนายน 2564',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
                 children: <Widget>[
                   DataTable(
+                    columnSpacing: 20,
                     columns: <DataColumn>[
                       DataColumn(
                           label: Text(
@@ -54,12 +63,12 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                     ],
                     rows: <DataRow>[
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเช้า')),
+                        DataCell(Text('น้ำนมวัวรอบเช้า')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเย็น')),
+                        DataCell(Text('น้ำนมวัวรอบเย็น')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
@@ -95,17 +104,18 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                 ],
               ),
               ExpansionTile(
-                collapsedBackgroundColor: Colors.teal[200],
+                collapsedBackgroundColor: Colors.blueGrey[100],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
                   'พฤษภาคม 2564',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
                 children: <Widget>[
                   DataTable(
+                    columnSpacing: 20,
                     columns: <DataColumn>[
                       DataColumn(
                           label: Text(
@@ -122,12 +132,12 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                     ],
                     rows: <DataRow>[
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเช้า')),
+                        DataCell(Text('น้ำนมวัวรอบเช้า')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเย็น')),
+                        DataCell(Text('น้ำนมวัวรอบเย็น')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
@@ -163,17 +173,18 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                 ],
               ),
               ExpansionTile(
-                collapsedBackgroundColor: Color(0xff59aca9),
+                collapsedBackgroundColor: Colors.blueGrey[200],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
                   'เมษายน 2564',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
                 children: <Widget>[
                   DataTable(
+                    columnSpacing: 20,
                     columns: <DataColumn>[
                       DataColumn(
                           label: Text(
@@ -190,12 +201,12 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                     ],
                     rows: <DataRow>[
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเช้า')),
+                        DataCell(Text('น้ำนมวัวรอบเช้า')),
                         DataCell(Text('200')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเย็น')),
+                        DataCell(Text('น้ำนมวัวรอบเย็น')),
                         DataCell(Text('200')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
@@ -231,17 +242,18 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                 ],
               ),
               ExpansionTile(
-                collapsedBackgroundColor: Colors.teal[200],
+                collapsedBackgroundColor: Colors.blueGrey[100],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
                   'มีนาคม 2564',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
                 children: <Widget>[
                   DataTable(
+                    columnSpacing: 20,
                     columns: <DataColumn>[
                       DataColumn(
                           label: Text(
@@ -258,12 +270,12 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                     ],
                     rows: <DataRow>[
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเช้า')),
+                        DataCell(Text('น้ำนมวัวรอบเช้า')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),
                       DataRow(cells: <DataCell>[
-                        DataCell(Text('รวมน้ำนมวัวรอบเย็น')),
+                        DataCell(Text('น้ำนมวัวรอบเย็น')),
                         DataCell(Text('20')),
                         DataCell(Text('กิโลกรัม (20 ตัว)')),
                       ]),

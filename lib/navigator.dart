@@ -102,11 +102,11 @@ class _HomepageState extends State<Homepage> {
         unselectedItemColor: Colors.blueGrey,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.analytics),
+            icon: Icon(Icons.home),
             label: 'ภาพรวม',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: ImageIcon(AssetImage("assets/images/icon_cow.png")),
             label: 'วัวของฉัน',
           ),
           BottomNavigationBarItem(
@@ -133,7 +133,7 @@ class _HomepageState extends State<Homepage> {
             }));
           },
           child: const Icon(
-            Icons.add_circle_outline_rounded,
+            Icons.add,
             color: Colors.white,
             size: 40,
           ),

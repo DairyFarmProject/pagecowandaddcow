@@ -32,6 +32,7 @@ class _RecordMilkDayState extends State<RecordMilkDay> {
           backgroundColor: Colors.amber[600],
         ),
         body: Container(
+            child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <
                   Widget>[
@@ -104,27 +105,40 @@ class _RecordMilkDayState extends State<RecordMilkDay> {
                                   child: SingleChildScrollView(
                                     child: Column(
                                       children: [
-                                        Text("จำนวนน้ำนมรวมภายในวันนี้"),
-                                        Text('40'),
+                                        Text(
+                                          "จำนวนน้ำนมรวมภายในวันนี้",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Text('40',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500)),
                                         Container(
                                             margin: EdgeInsets.only(bottom: 20),
-                                            child: Text('กิโลกรัม')),
+                                            child: Text('กิโลกรัม',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w400))),
                                         ExpansionTile(
                                           initiallyExpanded: true,
                                           collapsedBackgroundColor:
-                                              Color(0xff59aca9),
+                                              Colors.blueGrey[200],
                                           tilePadding:
                                               const EdgeInsets.fromLTRB(
-                                                  20, 0, 20, 0),
+                                                  10, 0, 20, 0),
                                           title: Text(
                                             'วันที่ 21 มิถุนายน 2564',
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w400,
                                                 fontSize: 16),
                                           ),
                                           children: <Widget>[
                                             DataTable(
+                                              columnSpacing: 20,
                                               columns: <DataColumn>[
                                                 DataColumn(
                                                     label: Text(
@@ -175,7 +189,7 @@ class _RecordMilkDayState extends State<RecordMilkDay> {
                                             ),
                                             Container(
                                               margin: EdgeInsets.fromLTRB(
-                                                  100, 10, 100, 20),
+                                                  100, 0, 100, 10),
                                               child: RaisedButton(
                                                 onPressed: () {
                                                   Navigator.push(context,
@@ -208,7 +222,7 @@ class _RecordMilkDayState extends State<RecordMilkDay> {
                           ]))
                     ])),
           ]),
-        ),
+        )),
         floatingActionButton: FloatingActionButton.extended(
           label: Text(
             ' เพิ่มการบันทึกข้อมูล',

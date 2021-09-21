@@ -33,13 +33,13 @@ class _AllRecordCalveState extends State<AllRecordCalve> {
               child: Column(
             children: [
               ExpansionTile(
-                collapsedBackgroundColor: Colors.blue[100],
+                collapsedBackgroundColor: Colors.blueGrey[100],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
                   'บุญมี - A122 กับ บุญรี - A123',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
                 children: <Widget>[

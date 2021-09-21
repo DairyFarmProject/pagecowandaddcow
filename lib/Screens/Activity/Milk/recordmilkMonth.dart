@@ -20,22 +20,31 @@ class _RecordMilkMonthState extends State<RecordMilkMonth> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Text("จำนวนน้ำนมรวมภายในเดือนนี้"),
-              Text('900'),
+              Text(
+                "จำนวนน้ำนมรวมภายในเดือนนี้",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+              ),
+              Text('900',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
               Container(
-                  margin: EdgeInsets.only(bottom: 20), child: Text('กิโลกรัม')),
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: Text(
+                    'กิโลกรัม',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                  )),
               ExpansionTile(
-                collapsedBackgroundColor: Color(0xff59aca9),
+                collapsedBackgroundColor: Colors.blueGrey[200],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
                   'วันที่ 21 มิถุนายน 2564',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
                 children: <Widget>[
                   DataTable(
+                    columnSpacing: 20,
                     columns: <DataColumn>[
                       DataColumn(
                           label: Text(
@@ -93,17 +102,18 @@ class _RecordMilkMonthState extends State<RecordMilkMonth> {
                 ],
               ),
               ExpansionTile(
-                collapsedBackgroundColor: Colors.teal[200],
+                collapsedBackgroundColor: Colors.blueGrey[100],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
                   'วันที่ 20 มิถุนายน 2564',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
                 children: <Widget>[
                   DataTable(
+                    columnSpacing: 20,
                     columns: <DataColumn>[
                       DataColumn(
                           label: Text(
@@ -161,17 +171,18 @@ class _RecordMilkMonthState extends State<RecordMilkMonth> {
                 ],
               ),
               ExpansionTile(
-                collapsedBackgroundColor: Color(0xff59aca9),
+                collapsedBackgroundColor: Colors.blueGrey[200],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
                   'วันที่ 19 มิถุนายน 2564',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
                 children: <Widget>[
                   DataTable(
+                    columnSpacing: 20,
                     columns: <DataColumn>[
                       DataColumn(
                           label: Text(
@@ -229,17 +240,18 @@ class _RecordMilkMonthState extends State<RecordMilkMonth> {
                 ],
               ),
               ExpansionTile(
-                collapsedBackgroundColor: Colors.teal[200],
+                collapsedBackgroundColor: Colors.blueGrey[100],
                 tilePadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 title: Text(
                   'วันที่ 18 มิถุนายน 2564',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16),
                 ),
                 children: <Widget>[
                   DataTable(
+                    columnSpacing: 20,
                     columns: <DataColumn>[
                       DataColumn(
                           label: Text(

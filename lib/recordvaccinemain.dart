@@ -31,6 +31,7 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
           backgroundColor: Color(0xff59aca9),
         ),
         body: Container(
+            child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <
                   Widget>[
@@ -93,7 +94,7 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
                                       children: [
                                         ExpansionTile(
                                           collapsedBackgroundColor:
-                                              Color(0xff59aca9),
+                                              Colors.blueGrey[200],
                                           tilePadding:
                                               const EdgeInsets.fromLTRB(
                                                   20, 0, 20, 0),
@@ -106,6 +107,7 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
                                           ),
                                           children: <Widget>[
                                             DataTable(
+                                              columnSpacing: 20,
                                               columns: <DataColumn>[
                                                 DataColumn(
                                                     label: Text(
@@ -124,19 +126,19 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
                                                 DataRow(cells: <DataCell>[
                                                   DataCell(
                                                       Text('มือปากเท้าเป่ือย')),
-                                                  DataCell(Text('1/2564')),
+                                                  DataCell(Text('1/64')),
                                                   DataCell(Text('2/2/2564')),
                                                 ]),
                                                 DataRow(cells: <DataCell>[
                                                   DataCell(
                                                       Text('มือปากเท้าเป่ือย')),
-                                                  DataCell(Text('2/2564')),
+                                                  DataCell(Text('2/64')),
                                                   DataCell(Text('2/5/2564')),
                                                 ]),
                                                 DataRow(cells: <DataCell>[
                                                   DataCell(
                                                       Text('มือปากเท้าเป่ือย')),
-                                                  DataCell(Text('3/2564')),
+                                                  DataCell(Text('3/64')),
                                                   DataCell(Text('2/8/2564')),
                                                 ]),
                                               ],
@@ -175,7 +177,7 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
                           ]))
                     ])),
           ]),
-        ),
+        )),
         floatingActionButton: FloatingActionButton.extended(
           label: Text(
             ' เพิ่มการบันทึกข้อมูล',
