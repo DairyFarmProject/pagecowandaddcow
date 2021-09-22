@@ -1,6 +1,7 @@
+import 'package:finaldairy/Screens/Profile/Farm_data.dart';
 import 'package:finaldairy/dashboard.dart';
 import 'package:finaldairy/notification.dart';
-import 'package:finaldairy/profile.dart';
+import 'package:finaldairy/Screens/Profile/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/Activity/addactivity.dart';
@@ -83,7 +84,7 @@ class _HomepageState extends State<Homepage> {
     Cow(),
     AddActivity(),
     Notifications(),
-    Profile(),
+    FarmData(),
   ];
 
   @override

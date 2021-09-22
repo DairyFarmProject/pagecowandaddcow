@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class Profile extends StatefulWidget {
+class AcceptMember extends StatefulWidget {
   @override
-  _ProfileState createState() => _ProfileState();
+  _AcceptMemberState createState() => _AcceptMemberState();
 }
 
-class _ProfileState extends State<Profile> {
+class _AcceptMemberState extends State<AcceptMember> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
