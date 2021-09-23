@@ -1,3 +1,6 @@
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+
 import '../../Cow/successrecord.dart';
 
 import 'package:flutter/material.dart';
@@ -9,6 +12,8 @@ class RecordMilk extends StatefulWidget {
 
 class _RecordMilkState extends State<RecordMilk> {
   var num1 = 0, num2 = 0, sum = 0;
+  DateTime? now = new DateTime.now();
+  var formatter = new DateFormat.yMMMMd("th_TH");
 
   final TextEditingController t1 = new TextEditingController(text: "0");
   final TextEditingController t2 = new TextEditingController(text: "0");
@@ -30,6 +35,12 @@ class _RecordMilkState extends State<RecordMilk> {
       t1.text = "0";
       t2.text = "0";
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting();
   }
 
   @override
@@ -62,7 +73,7 @@ class _RecordMilkState extends State<RecordMilk> {
                       icon: const Icon(Icons.navigate_before, size: 24),
                       onPressed: () {}),
                   Text(
-                    '21 มิถุนายน 2564',
+                    '${DateFormat.yMMMMd("th_TH").format(DateTime.parse(now.toString()))}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,

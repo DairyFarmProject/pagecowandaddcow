@@ -1,33 +1,34 @@
 import 'dart:convert';
 
 class StatusCows {
-  final int statuscow_id;
+  final int status_id;
   final String status_name;
   StatusCows({
-    required this.statuscow_id,
+    required this.status_id,
     required this.status_name,
   });
+  
 
   StatusCows copyWith({
-    int? statuscow_id,
+    int? status_id,
     String? status_name,
   }) {
     return StatusCows(
-      statuscow_id: statuscow_id ?? this.statuscow_id,
+      status_id: status_id ?? this.status_id,
       status_name: status_name ?? this.status_name,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'statuscow_id': statuscow_id,
+      'status_id': status_id,
       'status_name': status_name,
     };
   }
 
   factory StatusCows.fromMap(Map<String, dynamic> map) {
     return StatusCows(
-      statuscow_id: map['statuscow_id'],
+      status_id: map['status_id'],
       status_name: map['status_name'],
     );
   }
@@ -37,17 +38,17 @@ class StatusCows {
   factory StatusCows.fromJson(String source) => StatusCows.fromMap(json.decode(source));
 
   @override
-  String toString() => 'StatusCows(statuscow_id: $statuscow_id, status_name: $status_name)';
+  String toString() => 'StatusCows(status_id: $status_id, status_name: $status_name)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
     return other is StatusCows &&
-      other.statuscow_id == statuscow_id &&
+      other.status_id == status_id &&
       other.status_name == status_name;
   }
 
   @override
-  int get hashCode => statuscow_id.hashCode ^ status_name.hashCode;
+  int get hashCode => status_id.hashCode ^ status_name.hashCode;
 }

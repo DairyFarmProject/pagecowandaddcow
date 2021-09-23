@@ -1,21 +1,18 @@
-import 'dart:convert';
-import 'package:finaldairy/Screens/Welcome/welcome.dart';
-import 'package:finaldairy/models/CheckEmail.dart';
-import 'package:finaldairy/models/UserDairys.dart';
+import 'dart:io';
+import '/Screens/Welcome/welcome.dart';
+import '/models/CheckEmail.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/CheckEmail.dart';
 import '../Farm/text_field_container.dart';
 import 'welcome.dart';
-import '../../models/UserDairys.dart';
 import '../../util/register_store.dart';
 import '../../util/shared_preference.dart';
 
@@ -43,15 +40,43 @@ class _RegisterScreenState extends State<RegisterScreen>
   User? firebaseUser;
   late String actualCode;
   late String _verificationId;
+  File? _image;
+  String _uploadedFileURL = '';
+  String? imageName;
   final firstnameController = TextEditingController();
   final lastnameController = TextEditingController();
   //final birthdayController = TextEditingController();
   final mobileController = TextEditingController();
-  final user_imageController = TextEditingController();
+  // final user_imageController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _smsController = TextEditingController();
   final value_validator = RequiredValidator(errorText: "X Invalid");
+
+  Future getImage() async {
+    final _picker = ImagePicker();
+    var image = await _picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = File(image!.path);
+    });
+  }
+
+  Future saveImage() async {
+    if (_image != null) {
+      setState(() {
+        this.isLoading = true;
+      });
+      Reference ref = FirebaseStorage.instance.ref();
+      TaskSnapshot addImg = await ref.child("User/$_image").putFile(_image!);
+      if (addImg.state == TaskState.success) {
+        setState(() {
+          this.isLoading = false;
+        });
+        print("added to Firebase Storage");
+      }
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -117,6 +142,39 @@ class _RegisterScreenState extends State<RegisterScreen>
                           child: Text('สร้างบัญชีผู้ใช้งาน',
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 25)),
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.all(0),
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              child: _image == null
+                                  ? Container(
+                                      width: 200,
+                                      height: 200,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.white),
+                                      child: Padding(
+                                          padding: EdgeInsets.all(4.0),
+                                          child: Center(
+                                              child: Container(
+                                                  child: IconButton(
+                                            icon: Icon(
+                                              Icons.add_a_photo_outlined,
+                                              size: 30,
+                                              color: Colors.blueGrey,
+                                            ),
+                                            onPressed: () {
+                                              getImage();
+                                            },
+                                          )))))
+                                  : CircleAvatar(
+                                      backgroundImage: FileImage(_image!),
+                                      radius: 100.0),
+                            )
+                          ],
                         ),
                         TextFieldContainer(
                             controller: firstnameController,
@@ -220,16 +278,6 @@ class _RegisterScreenState extends State<RegisterScreen>
                               style: TextStyle(fontSize: 15),
                             ),
                             hintText: "เบอร์มือถือ"),
-                        TextFieldContainer(
-                            controller: user_imageController,
-                            keyboardType: TextInputType.text,
-                            onChanged: (value) {},
-                            validator: value_validator,
-                            child: Text(
-                              'รูปโปรไฟล์',
-                              style: TextStyle(fontSize: 15),
-                            ),
-                            hintText: "รูปโปรไฟล์"),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -301,21 +349,17 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                       "Please Enter Mobile")));
                                           return;
                                         }
-                                        if (user_imageController.text.isEmpty) {
-                                          _scaffoldKey.currentState
-                                              ?.showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      "Please Enter Image")));
-                                          return;
-                                        }
+
                                         if (mobileController.text.isNotEmpty) {
+                                          String d = '${DateFormat('yyyy-MM-dd').format(DateTime.parse(_dateTime.toString()))}';
+                                          print('------' + d);
                                           UserPreferences().saveRegister(
                                               args.user_id,
                                               firstnameController.text,
                                               lastnameController.text,
                                               '${DateFormat('yyyy-MM-dd').format(DateTime.parse(_dateTime.toString()))}',
                                               mobileController.text.toString(),
-                                              user_imageController.text,
+                                              FileImage(_image!).toString(),
                                               args.email,
                                               args.password);
                                           loginStore.getCodeWithPhoneNumber(

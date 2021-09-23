@@ -3,7 +3,7 @@ import 'package:finaldairy/Screens/Cow/successrecord.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:convert';
-import '../../../models/Abdominals.dart';
+import '../../../models/Abdominal.dart';
 import 'package:http/http.dart' as http;
 
 class RecordCalve extends StatefulWidget {
@@ -13,14 +13,14 @@ class RecordCalve extends StatefulWidget {
 
 class _RecordCalveState extends State<RecordCalve> {
   DateTime? _dateTime;
-  Future<List<Abdominals>> getAbdominals() async {
+  Future<List<Abdominal>> getAbdominals() async {
     final response = await http.get(Uri.http('10.0.2.2:3000', 'abdominal'));
 
     Map<String, dynamic> data = jsonDecode(response.body);
     final List list = data['data'];
 
-    List<Abdominals> abdominals =
-        list.map((e) => Abdominals.fromMap(e)).toList();
+    List<Abdominal> abdominals =
+        list.map((e) => Abdominal.fromMap(e)).toList();
 
     return abdominals;
   }
@@ -61,7 +61,7 @@ class _RecordCalveState extends State<RecordCalve> {
           backgroundColor: Color(0xff5a82de),
         ),
         body: Container(
-          child: FutureBuilder<List<Abdominals>>(
+          child: FutureBuilder<List<Abdominal>>(
             future: getAbdominals(),
             builder: (context, snapshot) {
               if (snapshot.data == null) {

@@ -24,7 +24,6 @@ class _SplashPageState extends State<SplashPage> {
     Provider.of<UserProvider>(context, listen: false)
         .isAlreadyAuthenticated()
         .then((result) {
-      print(result);
       if (result) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Homepage();

@@ -52,7 +52,7 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
 
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<UserProvider>(context).user;
+    User? user = Provider.of<UserProvider>(context).user;
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -220,7 +220,7 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     userCreateFarm(
-                                        user.user_id,
+                                        user?.user_id,
                                         args.farm_name,
                                         args.farm_no,
                                         args.address,

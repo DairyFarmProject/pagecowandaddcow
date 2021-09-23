@@ -3,7 +3,7 @@ import 'package:finaldairy/Screens/Cow/successrecord.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:convert';
-import '../../../models/Abdominals.dart';
+import '../../../models/Abdominal.dart';
 import 'package:http/http.dart' as http;
 
 class EditRecordCalve extends StatefulWidget {
@@ -46,7 +46,7 @@ class _EditRecordCalveState extends State<EditRecordCalve> {
           backgroundColor: Color(0xff5a82de),
         ),
         body: Container(
-          child: FutureBuilder<List<Abdominals>>(
+          child: FutureBuilder<List<Abdominal>>(
             builder: (context, snapshot) {
               if (snapshot.data == null) {
                 return Container(

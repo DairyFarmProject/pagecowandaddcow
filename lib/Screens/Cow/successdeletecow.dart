@@ -53,7 +53,7 @@ class _SuccessDeleteCowState extends State<SuccessDeleteCow> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Nav();
+                        return Homepage();
                       }));
                     },
                     color: Colors.blueGrey[50],

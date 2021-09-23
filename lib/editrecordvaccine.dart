@@ -15,7 +15,7 @@ class EditRecordVaccine extends StatefulWidget {
 
 class _EditRecordVaccineState extends State<EditRecordVaccine> {
   Future<List<Vaccines>> getVaccines() async {
-    final response = await http.get(Uri.http('10.0.2.2:3000', 'vaccines'));
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'allvaccine'));
 
     Map<String, dynamic> data = jsonDecode(response.body);
     final List list = data['data'];

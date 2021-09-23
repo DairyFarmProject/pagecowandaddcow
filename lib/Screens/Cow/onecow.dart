@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:finaldairy/Screens/Cow/deletecow.dart';
 import 'package:finaldairy/Screens/Cow/editcow.dart';
 import 'package:finaldairy/Screens/Cow/historycow.dart';
+import 'package:http/http.dart' as http;
+import 'package:finaldairy/models/User.dart';
+import 'package:finaldairy/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../../models/Cows.dart';
 
 class OneCow extends StatefulWidget {
@@ -13,6 +19,27 @@ class OneCow extends StatefulWidget {
 }
 
 class _OneCowState extends State<OneCow> {
+
+  Future<List<Cows>> getCow() async {
+    User? user = Provider.of<UserProvider>(context, listen: false).user;
+    late List<Cows> cows;
+    Map data = {'farm_id': user?.farm_id.toString()};
+    final response = await http.post(Uri.http('10.0.2.2:3000', 'farms/cow'),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data,
+        encoding: Encoding.getByName("utf-8"));
+    
+    if (response.statusCode == 200) {
+    Map<String, dynamic> db = jsonDecode(response.body);
+    final List list = db['data']['cows'];
+    cows = list.map((e) => Cows.fromMap(e)).toList();
+  }
+  return cows;
+  }
+
   @override
   Widget OneCow() {
     return IconButton(
@@ -77,7 +104,7 @@ class _OneCowState extends State<OneCow> {
                 borderRadius: BorderRadius.circular(30.0),
                 child: FittedBox(
                   child: Image.network(
-                      widget.cow.cow_image1),
+                      widget.cow.cow_image),
                   //fit: BoxFit.cover,
                 ),
               ),
@@ -135,7 +162,7 @@ class _OneCowState extends State<OneCow> {
                         child: Padding(
                       padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                       child: Text(
-                        'พ่อพันธ์ : ???',
+                        'พ่อพันธ์ : ${widget.cow.semen_id}',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     )),
@@ -146,7 +173,7 @@ class _OneCowState extends State<OneCow> {
                           alignment: FractionalOffset.bottomLeft,
                           child: Padding(
                               padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              child: Text('แม่พันธ์ : ???',
+                              child: Text('แม่พันธ์ : ${widget.cow.mom_id}',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold))))),
                 ],
@@ -159,7 +186,7 @@ class _OneCowState extends State<OneCow> {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: Text(
-                    'สายพันธ์ : ${widget.cow.species_id} - ???',
+                    'สายพันธุ์ : ${widget.cow.specie_name_th}',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),

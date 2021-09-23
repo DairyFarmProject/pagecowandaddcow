@@ -1,17 +1,46 @@
+import 'dart:convert';
+
 import 'package:finaldairy/models/CheckEmail.dart';
-import '../models/UserDairys.dart';
+import 'package:finaldairy/models/Cows.dart';
 import 'package:finaldairy/models/Token.dart';
+import 'package:finaldairy/models/UserDairys.dart';
 import '../models/User.dart';
 import '../models/CheckEmail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
 class UserPreferences {
+  static SharedPreferences? _prefs;
+  static Future init() async => _prefs = await SharedPreferences.getInstance();
+
+  Future<bool> saveUserDairy(
+      int user_id,
+      String firstname,
+      String lastname,
+      String user_birthday,
+      String mobile,
+      String user_image,
+      String email,
+      String password) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt("user_id", user_id);
+    prefs.setString("lastname", lastname);
+    prefs.setString("user_birthday", user_birthday);
+    prefs.setString("mobile", mobile);
+    prefs.setString("firstname", firstname);
+    prefs.setString("user_image", user_image);
+    prefs.setString("email", email);
+    prefs.setString("password", password);
+
+    return prefs.commit();
+  }
+
   Future<bool> saveUser(
       int user_id,
       String firstname,
       String lastname,
-      String birthday,
+      String user_birthday,
       String mobile,
       String user_image,
       String email,
@@ -19,8 +48,7 @@ class UserPreferences {
       int worker_id,
       int role_id,
       int farm_id,
-      String date_startwork,
-      String date_endwork,
+      String startwork,
       String role_name,
       String farm_no,
       String farm_name,
@@ -37,7 +65,7 @@ class UserPreferences {
 
     prefs.setInt("user_id", user_id);
     prefs.setString("lastname", lastname);
-    prefs.setString("birthday", birthday);
+    prefs.setString("user_birthday", user_birthday);
     prefs.setString("mobile", mobile);
     prefs.setString("firstname", firstname);
     prefs.setString("user_image", user_image);
@@ -46,8 +74,7 @@ class UserPreferences {
     prefs.setInt("worker_id", worker_id);
     prefs.setInt("role_id", role_id);
     prefs.setInt("farm_id", farm_id);
-    prefs.setString("date_startwork", date_startwork);
-    prefs.setString("date_endwork", date_endwork);
+    prefs.setString("startwork", startwork);
     prefs.setString("role_name", role_name);
     prefs.setString("farm_no", farm_no);
     prefs.setString("farm_name", farm_name);
@@ -70,7 +97,7 @@ class UserPreferences {
       String? user_id,
       String firstname,
       String lastname,
-      String birthday,
+      String user_birthday,
       String mobile,
       String user_image,
       String? email,
@@ -79,7 +106,7 @@ class UserPreferences {
 
     prefs.setString("user_id", user_id!);
     prefs.setString("lastname", lastname);
-    prefs.setString("birthday", birthday);
+    prefs.setString("user_birthday", user_birthday);
     prefs.setString("mobile", mobile);
     prefs.setString("firstname", firstname);
     prefs.setString("user_image", user_image);
@@ -90,20 +117,17 @@ class UserPreferences {
   }
 
   Future<bool> saveCow(
-    int cow_id,
-    int typecow_id,
-    int species_id,
-    int farm_id,
-    int statuscow_id,
-    String cow_no,
-    String cow_name,
-    String cow_birthday,
-    String cow_sex,
-    String cow_image1,
-    String cow_image2,
-    String cow_image3,
-    String note
-  ) async {
+      int cow_id,
+      int typecow_id,
+      int species_id,
+      int farm_id,
+      int statuscow_id,
+      String cow_no,
+      String cow_name,
+      String cow_birthday,
+      String cow_sex,
+      String cow_image,
+      String note) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setInt("cow_id", cow_id);
@@ -115,9 +139,7 @@ class UserPreferences {
     prefs.setString("cow_name", cow_name);
     prefs.setString("cow_birthday", cow_birthday);
     prefs.setString("cow_sex", cow_sex);
-    prefs.setString("cow_image1", cow_image1);
-    prefs.setString("cow_image2", cow_image2);
-    prefs.setString("cow_image3", cow_image3);
+    prefs.setString("cow_image1", cow_image);
 
     return prefs.commit();
   }
@@ -125,10 +147,12 @@ class UserPreferences {
   Future<User> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    print('Get User Prefs');
+
     int? user_id = prefs.getInt("user_id");
     String? firstname = prefs.getString("firstname");
     String? lastname = prefs.getString("lastname");
-    String? birthday = prefs.getString("birthday");
+    String? user_birthday = prefs.getString("user_birthday");
     String? mobile = prefs.getString("mobile");
     String? user_image = prefs.getString("user_image");
     String? email = prefs.getString("email");
@@ -136,8 +160,7 @@ class UserPreferences {
     int? worker_id = prefs.getInt("worker_id");
     int? role_id = prefs.getInt("role_id");
     int? farm_id = prefs.getInt("farm_id");
-    String? date_startwork = prefs.getString("date_startwork");
-    String? date_endwork = prefs.getString("date_endwork");
+    String? startwork = prefs.getString("startwork");
     String? role_name = prefs.getString("role_name");
     String? farm_no = prefs.getString("farm_no");
     String? farm_name = prefs.getString("farm_name");
@@ -155,7 +178,7 @@ class UserPreferences {
         user_id: user_id,
         firstname: firstname,
         lastname: lastname,
-        birthday: birthday,
+        user_birthday: user_birthday,
         mobile: mobile,
         user_image: user_image,
         email: email,
@@ -163,8 +186,7 @@ class UserPreferences {
         worker_id: worker_id,
         role_id: role_id,
         farm_id: farm_id,
-        date_startwork: date_startwork,
-        date_endwork: date_endwork,
+        startwork: startwork,
         role_name: role_name,
         farm_no: farm_no,
         farm_name: farm_name,
@@ -177,6 +199,65 @@ class UserPreferences {
         district: district,
         province: province,
         postcode: postcode);
+
+        
+  }
+
+  Future <UserDairys> getUserDairy() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? user_id = prefs.getInt("user_id");
+    String? firstname = prefs.getString("firstname");
+    String? lastname = prefs.getString("lastname");
+    String? user_birthday = prefs.getString("user_birthday");
+    String? mobile = prefs.getString("mobile");
+    String? user_image = prefs.getString("user_image");
+    String? email = prefs.getString("email");
+    String? password = prefs.getString("password");
+
+    return UserDairys(
+        user_id: user_id,
+        firstname: firstname,
+        lastname: lastname,
+        user_birthday: user_birthday,
+        mobile: mobile,
+        user_image: user_image,
+        email: email,
+        password: password);
+  }
+
+
+  Future setUser(Cows cow) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final json = jsonEncode(cow.toJson());
+    final idCow = cow.cow_id.toString();
+
+    await prefs.setString(idCow, json);
+  }
+
+  Cows getCow(String idCow) {
+    final json = _prefs!.getString(idCow);
+
+    return Cows.fromJson(jsonDecode(json!));
+  }
+
+  Future addCows(Cows cow) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final idCows = prefs.getStringList('cows') ?? <String>[];
+    final newIdCows = List.of(idCows)..add(cow.cow_id.toString());
+
+    await prefs.setStringList('cows', newIdCows);
+  }
+
+  Future<List<Cows>> getCows() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final idCows = prefs.getStringList('cows');
+
+    if (idCows == null) {
+      return <Cows>[];
+    } else {
+      return idCows.map<Cows>(getCow).toList();
+    }
   }
 
   void removeUser() async {

@@ -1,5 +1,5 @@
 import 'package:finaldairy/Screens/Farm/join_farm.dart';
-import 'package:finaldairy/profile.dart';
+import 'package:finaldairy/Screens/Profile/profile.dart';
 import 'package:flutter/material.dart';
 
 class JoinFarmWait extends StatefulWidget {

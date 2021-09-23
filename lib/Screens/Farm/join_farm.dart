@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:finaldairy/Screens/Farm/join_farm_wait.dart';
-import 'package:finaldairy/profile.dart';
+import 'package:finaldairy/Screens/Profile/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

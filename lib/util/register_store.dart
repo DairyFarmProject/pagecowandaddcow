@@ -110,7 +110,7 @@ abstract class RegisterStoreBase with Store {
       String password,
       String firstname,
       String lastname,
-      String birthday,
+      String user_birthday,
       String mobile,
       String user_image) async {
     isOtpLoading = true;
@@ -131,7 +131,7 @@ abstract class RegisterStoreBase with Store {
       if (authResult != null && authResult.user != null) {
         print('Authentication successful');
         onAuthenticationSuccessful(context, authResult);
-        register(user_id, email, password, firstname, lastname, birthday,
+        register(user_id, email, password, firstname, lastname, user_birthday,
             mobile, user_image);
       }
     });
@@ -158,16 +158,16 @@ abstract class RegisterStoreBase with Store {
       String password,
       String firstname,
       String lastname,
-      String date,
+      String user_birthday,
       String mobile,
-      user_image) async {
+      String user_image) async {
     print("Calling");
 
     Map data = {
       'user_id': user_id,
       'firstname': firstname,
       'lastname': lastname,
-      'birthday': date,
+      'user_birthday': user_birthday,
       'mobile': mobile,
       'user_image': user_image,
       'email': email,

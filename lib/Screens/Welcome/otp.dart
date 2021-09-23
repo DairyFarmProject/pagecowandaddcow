@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:finaldairy/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,7 +28,7 @@ class _OTPState extends State<OTP> with TickerProviderStateMixin {
   String user_id = '';
   String firstname = '';
   String lastname = '';
-  String birthday = '';
+  String user_birthday = '';
   String user_image = '';
   String mobile = '';
   String email = '';
@@ -62,7 +59,7 @@ class _OTPState extends State<OTP> with TickerProviderStateMixin {
       user_id = (prefs.getString('user_id') ?? '');
       firstname = (prefs.getString('firstname') ?? '');
       lastname = (prefs.getString('lastname') ?? '');
-      birthday = (prefs.getString('birthday') ?? '');
+      user_birthday = (prefs.getString('user_birthday') ?? '');
       mobile = (prefs.getString('mobile') ?? '');
       user_image = (prefs.getString('user_image') ?? '');
       email = (prefs.getString('email') ?? '');
@@ -169,7 +166,7 @@ class _OTPState extends State<OTP> with TickerProviderStateMixin {
                               password,
                               firstname,
                               lastname,
-                              birthday,
+                              user_birthday,
                               mobile,
                               user_image);
                         },

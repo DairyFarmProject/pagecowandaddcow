@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:finaldairy/models/UserDairys.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,52 +45,76 @@ class AuthProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
 
-      List userData = responseData['data'];
+      List userData = responseData['data']['rows'];
 
-      List<User> authUser = userData.map((e) => User.fromMap(e)).toList();
+      print(responseData['data']['message']);
 
-      UserPreferences().saveUser(
-        userData[0]['user_id'],
-        userData[0]['firstname'],
-        userData[0]['lastname'],
-        userData[0]['birthday'],
-        userData[0]['mobile'],
-        userData[0]['user_image'],
-        userData[0]['email'],
-        userData[0]['password'],
-        userData[0]['worker_id'],
-        userData[0]['role_id'],
-        userData[0]['farm_id'],
-        userData[0]['date_startwork'],
-        userData[0]['date_endwork'],
-        userData[0]['role_name'],
-        userData[0]['farm_no'],
-        userData[0]['farm_name'],
-        userData[0]['farm_image'],
-        userData[0]['address'],
-        userData[0]['moo'],
-        userData[0]['soi'],
-        userData[0]['road'],
-        userData[0]['sub_district'],
-        userData[0]['district'],
-        userData[0]['province'],
-        userData[0]['postcode'],
-      );
+      if (responseData['data']['message'] == 'A') {
+        List<User> authUser = userData.map((e) => User.fromMap(e)).toList();
 
-      _loggedInStatus = Status.LoggedIn;
-      notifyListeners();
-      print("hi login ath");
+        UserPreferences().saveUser(
+          userData[0]['user_id'],
+          userData[0]['firstname'],
+          userData[0]['lastname'],
+          userData[0]['user_birthday'],
+          userData[0]['mobile'],
+          userData[0]['user_image'],
+          userData[0]['email'],
+          userData[0]['password'],
+          userData[0]['worker_id'],
+          userData[0]['role_id'],
+          userData[0]['farm_id'],
+          userData[0]['startwork'],
+          userData[0]['role_name'],
+          userData[0]['farm_no'],
+          userData[0]['farm_name'],
+          userData[0]['farm_image'],
+          userData[0]['address'],
+          userData[0]['moo'],
+          userData[0]['soi'],
+          userData[0]['road'],
+          userData[0]['sub_district'],
+          userData[0]['district'],
+          userData[0]['province'],
+          userData[0]['postcode'],
+        );
 
-      result = {"user": authUser[0]};
-      print(result);
-    } else {
-      _loggedInStatus = Status.NotLoggedIn;
-      notifyListeners();
-      result = {
-        'status': false,
-        'message': json.decode(response.body)['error']
-      };
+        _loggedInStatus = Status.LoggedIn;
+        notifyListeners();
+        print("hi login ath");
+
+        result = {"ans": 'A',"user": authUser[0]};
+        print(result);
+      } else if (responseData['data']['message'] == 'B') {
+        List<UserDairys> authUser =
+            userData.map((e) => UserDairys.fromMap(e)).toList();
+
+        UserPreferences().saveUserDairy(
+          userData[0]['user_id'],
+          userData[0]['firstname'],
+          userData[0]['lastname'],
+          userData[0]['user_birthday'],
+          userData[0]['mobile'],
+          userData[0]['user_image'],
+          userData[0]['email'],
+          userData[0]['password'],
+        );
+
+        _loggedInStatus = Status.LoggedIn;
+        notifyListeners();
+        print("hi login ath");
+
+        result = {"ans": 'B',"user": authUser[0]};
+      } else {
+        _loggedInStatus = Status.NotLoggedIn;
+        notifyListeners();
+        result = {
+          'status': false,
+          'message': json.decode(response.body)['error']
+        };
+      }
     }
+
     return result;
   }
 

@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:finaldairy/Screens/Activity/Milk/editrecordmilk.dart';
+import 'package:finaldairy/models/Milks.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 import 'recordmilk.dart';
 import 'recordmilkDay.dart';
@@ -14,6 +20,42 @@ class RecordMilkYear extends StatefulWidget {
 }
 
 class _RecordMilkYearState extends State<RecordMilkYear> {
+  DateTime? now = new DateTime.now();
+  var formatter = new DateFormat.yMMMMd("th_TH");
+  int? milks;
+
+  Future<List<Milks>> getMilk() async {
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'milks'));
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    final List list = data['data']['rows'];
+
+    List<Milks> typecows = list.map((e) => Milks.fromMap(e)).toList();
+
+    return typecows;
+  }
+
+  Future getCount() async {
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'milks/year'));
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    int? milk = data['data']['milk'];
+
+    setState(() {
+      milks = milk;
+    });
+
+    return milk;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getMilk();
+    getCount();
+    initializeDateFormatting();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +68,7 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                 "จำนวนน้ำนมรวมภายในปีนี้",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
               ),
-              Text('1,800',
+              Text('${milks}',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
               Container(
                   margin: EdgeInsets.only(bottom: 20),

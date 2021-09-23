@@ -1,6 +1,7 @@
 import 'package:finaldairy/Screens/Cow/cow1.dart';
 import 'package:finaldairy/Screens/Farm/home.dart';
 import 'package:finaldairy/Screens/Farm/splash.dart';
+import 'package:finaldairy/models/UserDairys.dart';
 import 'package:finaldairy/util/shared_preference.dart';
 
 import '../../models/User.dart';
@@ -183,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Map<String, dynamic> resposne = jsonDecode(response.body);
       Map<String, dynamic> user = resposne['data'];
       savePref(user['token']);
-      //UserPreferences().getToken(user['token']);
+      UserPreferences().getToken(user['token']);
       doLogin(user['token']);
     } else {
       _scaffoldKey.currentState
@@ -203,11 +204,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
     successfulMessage.then((response) {
       if (response["user"] != null) {
-        User user = response["user"];
-        Provider.of<UserProvider>(context, listen: false).setUser(user);
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return SplashPage();
-        }));
+        if (response['ans'] == 'A') {
+          User user = response["user"];
+          print(user);
+          Provider.of<UserProvider>(context, listen: false).setUser(user);
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return SplashPage();
+          }));
+        } else {
+          UserDairys user = response["user"];
+          print(user);
+          Provider.of<UserProvider>(context, listen: false).setUserDairy(user);
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return SplashPage();
+          }));
+        }
       } else {
         // Flushbar(
         //   title: "Failed Login",

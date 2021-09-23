@@ -3,6 +3,7 @@ import 'dart:convert';
 class Farms {
   final int farm_id;
   final String farm_no;
+  final String farm_code;
   final String farm_name;
   final String farm_image;
   final String address;
@@ -16,6 +17,7 @@ class Farms {
   Farms({
     required this.farm_id,
     required this.farm_no,
+    required this.farm_code,
     required this.farm_name,
     required this.farm_image,
     required this.address,
@@ -27,10 +29,12 @@ class Farms {
     required this.province,
     required this.postcode,
   });
+  
 
   Farms copyWith({
     int? farm_id,
     String? farm_no,
+    String? farm_code,
     String? farm_name,
     String? farm_image,
     String? address,
@@ -45,6 +49,7 @@ class Farms {
     return Farms(
       farm_id: farm_id ?? this.farm_id,
       farm_no: farm_no ?? this.farm_no,
+      farm_code: farm_code ?? this.farm_code,
       farm_name: farm_name ?? this.farm_name,
       farm_image: farm_image ?? this.farm_image,
       address: address ?? this.address,
@@ -62,6 +67,7 @@ class Farms {
     return {
       'farm_id': farm_id,
       'farm_no': farm_no,
+      'farm_code': farm_code,
       'farm_name': farm_name,
       'farm_image': farm_image,
       'address': address,
@@ -79,6 +85,7 @@ class Farms {
     return Farms(
       farm_id: map['farm_id'],
       farm_no: map['farm_no'],
+      farm_code: map['farm_code'],
       farm_name: map['farm_name'],
       farm_image: map['farm_image'],
       address: map['address'],
@@ -98,7 +105,7 @@ class Farms {
 
   @override
   String toString() {
-    return 'Farms(farm_id: $farm_id, farm_no: $farm_no, farm_name: $farm_name, farm_image: $farm_image, address: $address, moo: $moo, soi: $soi, road: $road, sub_district: $sub_district, district: $district, province: $province, postcode: $postcode)';
+    return 'Farms(farm_id: $farm_id, farm_no: $farm_no, farm_code: $farm_code, farm_name: $farm_name, farm_image: $farm_image, address: $address, moo: $moo, soi: $soi, road: $road, sub_district: $sub_district, district: $district, province: $province, postcode: $postcode)';
   }
 
   @override
@@ -108,6 +115,7 @@ class Farms {
     return other is Farms &&
       other.farm_id == farm_id &&
       other.farm_no == farm_no &&
+      other.farm_code == farm_code &&
       other.farm_name == farm_name &&
       other.farm_image == farm_image &&
       other.address == address &&
@@ -124,6 +132,7 @@ class Farms {
   int get hashCode {
     return farm_id.hashCode ^
       farm_no.hashCode ^
+      farm_code.hashCode ^
       farm_name.hashCode ^
       farm_image.hashCode ^
       address.hashCode ^

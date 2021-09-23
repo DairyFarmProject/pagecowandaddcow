@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:finaldairy/Screens/Welcome/background.dart';
-import 'package:finaldairy/Screens/Welcome/rounded_button.dart';
-import 'package:finaldairy/Screens/Welcome/login.dart';
-import 'package:finaldairy/Screens/Welcome/signup.dart';
-import 'package:finaldairy/Screens/Welcome/constants.dart';
-import '../../util/register_store.dart';
-import 'package:provider/provider.dart';
-import 'register.dart';
+import '/Screens/Welcome/background.dart';
+import '/Screens/Welcome/rounded_button.dart';
+import '/Screens/Welcome/login.dart';
+import '/Screens/Welcome/signup.dart';
+import '/Screens/Welcome/constants.dart';
 import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -56,7 +52,7 @@ class _WelcomeState extends State<Welcome> {
             SizedBox(height: size.height * 0.05),
             Image.asset(
               "assets/images/DairyCattle1.png",
-              height: size.height * 0.40,
+              height: size.height * 0.30,
             ),
             SizedBox(height: size.height * 0.05),
             RoundedButton(

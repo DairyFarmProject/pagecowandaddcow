@@ -53,7 +53,7 @@ class _SuccessEditCowState extends State<SuccessEditCow> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Nav();
+                        return Homepage();
                       }));
                     },
                     color: Colors.blueGrey[50],

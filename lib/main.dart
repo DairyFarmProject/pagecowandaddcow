@@ -1,17 +1,19 @@
-import 'package:finaldairy/Screens/Cow/cow1.dart';
-import 'package:finaldairy/Screens/Welcome/login.dart';
-import 'package:finaldairy/Screens/Welcome/otp.dart';
-import 'package:finaldairy/Screens/Welcome/register.dart';
-import 'package:finaldairy/Screens/Welcome/signup.dart';
-import 'package:finaldairy/Screens/Welcome/welcome.dart';
+import 'package:finaldairy/Screens/Activity/Milk/recordmilkDay.dart';
+
+
+import '/Screens/Welcome/otp.dart';
+import '/Screens/Welcome/register.dart';
+import '/Screens/Welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'providers/auth.dart';
 import 'providers/user_provider.dart';
 import 'models/User.dart' as DairyUser;
+import 'models/UserDairys.dart';
 import 'util/shared_preference.dart';
 import 'util/register_store.dart';
 import 'Screens/Farm/confirm_create_farm.dart';
@@ -28,14 +30,16 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting();
     Future<DairyUser.User> getUserData() => UserPreferences().getUser();
+    Future<UserDairys> getUser() => UserPreferences().getUserDairy();
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           ChangeNotifierProvider(create: (_) => UserProvider()),
           Provider<RegisterStore>(create: (_) => RegisterStore()),
           Provider<AuthProvider>(create: (_) => AuthProvider()),
-          // Provider<UserProvider>(create: (_) => UserProvider()),
+         // Provider<ProfileProvider>(create: (_) => ProfileProvider()),
           ChangeNotifierProxyProvider<UserProvider, AuthProvider>(
             create: (_) => AuthProvider(),
             update:
@@ -50,6 +54,6 @@ class MyApp extends StatelessWidget {
               RegisterScreen.routeName: (context) => RegisterScreen(),
               OTP.routeName: (context) => OTP(),
             },
-            home: LoginScreen()));
+            home: RecordMilkDay()));
   }
 }
