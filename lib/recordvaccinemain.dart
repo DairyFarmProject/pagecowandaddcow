@@ -37,7 +37,7 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
                   Widget>[
             SizedBox(height: 20.0),
             DefaultTabController(
-                length: 2, // length of tabs
+                length: 1, // length of tabs
                 initialIndex: 0,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -63,18 +63,18 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
                                 ),
                               ),
                             ),
-                            Tab(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        color: Colors.red[900]!, width: 1)),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("รายฝูง"),
-                                ),
-                              ),
-                            ),
+                            // Tab(
+                            //   child: Container(
+                            //     decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(50),
+                            //         border: Border.all(
+                            //             color: Colors.red[900]!, width: 1)),
+                            //     child: Align(
+                            //       alignment: Alignment.center,
+                            //       child: Text("รายฝูง"),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -124,20 +124,17 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
                                               ],
                                               rows: <DataRow>[
                                                 DataRow(cells: <DataCell>[
-                                                  DataCell(
-                                                      Text('มือปากเท้าเป่ือย')),
+                                                  DataCell(Text('ไข้ขา')),
                                                   DataCell(Text('1/64')),
                                                   DataCell(Text('2/2/2564')),
                                                 ]),
                                                 DataRow(cells: <DataCell>[
-                                                  DataCell(
-                                                      Text('มือปากเท้าเป่ือย')),
+                                                  DataCell(Text('ไข้ขา')),
                                                   DataCell(Text('2/64')),
                                                   DataCell(Text('2/5/2564')),
                                                 ]),
                                                 DataRow(cells: <DataCell>[
-                                                  DataCell(
-                                                      Text('มือปากเท้าเป่ือย')),
+                                                  DataCell(Text('ไข้ขา')),
                                                   DataCell(Text('3/64')),
                                                   DataCell(Text('2/8/2564')),
                                                 ]),
@@ -173,7 +170,7 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
                                     ),
                                   )),
                             ),
-                            RecordVaccineMainAll(),
+                            //RecordVaccineMainAll(),
                           ]))
                     ])),
           ]),
