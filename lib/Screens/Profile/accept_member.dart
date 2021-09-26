@@ -64,7 +64,20 @@ class _AcceptMemberState extends State<AcceptMember> {
                     Container(
                       margin: EdgeInsets.only(right: 10),
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () => showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title:
+                                const Text('คุณ... ได้เข้าร่วมฟาร์มของคุณแล้ว'),
+                            //content: const Text('AlertDialog description'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        ),
                         color: Color(0xff62b490),
                         shape: RoundedRectangleBorder(
                             borderRadius:
@@ -78,7 +91,7 @@ class _AcceptMemberState extends State<AcceptMember> {
                         ),
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
