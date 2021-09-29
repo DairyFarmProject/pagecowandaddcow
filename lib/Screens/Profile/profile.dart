@@ -1,4 +1,8 @@
+import 'package:finaldairy/models/User.dart';
+import 'package:finaldairy/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -10,9 +14,19 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
+    User? user = Provider.of<UserProvider>(context, listen: false).user;
     return Scaffold(
       body: Column(
         children: [
+          Container(
+              width: 200,
+              height: 200,
+              decoration:
+                  BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+              child: CircleAvatar(
+                              backgroundImage: NetworkImage('https://firebasestorage.googleapis.com/v0/b/examplesenior.appspot.com/o/User%2F1.jpg?alt=media&token=6372f79d-9bb0-4fbc-8c31-1ab9731cf93f'),
+                              radius: 100.0)
+                      ),
           Container(
             child: Text(
               'โปรไฟล์',
@@ -31,11 +45,10 @@ class _ProfileState extends State<Profile> {
             ),
             child: Column(
               children: [
-                Text('ชื่อ : สมปอง'),
-                Text('นามสกุล : รักฟาร์มวัว'),
-                Text('วันเกิด : 11 ธันวาคม 2530'),
-                Text('เบอร์มือถือ : 092-222-2222'),
-                Text('ID ผู้ใช้งาน : 1001010')
+                Text('ชื่อ : ${user?.firstname}'),
+                Text('นามสกุล : ${user?.lastname}'),
+                Text('วันเกิด : ${DateFormat('dd-MM-yyyy').format(DateTime.parse(user!.user_birthday.toString()))}'),
+                Text('เบอร์มือถือ : ${user.mobile}'),
               ],
             ),
           ),

@@ -21,6 +21,7 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   late ScreenArguments args;
   late String farm_no = '';
+  late String farm_code = '';
   late String farm_name = '';
   late String address = '';
   late String moo = '';
@@ -38,6 +39,7 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
       args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
       farm_name = args.farm_name;
       farm_no = args.farm_no;
+      farm_code = args.farm_code;
       address = args.address;
       moo = args.moo;
       soi = args.soi;
@@ -112,6 +114,12 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
                         style: TextStyle(fontSize: 15),
                       ),
                       hintText: args.farm_no),
+                  ShowTextField(
+                      child: Text(
+                        'ไอดีฟาร์ม',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      hintText: args.farm_code),
                   Column(
                     children: [
                       Container(
@@ -223,6 +231,7 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
                                         user?.user_id,
                                         args.farm_name,
                                         args.farm_no,
+                                        args.farm_code,
                                         args.address,
                                         args.moo,
                                         args.soi,
@@ -258,16 +267,18 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
         ));
   }
 
-  userCreateFarm(user_id, farm_name, farm_no, address, moo, soi, road,
+  userCreateFarm(user_id, farm_name, farm_no, farm_code, address, moo, soi, road,
       sub_district, district, province, postcode) async {
 
       print(user_id);
     String user = user_id.toString();
+    String farm_image = 'https://www.organicfarmthailand.com/wp-content/uploads/2016/09/Farm-from-a-Box-SMA.jpg';
 
     Map data = {
       'user_id': user,
       'farm_name': farm_name,
       'farm_no': farm_no,
+      'farm_code': farm_code,
       'address': address,
       'moo': moo,
       'soi': soi,
@@ -275,10 +286,11 @@ class _ConfirmCreateFarmState extends State<ConfirmCreateFarm>
       'sub_district': sub_district,
       'district': district,
       'province': province,
-      'postcode': postcode
+      'postcode': postcode,
+      'farm_image': farm_image
     };
 
-    final response = await http.post(Uri.http('10.0.2.2:3000', 'createFarm'),
+    final response = await http.post(Uri.http('10.0.2.2:3000', 'farms/create'),
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/x-www-form-urlencoded"

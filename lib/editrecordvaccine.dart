@@ -1,24 +1,30 @@
+import 'package:finaldairy/models/Vaccine_schedule.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:dropdown_search/dropdown_search.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 import 'Screens/Cow/successrecord.dart';
 import 'models/Vaccines.dart';
 
 class EditRecordVaccine extends StatefulWidget {
+  final Vaccine_schedule vac;
+  EditRecordVaccine({required this.vac});
   @override
   _EditRecordVaccineState createState() => _EditRecordVaccineState();
 }
 
 class _EditRecordVaccineState extends State<EditRecordVaccine> {
+
+
   Future<List<Vaccines>> getVaccines() async {
-    final response = await http.get(Uri.http('10.0.2.2:3000', 'allvaccine'));
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'vaccines'));
 
     Map<String, dynamic> data = jsonDecode(response.body);
-    final List list = data['data'];
+    final List list = data['data']['rows'];
 
     List<Vaccines> vaccines = list.map((e) => Vaccines.fromMap(e)).toList();
 
@@ -103,7 +109,7 @@ class _EditRecordVaccineState extends State<EditRecordVaccine> {
                           padding: EdgeInsets.fromLTRB(30, 20, 0, 20),
                           child: Text(
                             _dateTime == null
-                                ? 'yyyy/mm/dd'
+                                ? '${DateFormat('dd-MM-yyyy').format(DateTime.parse(widget.vac.vac_date))}'
                                 : _dateTime.toString(),
                           ),
                         ),

@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:finaldairy/editrecordvaccine.dart';
+import 'package:finaldairy/models/Vaccine_schedule.dart';
+import 'package:finaldairy/models/Vaccines.dart';
 
 import 'package:finaldairy/recordvaccinemainall.dart';
 import 'package:finaldairy/ref.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 import 'recordvaccine.dart';
 
@@ -14,6 +20,25 @@ class RecordVaccineMain extends StatefulWidget {
 }
 
 class _RecordVaccineMainState extends State<RecordVaccineMain> {
+  Future<List<Vaccine_schedule>> getMilk() async {
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'schedule'));
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    final List list = data['data'];
+
+    List<Vaccine_schedule> typecows =
+        list.map((e) => Vaccine_schedule.fromMap(e)).toList();
+
+    return typecows;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getMilk();
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,151 +55,111 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
           ),
           backgroundColor: Color(0xff59aca9),
         ),
-        body: Container(
-            child: SingleChildScrollView(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <
-                  Widget>[
-            SizedBox(height: 20.0),
-            DefaultTabController(
-                length: 1, // length of tabs
-                initialIndex: 0,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        child: TabBar(
-                          unselectedLabelColor: Colors.red[900],
-                          indicatorSize: TabBarIndicatorSize.label,
-                          indicator: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.red[900]),
-                          tabs: [
-                            Tab(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        color: Colors.red[900]!, width: 1)),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("รายตัว"),
+        body: FutureBuilder<List<Vaccine_schedule>>(
+            future: getMilk(),
+            builder: (context, snapshot) {
+              if (snapshot.data == null) {
+                return Container(
+                  child: Center(
+                    child: Text('Loading...'),
+                  ),
+                );
+              } else
+                return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, i) {
+                      return Container(
+                          margin: EdgeInsets.fromLTRB(20, 15, 20, 5),
+                          child: SingleChildScrollView(
+                              child: Card(
+                                  child: Column(
+                            children: [
+                              ExpansionTile(
+                                collapsedBackgroundColor: Color(0xff59aca9),
+                                tilePadding:
+                                    const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                title: Text(
+                                  '${snapshot.data?[i].schedule_id}',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
                                 ),
-                              ),
-                            ),
-                            // Tab(
-                            //   child: Container(
-                            //     decoration: BoxDecoration(
-                            //         borderRadius: BorderRadius.circular(50),
-                            //         border: Border.all(
-                            //             color: Colors.red[900]!, width: 1)),
-                            //     child: Align(
-                            //       alignment: Alignment.center,
-                            //       child: Text("รายฝูง"),
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                          height: 700, //height of TabBarView
-
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  top: BorderSide(
-                                      color: Colors.grey, width: 0.5))),
-                          child: TabBarView(children: <Widget>[
-                            Container(
-                              child: Container(
-                                  margin: EdgeInsets.fromLTRB(20, 15, 20, 5),
-                                  child: SingleChildScrollView(
-                                    child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(top: 20, bottom: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        ExpansionTile(
-                                          collapsedBackgroundColor:
-                                              Colors.blueGrey[200],
-                                          tilePadding:
-                                              const EdgeInsets.fromLTRB(
-                                                  20, 0, 20, 0),
-                                          title: Text(
-                                            'มูมู้ A121',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16),
-                                          ),
-                                          children: <Widget>[
-                                            DataTable(
-                                              columnSpacing: 20,
-                                              columns: <DataColumn>[
-                                                DataColumn(
-                                                    label: Text(
-                                                  'ชื่อวัคซีน',
-                                                )),
-                                                DataColumn(
-                                                    label: Text(
-                                                  'รอบการฉีด',
-                                                )),
-                                                DataColumn(
-                                                    label: Text(
-                                                  'วันที่',
-                                                )),
-                                              ],
-                                              rows: <DataRow>[
-                                                DataRow(cells: <DataCell>[
-                                                  DataCell(Text('ไข้ขา')),
-                                                  DataCell(Text('1/64')),
-                                                  DataCell(Text('2/2/2564')),
-                                                ]),
-                                                DataRow(cells: <DataCell>[
-                                                  DataCell(Text('ไข้ขา')),
-                                                  DataCell(Text('2/64')),
-                                                  DataCell(Text('2/5/2564')),
-                                                ]),
-                                                DataRow(cells: <DataCell>[
-                                                  DataCell(Text('ไข้ขา')),
-                                                  DataCell(Text('3/64')),
-                                                  DataCell(Text('2/8/2564')),
-                                                ]),
-                                              ],
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'วันที่ฉีด',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
                                             ),
-                                            Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  100, 10, 100, 20),
-                                              child: RaisedButton(
-                                                onPressed: () {
-                                                  Navigator.push(context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) {
-                                                    return EditRecordVaccine();
-                                                  }));
-                                                },
-                                                child: Center(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Icon(Icons.edit),
-                                                      Text('แก้ไข')
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
+                                            Text(
+                                              'วัคซีน',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              'นัดหมาย',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              'วัว',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
                                             )
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text('${DateFormat('dd-MM-yyyy').format(DateTime.parse(snapshot.data![i].vac_date.toString()))}'),
+                                            Text('${snapshot.data?[i].vac_name_th}'),
+                                            Text('${DateFormat('dd-MM-yyyy').format(DateTime.parse(snapshot.data![i].next_date.toString()))}'),
+                                            Text('${snapshot.data?[i].cow_name}')
                                           ],
                                         ),
                                       ],
                                     ),
-                                  )),
-                            ),
-                            //RecordVaccineMainAll(),
-                          ]))
-                    ])),
-          ]),
-        )),
+                                  ),
+                                  Container(
+                                    margin:
+                                        EdgeInsets.fromLTRB(100, 10, 100, 20),
+                                    child: RaisedButton(
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) => EditRecordVaccine(
+                                                      vac: snapshot.data![i])));
+                                      },
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.edit),
+                                            Text('แก้ไข')
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ))));
+                    });
+            }),
         floatingActionButton: FloatingActionButton.extended(
           label: Text(
             ' เพิ่มการบันทึกข้อมูล',

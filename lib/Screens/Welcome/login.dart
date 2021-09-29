@@ -220,11 +220,9 @@ class _LoginScreenState extends State<LoginScreen> {
           }));
         }
       } else {
-        // Flushbar(
-        //   title: "Failed Login",
-        //   message: response['message']['message'].toString(),
-        //   duration: Duration(seconds: 3),
-        // ).show(context);
+        _scaffoldKey.currentState
+          ?.showSnackBar(SnackBar(content: Text("Failed Login!")));
+        
       }
     });
   }

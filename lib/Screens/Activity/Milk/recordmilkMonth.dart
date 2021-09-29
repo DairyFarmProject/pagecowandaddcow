@@ -43,8 +43,6 @@ class _RecordMilkMonthState extends State<RecordMilkMonth> {
     setState(() {
       milks = milk;
     });
-    print(milks);
-    print(milk);
 
     return milk;
   }

@@ -63,23 +63,23 @@ class _RecordVaccineMainAllState extends State<RecordVaccineMainAll> {
                       ]),
                     ],
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(100, 10, 100, 20),
-                    child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return EditRecordVaccine();
-                        }));
-                      },
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [Icon(Icons.edit), Text('แก้ไข')],
-                        ),
-                      ),
-                    ),
-                  )
+                  // Container(
+                  //   margin: EdgeInsets.fromLTRB(100, 10, 100, 20),
+                  //   child: RaisedButton(
+                  //     onPressed: () {
+                  //       Navigator.push(context,
+                  //           MaterialPageRoute(builder: (context) {
+                  //         return EditRecordVaccine();
+                  //       }));
+                  //     },
+                  //     child: Center(
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: [Icon(Icons.edit), Text('แก้ไข')],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ],

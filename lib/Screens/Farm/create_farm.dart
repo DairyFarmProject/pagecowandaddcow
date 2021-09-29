@@ -21,6 +21,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final nameFarmController = TextEditingController();
   final numberFarmController = TextEditingController();
+  final codeFarmController = TextEditingController();
   final addressFarmController = TextEditingController();
   final mooFarmController = TextEditingController();
   final soiFarmController = TextEditingController();
@@ -147,7 +148,17 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                         'เลขทะเบียนฟาร์ม',
                         style: TextStyle(fontSize: 15),
                       ),
-                      hintText: "รูปภาพ"),
+                      hintText: "เลขทะเบียนฟาร์ม"),
+                  TextFieldContainer(
+                      controller: codeFarmController,
+                      keyboardType: TextInputType.text,
+                      onChanged: (value) {},
+                      validator: value_validator,
+                      child: Text(
+                        'ไอดีฟาร์ม',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      hintText: "ไอดีฟาร์ม"),
                   Column(
                     children: [
                       Container(
@@ -305,6 +316,7 @@ class _CreateFarmState extends State<CreateFarm> with TickerProviderStateMixin {
                                         arguments: ScreenArguments(
                                           farm_name: nameFarmController.text,
                                           farm_no: numberFarmController.text,
+                                          farm_code: codeFarmController.text,
                                           address: addressFarmController.text,
                                           moo: mooFarmController.text,
                                           soi: soiFarmController.text,

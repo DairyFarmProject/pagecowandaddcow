@@ -300,9 +300,7 @@ class _OneCowState extends State<OneCow> {
                     RaisedButton(
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return HistoryCow();
-                        }));
+                            MaterialPageRoute(builder: (context) => HistoryCow(cow: widget.cow)));
                       },
                       color: Color(0xff6d78e1),
                       shape: RoundedRectangleBorder(
