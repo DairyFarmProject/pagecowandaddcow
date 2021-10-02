@@ -1,13 +1,71 @@
+import 'dart:convert';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:finaldairy/Screens/Cow/successdeletecow.dart';
+import 'package:finaldairy/models/Cows.dart';
+import 'package:finaldairy/models/StatusCows.dart';
+import '../../providers/user_provider.dart';
+import '../../models/User.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class DeleteCow extends StatefulWidget {
+  final Cows cow;
+  DeleteCow({required this.cow});
   @override
   _DeleteCowState createState() => _DeleteCowState();
 }
 
+class Status {
+  const Status(this.name);
+  final String name;
+}
+
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+void showInSnackBar(String value) {
+  _scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(value)));
+}
+
 class _DeleteCowState extends State<DeleteCow> {
+  int selectStatus=0;
+  List<Status> statuses = <Status>[
+    Status('ขายออก'),
+    Status('ป่วย'),
+    Status('โคแก่'),
+    Status('ตาย'),
+    Status('อื่น ๆ')
+  ];
+
+  final cowNoteController = TextEditingController();
+
+  Future<List<StatusCows>> getStatusCows() async {
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'statuscows'));
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    final List list = data['data']['status'];
+
+    List<StatusCows> statuscows =
+        list.map((e) => StatusCows.fromMap(e)).toList();
+
+    return statuscows;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getStatusCows();
+  }
+
+  int _selectIndex = 0;
+
+  void _onItemTap(int index) {
+    setState(() {
+      _selectIndex = index;
+    });
+  }
+
   Widget optionCowButton() {
     return IconButton(
       icon: Icon(Icons.more_vert),
@@ -17,12 +75,9 @@ class _DeleteCowState extends State<DeleteCow> {
     );
   }
 
-  final String name = 'มูมู้';
-  final String birthday = '11 ธันวาคม 2559';
-  final String code = 'A121';
-
   @override
   Widget build(BuildContext context) {
+    User? user = Provider.of<UserProvider>(context, listen: false).user;
     return Scaffold(
       appBar: AppBar(
         title: Text("ลบวัว"),
@@ -48,7 +103,7 @@ class _DeleteCowState extends State<DeleteCow> {
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.blueGrey[100],
-                  border: Border.all(color: (Colors.blueGrey[800])!, width: 2),
+                  border: Border.all(color: (Colors.blueGrey[300])!, width: 2),
                   borderRadius: BorderRadius.circular(3),
                 ),
                 child: Container(
@@ -69,7 +124,7 @@ class _DeleteCowState extends State<DeleteCow> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 0, 5),
                                   child: Text(
-                                    'ชื่อวัว : มูมู้',
+                                    'ชื่อวัว : ${widget.cow.cow_name}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
@@ -83,7 +138,7 @@ class _DeleteCowState extends State<DeleteCow> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 0, 5),
                                   child: Text(
-                                    'วันเกิด : 11 ธันวาคม 2559',
+                                    'วันเกิด : ${DateFormat('dd-MM-yyyy').format(DateTime.parse(widget.cow.cow_birthday))}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
@@ -97,7 +152,7 @@ class _DeleteCowState extends State<DeleteCow> {
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 10, 0, 15),
                           child: Text(
-                            'รหัสประจำตัว : A121',
+                            'รหัสประจำตัว : ${widget.cow.cow_no}',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -109,7 +164,7 @@ class _DeleteCowState extends State<DeleteCow> {
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Text(
-                          'สถานะปัจจุบัน : โคท้อง',
+                          'สถานะปัจจุบัน : ${widget.cow.type_name}',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -122,32 +177,46 @@ class _DeleteCowState extends State<DeleteCow> {
               ),
               Container(
                 padding: const EdgeInsets.all(20.0),
-                child: DropdownSearch<String>(
-                  mode: Mode.MENU,
-                  showSelectedItem: true,
-                  items: ['เสียชีวิต', 'ขาย', 'อื่นๆ'],
-                  label: 'สาเหตุการลบวัว',
-                  hint: 'country in menu mode',
-                  popupItemDisabled: (String s) => s.startsWith('I'),
-                  onChanged: print,
-                  selectedItem: 'เสียชีวิต',
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'รายละเอียดอื่นๆ',
-                    fillColor: Colors.blueGrey,
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.blueGrey,
-                        width: 2,
+                child: DropdownButton<Status>(
+                  hint: new Text("Select a status"),
+                  value: selectStatus == null ? null : statuses[selectStatus],
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectStatus = statuses.indexOf(newValue!);
+                      print(selectStatus);
+                    });
+                  },
+                  items: statuses.map((Status status) {
+                    return new DropdownMenuItem<Status>(
+                      value: status,
+                      child: new Text(
+                        status.name,
+                        style: new TextStyle(color: Colors.black),
                       ),
-                    ),
-                  ),
+                    );
+                  }).toList(),
                 ),
               ),
+              Column(children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  margin: EdgeInsets.all(0),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Text('รายละเอียดอื่นๆ',
+                      style: TextStyle(fontWeight: FontWeight.w500)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 60),
+                  child: TextField(
+                    controller: cowNoteController,
+                    decoration: InputDecoration(
+                      hintText: '${widget.cow.note}',
+                      fillColor: Colors.blueGrey,
+                    ),
+                    onChanged: (String name) {},
+                  ),
+                )
+              ]),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -157,7 +226,6 @@ class _DeleteCowState extends State<DeleteCow> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        //ignore: deprecated_member_use
                         RaisedButton(
                           onPressed: () {},
                           color: Colors.blueGrey[50],
@@ -181,11 +249,15 @@ class _DeleteCowState extends State<DeleteCow> {
                     margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                     child: Column(
                       children: [
-                        //ignore: deprecated_member_use
                         RaisedButton(
                           onPressed: () async {
                             final ConfirmAction? action =
-                                await _asyncConfirmDialog(context);
+                                await _asyncConfirmDialog(
+                                    context,
+                                    selectStatus,
+                                    widget.cow.cow_id,
+                                    widget.cow.farm_id,
+                                    user?.user_id);
                             print("Confirm Action $action");
                           },
                           padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
@@ -215,8 +287,44 @@ class _DeleteCowState extends State<DeleteCow> {
   }
 }
 
+deleteCow(context, status, user_id, farm_id, cow_id) async {
+  Map data = {
+    'user_id': user_id.toString(),
+    'farm_id': farm_id.toString(),
+    'cow_id': cow_id.toString(),
+  };
+  print(data.toString());
+
+  final response = await http.delete(Uri.http('10.0.2.2:3000', 'cows/delete'),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: data,
+      encoding: Encoding.getByName("utf-8"));
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> resposne = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      print("Delete Success");
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return SuccessDeleteCow();
+      }));
+    } else {
+      _scaffoldKey.currentState
+          ?.showSnackBar(SnackBar(content: Text("${resposne['message']}")));
+    }
+    _scaffoldKey.currentState
+        ?.showSnackBar(SnackBar(content: Text("${resposne['message']}")));
+  } else {
+    _scaffoldKey.currentState
+        ?.showSnackBar(SnackBar(content: Text("Please Try again")));
+  }
+}
+
 enum ConfirmAction { Cancle, Accept }
-Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
+Future<ConfirmAction?> _asyncConfirmDialog(
+    context, status, cow_id, farm_id, user_id) async {
   return showDialog<ConfirmAction>(
       context: context,
       barrierDismissible: false,
@@ -257,9 +365,7 @@ Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
                   borderRadius: BorderRadius.all(Radius.circular(39)),
                 ),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return SuccessDeleteCow();
-                  }));
+                  deleteCow(context, status, user_id, farm_id, cow_id);
                 },
               ),
             ),

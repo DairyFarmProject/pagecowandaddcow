@@ -1,16 +1,50 @@
+import 'dart:convert';
+
+import 'package:finaldairy/models/Abdominal.dart';
+import 'package:finaldairy/models/Cows.dart';
+import 'package:finaldairy/models/User.dart';
+import 'package:finaldairy/providers/user_provider.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HistoryCow extends StatefulWidget {
+  final Cows cow;
+  HistoryCow({required this.cow});
   @override
   _HistoryCowState createState() => _HistoryCowState();
 }
 
 class _HistoryCowState extends State<HistoryCow> {
+
+  Future<List<Abdominal>> getAb() async {
+    User? user = Provider.of<UserProvider>(context, listen: false).user;
+    List<Abdominal> ab =[];
+    Map data = {'farm_id': user!.farm_id.toString()};
+    final response = await http.post(Uri.http('10.0.2.2:3000', 'cows/abdominal'),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data,
+        encoding: Encoding.getByName("utf-8"));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> db = jsonDecode(response.body);
+      final List list = db['data']['rows'];
+      ab = list.map((e) => Abdominal.fromMap(e)).toList();
+    }
+    return ab;
+  }
+
   @override
-  final String name = 'มูมู้';
-  final String birthday = '11 ธันวาคม 2559';
-  final String code = 'A121';
-  final String note = 'ไม่กินหญ้า';
+  void initState() {
+    super.initState();
+    getAb();
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +72,7 @@ class _HistoryCowState extends State<HistoryCow> {
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.blueGrey[100],
-                  border: Border.all(color: (Colors.blueGrey[800])!, width: 2),
+                  border: Border.all(color: (Colors.blueGrey[300])!, width: 2),
                   borderRadius: BorderRadius.circular(3),
                 ),
                 child: Container(
@@ -59,7 +93,7 @@ class _HistoryCowState extends State<HistoryCow> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 0, 5),
                                   child: Text(
-                                    'ชื่อวัว : $name',
+                                    'ชื่อวัว : ${widget.cow.cow_name}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
@@ -73,7 +107,7 @@ class _HistoryCowState extends State<HistoryCow> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 0, 5),
                                   child: Text(
-                                    'วันเกิด : $birthday',
+                                    'วันเกิด : ${DateFormat('dd-MM-yyyy').format(DateTime.parse(widget.cow.cow_birthday))}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
@@ -87,7 +121,7 @@ class _HistoryCowState extends State<HistoryCow> {
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 10, 0, 15),
                           child: Text(
-                            'รหัสประจำตัว : $code',
+                            'รหัสประจำตัว : ${widget.cow.cow_no}',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -99,7 +133,7 @@ class _HistoryCowState extends State<HistoryCow> {
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Text(
-                          'สถานะปัจจุบัน : โคท้อง',
+                          'สถานะปัจจุบัน : ${widget.cow.type_name}',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

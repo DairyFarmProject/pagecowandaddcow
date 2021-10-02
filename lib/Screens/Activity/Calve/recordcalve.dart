@@ -218,10 +218,11 @@ class _RecordCalveState extends State<RecordCalve> {
 
                                   RaisedButton(
                                     onPressed: () {
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return SuccessRecord();
-                                      }));
+                                      addCalve();
+                                      // Navigator.push(context,
+                                      //     MaterialPageRoute(builder: (context) {
+                                      //   return SuccessRecord();
+                                      // }));
                                     },
                                     color: Color(0xff62b490),
                                     shape: RoundedRectangleBorder(
@@ -247,5 +248,9 @@ class _RecordCalveState extends State<RecordCalve> {
             },
           ),
         ));
+  }
+
+  addCalve() {
+    
   }
 }

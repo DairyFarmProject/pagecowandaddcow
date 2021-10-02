@@ -19,7 +19,6 @@ class OneCow extends StatefulWidget {
 }
 
 class _OneCowState extends State<OneCow> {
-
   Future<List<Cows>> getCow() async {
     User? user = Provider.of<UserProvider>(context, listen: false).user;
     late List<Cows> cows;
@@ -31,13 +30,13 @@ class _OneCowState extends State<OneCow> {
         },
         body: data,
         encoding: Encoding.getByName("utf-8"));
-    
+
     if (response.statusCode == 200) {
-    Map<String, dynamic> db = jsonDecode(response.body);
-    final List list = db['data']['cows'];
-    cows = list.map((e) => Cows.fromMap(e)).toList();
-  }
-  return cows;
+      Map<String, dynamic> db = jsonDecode(response.body);
+      final List list = db['data']['cows'];
+      cows = list.map((e) => Cows.fromMap(e)).toList();
+    }
+    return cows;
   }
 
   @override
@@ -70,11 +69,15 @@ class _OneCowState extends State<OneCow> {
             onSelected: (int menu) {
               print(menu);
               if (menu == 1) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => EditCow(cow: widget.cow)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditCow(cow: widget.cow)));
               } else if (menu == 2) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DeleteCow()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeleteCow(cow: widget.cow)));
               }
             },
           )
@@ -103,8 +106,7 @@ class _OneCowState extends State<OneCow> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30.0),
                 child: FittedBox(
-                  child: Image.network(
-                      widget.cow.cow_image),
+                  child: Image.network(widget.cow.cow_image),
                   //fit: BoxFit.cover,
                 ),
               ),
@@ -133,7 +135,8 @@ class _OneCowState extends State<OneCow> {
                       child: Container(
                           child: Padding(
                               padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
-                              child: Text('วันเกิด : ${DateFormat('dd-MM-yyyy').format(DateTime.parse(widget.cow.cow_birthday))}',
+                              child: Text(
+                                  'วันเกิด : ${DateFormat('dd-MM-yyyy').format(DateTime.parse(widget.cow.cow_birthday))}',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold))))),
                 ],
@@ -299,8 +302,11 @@ class _OneCowState extends State<OneCow> {
                     // ignore: deprecated_member_use
                     RaisedButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => HistoryCow(cow: widget.cow)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    HistoryCow(cow: widget.cow)));
                       },
                       color: Color(0xff6d78e1),
                       shape: RoundedRectangleBorder(

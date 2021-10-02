@@ -22,10 +22,10 @@ class RecordMilkYear extends StatefulWidget {
 class _RecordMilkYearState extends State<RecordMilkYear> {
   DateTime? now = new DateTime.now();
   var formatter = new DateFormat.yMMMMd("th_TH");
-  String milks = '';
+  int milks = 0;
 
   Future<List<MilkYear>> getMilk() async {
-    final response = await http.get(Uri.http('10.0.2.2:3000', 'milks'));
+    final response = await http.get(Uri.http('10.0.2.2:3000', 'milks/year'));
 
     Map<String, dynamic> data = jsonDecode(response.body);
     final List list = data['data']['rows'];
@@ -40,7 +40,7 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
     final response = await http.get(Uri.http('10.0.2.2:3000', 'milks/year'));
 
     Map<String, dynamic> data = jsonDecode(response.body);
-    String milk = data['data']['total'];
+    int milk = data['data']['total'];
 
     setState(() {
       milks = milk;

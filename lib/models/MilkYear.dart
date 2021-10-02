@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class MilkYear {
-  String month;
+  int month;
   String count;
   MilkYear({
     required this.month,
@@ -10,7 +10,7 @@ class MilkYear {
   
 
   MilkYear copyWith({
-    String? month,
+    int? month,
     String? count,
   }) {
     return MilkYear(
