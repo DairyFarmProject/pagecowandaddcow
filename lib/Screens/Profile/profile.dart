@@ -15,6 +15,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     User? user = Provider.of<UserProvider>(context, listen: false).user;
+    Uri url = Uri.parse('${user?.user_image}');
     return Scaffold(
       body: Column(
         children: [
@@ -24,7 +25,7 @@ class _ProfileState extends State<Profile> {
               decoration:
                   BoxDecoration(shape: BoxShape.circle, color: Colors.white),
               child: CircleAvatar(
-                              backgroundImage: NetworkImage('https://firebasestorage.googleapis.com/v0/b/examplesenior.appspot.com/o/User%2F1.jpg?alt=media&token=6372f79d-9bb0-4fbc-8c31-1ab9731cf93f'),
+                              backgroundImage: NetworkImage('$url'),
                               radius: 100.0)
                       ),
           Container(

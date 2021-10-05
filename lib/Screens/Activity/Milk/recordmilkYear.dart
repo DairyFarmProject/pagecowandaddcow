@@ -89,8 +89,8 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                           );
                         } else
                           return ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, i) {
                                 return Container(
@@ -125,29 +125,6 @@ class _RecordMilkYearState extends State<RecordMilkYear> {
                                           ]),
                                         ],
                                       ),
-                                      Container(
-                                        margin: EdgeInsets.fromLTRB(
-                                            100, 10, 100, 20),
-                                        child: RaisedButton(
-                                          onPressed: () {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                              return EditRecordMilk();
-                                            }));
-                                          },
-                                          child: Center(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(Icons.edit),
-                                                Text('แก้ไข')
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      )
                                     ],
                                   ),
                                 ]))));

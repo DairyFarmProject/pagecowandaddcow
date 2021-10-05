@@ -148,11 +148,13 @@ class _RecordMilkMonthState extends State<RecordMilkMonth> {
                                       margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
                                       child: RaisedButton(
                                         onPressed: () {
-                                          Navigator.push(context,
+                                          Navigator.push(
+                                              context,
                                               MaterialPageRoute(
-                                                  builder: (context) {
-                                            return EditRecordMilk();
-                                          }));
+                                                  builder: (context) =>
+                                                      EditRecordMilk(
+                                                          milk: snapshot
+                                                              .data![i])));
                                         },
                                         child: Center(
                                           child: Row(
@@ -171,22 +173,6 @@ class _RecordMilkMonthState extends State<RecordMilkMonth> {
                               ]))));
                             });
                     })),
-            Container(
-              margin: EdgeInsets.fromLTRB(100, 10, 100, 20),
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return EditRecordMilk();
-                  }));
-                },
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Icon(Icons.edit), Text('แก้ไข')],
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),

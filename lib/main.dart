@@ -1,13 +1,9 @@
-import 'package:finaldairy/Screens/Activity/Milk/recordmilkDay.dart';
-
-
 import '/Screens/Welcome/otp.dart';
 import '/Screens/Welcome/register.dart';
 import '/Screens/Welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'providers/auth.dart';
@@ -17,9 +13,6 @@ import 'models/UserDairys.dart';
 import 'util/shared_preference.dart';
 import 'util/register_store.dart';
 import 'Screens/Farm/confirm_create_farm.dart';
-
-//home
-import 'Screens/Activity/addactivity.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,6 +47,6 @@ class MyApp extends StatelessWidget {
               RegisterScreen.routeName: (context) => RegisterScreen(),
               OTP.routeName: (context) => OTP(),
             },
-            home: RecordMilkDay()));
+            home: Welcome()));
   }
 }

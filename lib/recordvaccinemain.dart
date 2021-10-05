@@ -2,14 +2,13 @@ import 'dart:convert';
 
 import 'package:finaldairy/editrecordvaccine.dart';
 import 'package:finaldairy/models/Vaccine_schedule.dart';
-import 'package:finaldairy/models/Vaccines.dart';
-
-import 'package:finaldairy/recordvaccinemainall.dart';
-import 'package:finaldairy/ref.dart';
+import 'package:finaldairy/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import 'models/User.dart';
 import 'recordvaccine.dart';
 
 class RecordVaccineMain extends StatefulWidget {
@@ -20,22 +19,44 @@ class RecordVaccineMain extends StatefulWidget {
 }
 
 class _RecordVaccineMainState extends State<RecordVaccineMain> {
-  Future<List<Vaccine_schedule>> getMilk() async {
-    final response = await http.get(Uri.http('10.0.2.2:3000', 'schedule'));
+  // Future<List<Vaccine_schedule>> getMilk() async {
+  //   final response = await http.get(Uri.http('10.0.2.2:3000', 'schedules'));
 
-    Map<String, dynamic> data = jsonDecode(response.body);
-    final List list = data['data'];
+  //   Map<String, dynamic> data = jsonDecode(response.body);
+  //   final List list = data['data']['row'];
 
-    List<Vaccine_schedule> typecows =
-        list.map((e) => Vaccine_schedule.fromMap(e)).toList();
+  //   List<Vaccine_schedule> typecows =
+  //       list.map((e) => Vaccine_schedule.fromMap(e)).toList();
 
-    return typecows;
+  //   return typecows;
+  // }
+
+  Future<List<Vaccine_schedule>> getVacS() async {
+    User? user = Provider.of<UserProvider>(context, listen: false).user;
+    late List<Vaccine_schedule> vacs;
+    Map data = {'farm_id': user?.farm_id.toString()};
+    final response = await http.post(Uri.http('10.0.2.2:3000', 'farm/schedules'),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data,
+        encoding: Encoding.getByName("utf-8"));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> db = jsonDecode(response.body);
+      print('Get Vaccine Schedule');
+      final List list = db['data']['rows'];
+      vacs = list.map((e) => Vaccine_schedule.fromMap(e)).toList();
+    }
+    return vacs;
   }
 
   @override
+  _RecordVaccineMainState createState() => _RecordVaccineMainState();
   void initState() {
     super.initState();
-    getMilk();
+    getVacS();
   }
 
   
@@ -56,7 +77,7 @@ class _RecordVaccineMainState extends State<RecordVaccineMain> {
           backgroundColor: Color(0xff59aca9),
         ),
         body: FutureBuilder<List<Vaccine_schedule>>(
-            future: getMilk(),
+            future: getVacS(),
             builder: (context, snapshot) {
               if (snapshot.data == null) {
                 return Container(

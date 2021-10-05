@@ -26,36 +26,36 @@ class _RecordMilkDayState extends State<RecordMilkDay> {
   DateTime? now = new DateTime.now();
   var formatter = new DateFormat.yMMMMd("th_TH");
 
-  // Future<List<Milks>> getMilk() async {
-  //   User? user = Provider.of<UserProvider>(context, listen: false).user;
-  //   late List<Milks> milks;
-  //   Map data = {'farm_id': user!.farm_id.toString()};
-  //   final response = await http.post(Uri.http('10.0.2.2:3000', 'milks'),
-  //       headers: {
-  //         "Accept": "application/json",
-  //         "Content-Type": "application/x-www-form-urlencoded"
-  //       },
-  //       body: data,
-  //       encoding: Encoding.getByName("utf-8"));
-
-  //   if (response.statusCode == 200) {
-  //     Map<String, dynamic> db = jsonDecode(response.body);
-  //     final List list = db['data']['rows'];
-  //     milks = list.map((e) => Milks.fromMap(e)).toList();
-  //   }
-  //   return milks;
-  // }
-
   Future<List<Milks>> getMilk() async {
-    final response = await http.get(Uri.http('10.0.2.2:3000', 'milks'));
+    User? user = Provider.of<UserProvider>(context, listen: false).user;
+    late List<Milks> milks;
+    Map data = {'farm_id': user!.farm_id.toString()};
+    final response = await http.post(Uri.http('10.0.2.2:3000', 'farms/milks'),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data,
+        encoding: Encoding.getByName("utf-8"));
 
-    Map<String, dynamic> data = jsonDecode(response.body);
-    final List list = data['data']['rows'];
-
-    List<Milks> typecows = list.map((e) => Milks.fromMap(e)).toList();
-
-    return typecows;
+    if (response.statusCode == 200) {
+      Map<String, dynamic> db = jsonDecode(response.body);
+      final List list = db['data']['rows'];
+      milks = list.map((e) => Milks.fromMap(e)).toList();
+    }
+    return milks;
   }
+
+  // Future<List<Milks>> getMilk() async {
+  //   final response = await http.get(Uri.http('10.0.2.2:3000', 'milks'));
+
+  //   Map<String, dynamic> data = jsonDecode(response.body);
+  //   final List list = data['data']['rows'];
+
+  //   List<Milks> typecows = list.map((e) => Milks.fromMap(e)).toList();
+
+  //   return typecows;
+  // }
 
   @override
   void initState() {
@@ -187,10 +187,15 @@ class _RecordMilkDayState extends State<RecordMilkDay> {
                                                             children: [
                                                               Text(
                                                                   "จำนวนน้ำนมรวมภายในวันนี้"),
-                                                              Text('${snapshot.data![270].total}'),
+                                                              Text(
+                                                                  '${snapshot.data![270].total}'),
                                                               Container(
-                                                                  margin: EdgeInsets.only(bottom: 20),
-                                                                  child: Text('กิโลกรัม')),
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              20),
+                                                                  child: Text(
+                                                                      'กิโลกรัม')),
                                                               ExpansionTile(
                                                                 initiallyExpanded:
                                                                     true,
@@ -198,11 +203,17 @@ class _RecordMilkDayState extends State<RecordMilkDay> {
                                                                     Color(
                                                                         0xff59aca9),
                                                                 tilePadding:
-                                                                    const EdgeInsets.fromLTRB(5,0,5,0),
+                                                                    const EdgeInsets
+                                                                            .fromLTRB(
+                                                                        5,
+                                                                        0,
+                                                                        5,
+                                                                        0),
                                                                 title: Text(
                                                                   '${DateFormat.yMMMMd("th_TH").format(DateTime.parse(now.toString()))}',
                                                                   style: TextStyle(
-                                                                      color: Colors.black,
+                                                                      color: Colors
+                                                                          .black,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
@@ -255,17 +266,14 @@ class _RecordMilkDayState extends State<RecordMilkDay> {
                                                                             20,
                                                                             20,
                                                                             20,
-                                                                            20),
+                                                                            0),
                                                                     child:
                                                                         RaisedButton(
                                                                       onPressed:
                                                                           () {
                                                                         Navigator.push(
                                                                             context,
-                                                                            MaterialPageRoute(builder:
-                                                                                (context) {
-                                                                          return EditRecordMilk();
-                                                                        }));
+                                                                            MaterialPageRoute(builder: (context) => EditRecordMilk(milk: snapshot.data![i])));
                                                                       },
                                                                       child:
                                                                           Center(

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:finaldairy/Screens/Activity/Milk/edit_milkDay.dart';
 import 'package:finaldairy/Screens/Activity/Milk/editrecordmilk.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -230,7 +231,7 @@ class _RecordMilkState extends State<RecordMilk> {
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return EditRecordMilk();
+                              return EditMilkDay(milk: '${DateFormat.yMMMMd("th_TH").format(DateTime.parse(now.toString()))}');
                             }));
                           },
                         );

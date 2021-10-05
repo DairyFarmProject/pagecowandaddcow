@@ -31,6 +31,7 @@ class _FarmDataState extends State<FarmData> {
   String? province;
   int? postcode;
   String? countCow;
+  Uri? url;
 
   Future<List<Farms>> getFarm() async {
     User? user = Provider.of<UserProvider>(context, listen: false).user;
@@ -65,6 +66,7 @@ class _FarmDataState extends State<FarmData> {
         district = list[0]['district'];
         province = list[0]['province'];
         postcode = list[0]['postcode'];
+        url = Uri.parse(farm_image);
       });
 
       print(farm_id);
@@ -183,8 +185,7 @@ class _FarmDataState extends State<FarmData> {
                                           height: 200,
                                           child: Padding(
                                             padding: EdgeInsets.all(4.0),
-                                            child: Image.network(
-                                                '${farm_image}'),
+                                            child: Image.network('$url'),
                                           )),
                                       Container(
                                         child: Text(
